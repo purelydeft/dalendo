@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>:: Dalendo Admin ::</title>
+  
+         <%= csrf_meta_tags %>
+      
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      
+    <link rel="icon" href="/assets/fav.png" type="image/png" sizes="16x16">
+      
+    <!--  Remain it on the top only Do not change    -->
+      
+        <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js', 'data-turbolinks-track': 'reload' %> 
+
+      
+    <!-- End  -->
+    
+    <!--Common CSS Files -->
+      
+        <%= stylesheet_link_tag    '/assets/screen', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag    'https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag    'http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'custom-fonts', media: 'all', 'data-turbolinks-track': 'reload' %>
+     
+      
+        <%= stylesheet_link_tag    '/assets/backend-custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag    '/assets/backend', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+    <!--Common CSS Files Ends -->
+      
+    
+   
+    <!--Login CSS Files -->
+      
+        <%= stylesheet_link_tag    '/assets/font-awesome.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!--Login CSS Files Ends --> 
+      
+
+      
+      
+    <!--Dashboard CSS Files -->
+      
+        <%= stylesheet_link_tag    '/assets/bootstrap-switch.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+    <!--Dashboard CSS Files Ends -->    
+      
+      
+    <!--View User CSS & JS Files -->
+      
+        <%= stylesheet_link_tag    '/assets/easy-responsive-tabs', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag    '/assets/sweetalert', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag    '/assets/swal-forms', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/easyResponsiveTabs', 'data-turbolinks-track': 'reload' %> 
+      
+    <!--View User CSS Files Ends -->
+      
+        
+      
+      
+    <!--Dashboard JS Files -->
+      
+        <%#= javascript_include_tag '/assets/jquery.min', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/bootstrap.min', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/jquery.mCustomScrollbar.min', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/bootstrap-switch', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/canvasjs.min', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'https://code.highcharts.com/highcharts.js', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/app', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/verify.notify', 'data-turbolinks-track': 'reload' %>
+
+    <!--Dashboard JS Files Ends -->  
+      
+    
+    <!--Common JS Files -->
+        <%= javascript_include_tag "//maps.google.com/maps/api/js?sensor=false&libraries=places" %>
+        <%= javascript_include_tag '/assets/backend-custom', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/backend', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/badges', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/bootstrap-select', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/bootstrap-datepicker', 'data-turbolinks-track': 'reload' %>
+      
+        <%= javascript_include_tag '/assets/bootstrap-wysiwyg', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/jquery.hotkeys', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/sweetalert.min', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag '/assets/swal-forms', 'data-turbolinks-track': 'reload' %>
+      
+        <%#= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js', 'data-turbolinks-track': 'reload' %>
+        
+      
+    <!--Common JS Files Ends -->  		
+	
+	
+	
+  </head>
+
+  <body>
+      
+    <div class="dalando_app">
+        
+        <%= render "layouts/admin_includes/adminsidebar" unless @skip_adminsidebar %>
+            
+        <section class="dalando_app_wrapper sidebar_full">
+            
+            <%= render "layouts/admin_includes/adminheader" unless @skip_adminheader %>        
+        
+            <%= yield %>
+	    
+        </section>
+        
+    </div>
+      
+    <%= render "layouts/admin_includes/adminfooter" %>
+      
+  </body>
+</html>

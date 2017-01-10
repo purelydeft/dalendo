@@ -1,0 +1,46 @@
+<!-- Start Script For Data Tables -->
+
+<script src="javascripts/bootstrap-select.js"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"> </script>
+
+<script>
+ // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+    
+    
+     
+    // DataTable
+    var table = $('#example').DataTable( { "pageLength": 5 } );
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            
+            //alert(1233);
+            
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+    
+    
+    
+    
+</script>
+
+<!-- End Script For Data Tables -->
+
+
+
+
+<footer class="footer">
+    <p>Copyright 2016 © dalendo. Privacy Policy</p>
+</footer>

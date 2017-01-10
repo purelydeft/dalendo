@@ -1,0 +1,129 @@
+<div class="mini-slides-wrap">
+<div class="mini-slides text-center">
+<h3>Lorem Ipsum is simply dummy </h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+</div>
+<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="row">		
+<%= render "layouts/header_projects" %>
+<div class="col-xs-12 two-parts-cmnt">
+<div class="row">
+    <!-- Left Sec -->
+    <div class="col-sm-8 col-xs-12">
+        <div class="user-dalender bg-white-radius">
+            <ul>
+                <!--Working Of Project Supporters -->
+               <% if @project_supporters.present? %>
+               <% @project_supporters.each do|allprojectSupporters| %>
+
+                <% @projectSupporter_persondata = User.where(id: allprojectSupporters['supported_by']).all %>
+                <% @projectSupporter_country    = Country.where(id: @projectSupporter_persondata[0]['country']).all %>
+
+                <% user_image = @projectSupporter_persondata[0]['user_image'] %> 
+
+                <!-- Code for Image Checking  -->
+
+                <% if user_image.present? %> 
+                <% if File.exist?(Rails.root.join('app','assets','images','userImages',user_image )) %>
+                <% supporter_user_pic = user_image  %>
+                <% else %>
+                <% supporter_user_pic = 'default' + '.jpg'  %>
+                <% end %>
+                <% else %>
+                <% supporter_user_pic = 'default' + '.jpg'  %>
+                <% end %>
+
+                <!-- Code for Image Checking  -->                         
+                <li>
+                    <figure>
+          <%= image_tag File.join('userImages', supporter_user_pic), :alt => '', :class => 'pull-left' %>
+                    </figure>
+                    <div class="dal-detail">
+                        
+                        <% if @projectSupporter_persondata[0]['first_name'].present? %>
+                        <% firstname = @projectSupporter_persondata[0]['first_name'].capitalize %>
+                        <% else %>
+                        <% firstname = '' %>
+                        <% end %>
+                        
+                        <% if @projectSupporter_persondata[0]['last_name'].present? %>
+                        <% lastname  = @projectSupporter_persondata[0]['last_name'].capitalize %>
+                        <% else %>
+                        <% lastname  = '' %>
+                        <% end %>
+                        
+                        
+                        
+                        <% fullname  = firstname +' '+ lastname  %>
+                        <% if fullname.length <= 10 %>
+                        <h2><%= link_to fullname, "javascript:;" %></h2>
+                        <% else %>
+                        <h2><%= link_to fullname[0..11], "javascript:;" %>..</h2>
+                                                
+                        <% end %>
+                        
+                        
+                       
+                        
+                        <span><i class="fa fa-map-marker" aria-hidden="true"></i><%= @projectSupporter_persondata[0]['state'] %>, <%= @projectSupporter_country[0]['country_name'] %></span>
+                    </div>
+                </li>
+                <% end %>
+                <% end %>
+
+<!--
+                <li>
+                    <figure>
+                        <%#= link_to (image_tag('by_user_cmnt.png', :alt => 'Dalendo User')), "javascript:;" %>
+                    </figure>
+                    <div class="dal-detail">
+                        <h2><%#= link_to "Lorem Ipsum", "javascript:;" %></h2>
+                        <span><i class="fa fa-map-marker" aria-hidden="true"></i>Los Angeles, CA USA</span>
+                    </div>
+                </li>
+-->
+            </ul>
+            <div class="view-all logon-sec">
+                <button id="dalenders" type="button" class="btn btn-sign-in">View more</button>
+            </div>
+        </div>
+    </div>
+
+    <%= render "layouts/sidebar_projects" %>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+    /*For Showing Home Menus Active*/
+    jQuery('#submenuid li').eq(3).find('a').addClass('active');
+
+
+
+$(function () {
+  if($(".user-dalender li" ).length<=8)
+  {
+    $("#dalenders").fadeOut();
+  }
+  $(".user-dalender li").slice(0, 8).show();
+  $("#dalenders").on('click', function (e) {
+      e.preventDefault();
+      $(".user-dalender li:hidden").slice(0, 8).slideDown();
+      if ($(".user-dalender li:hidden").length == 0) {
+          $("#dalenders").fadeOut('slow');
+      }
+      $('html,body').animate({
+          scrollTop: $(this).offset().top
+      }, 1500);
+  });
+  });
+
+</script>
+
+
+

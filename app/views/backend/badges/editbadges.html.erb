@@ -1,0 +1,182 @@
+<%
+
+  if @singlebadgeData.present?
+
+    badgeid             = @singlebadgeData[0]['id']
+    badgename           = @singlebadgeData[0]['badge_name']
+    badgedescription    = @singlebadgeData[0]['badge_description']
+    badgeimage          = @singlebadgeData[0]['badge_image']
+    badgestatus         = @singlebadgeData[0]['badge_status']
+
+  end
+
+
+
+%>
+
+
+
+
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+             <!------------Edit Badge Form Starts ---------------->
+
+             <%= form_for :editbadges, :url => backend_edit_badges_path, :html => {:id => 'editbadgesid', :multipart => true} do |f| %>
+
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>Edit Badges</h2>
+                            </div>
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :editbadgename, id: 'editbadgename', placeholder: 'Badge Name', class: 'form-control', value: badgename, :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false" %></div>
+                            </div>
+                              <!--Error Message For Blank Field-->
+                              <span id="editbadgename1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                              <span id="editbadgename3" class="alert alert-danger custom" style="display:none">Only characters are allowed.</span>     
+                              <!--Error Message Ends-->
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_area(:editbadge_decription, class: 'form-control', placeholder: 'Badge Description', value: badgedescription, :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false") %></div>
+                            </div>
+                              <!--Error Message For Blank Field-->
+                              <span id="editbadges_editbadge_decription1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                              <span id="editbadges_editbadge_decription2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>                  
+                              <!--Error Message Ends-->
+                            </div>
+
+
+
+                        <!--Hidden Fields Here-->
+
+                        <%= f.hidden_field :hidden_badgeid, :value => badgeid %>
+                        <%= f.hidden_field :previousHidden_badgeImage, :value => badgeimage %>
+
+                        <% if badgestatus == 'active' %>
+                         <%= f.hidden_field :edit_badges_status, :value => 'active', :class => 'badgesstatus'%>
+                        <% else %>
+                         <%= f.hidden_field :edit_badges_status, :value => 'inactive', :class => 'badgesstatus'%>
+                        <% end %>
+
+                        <!--Hidden Fields Ends-->
+                            
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+
+                                  <!--Preview of previous uploaded image-->
+<!--
+                                  <div class="upload-img-show">
+                                    <%#= image_tag File.join('backend/badgeimages', badgeimage) %>
+                                  </div>
+-->
+                                  <!--Preview Ends-->
+
+                                	<div class="upload-img-div">
+                                    <span><i><%= image_tag ('upload-img.png'), :alt => "" %></i>Upload image</span>
+                 <%= file_field_tag 'edit_badge_images', id: "edit_badgeimages", onchange: "ValidateSingleInput(this);" %>
+                                    </div>
+                                    <div class="upload-img-show">
+<!--                                      <img id="blah" src="#" alt="" style="display:none;" />-->
+                                      <%= image_tag File.join('backend/badgeimages', badgeimage), id: "blah" %>    
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                            
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Status:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                	<div class="custom-on-off">
+
+                                    <% if badgestatus == 'active' %>
+
+                                    <ul class="active_bg">
+                                    <li class="active"><a href="javascript:void(0)">Active</a></li>
+                                    <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                                    </ul>
+
+                                    <% else %>
+
+                                    <ul class="inactive_bg">
+                                    <li class="active"><a href="javascript:void(0)">Active</a></li>
+                                    <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                                    </ul>
+                                    <% end %>
+
+                       			</div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="row">
+                            	
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3"><%= f.submit :Update, :class => 'login-btn btn-margin-top', :id => 'badgeupdatebutton', :type => 'button' %></div>
+                            </div>
+                            
+                        </div>
+
+                        <% end %> <!-- Edit Badge form Ends -->
+
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+       
+        
+    </div>
+
+
+
+
+
+<script>
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').css('display','block');
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#edit_badgeimages").change(function(){
+        readURL(this);
+    });
+    
+$(document).ready(function(){
+$("#badgeupdatebutton").dblclick(function(e){
+e.preventDefault();
+});
+});    
+
+</script>
+<script>
+  
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#badgeupdatebutton').click();
+    }
+}
+
+</script>

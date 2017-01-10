@@ -1,0 +1,2 @@
+class Backendproject < ApplicationRecord
+end

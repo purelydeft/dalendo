@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>:: Dalendo Frontend ::</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      
+    <link rel="icon" href="/assets/fav.png" type="image/png" sizes="16x16">
+      
+    <%= csrf_meta_tags %>
+      
+<!-- Start CSS Created By Designers    -->
+	   	
+	<%= stylesheet_link_tag '/assets/bootstrap-switch.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag '/assets/owl.carousel', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag '/assets/owl.theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'custom-fonts', media: 'all', 'data-turbolinks-track': 'reload' %>
+	
+	<%= stylesheet_link_tag '/assets/animate', media: 'all', 'data-turbolinks-track': 'reload' %>
+	
+	<%= stylesheet_link_tag  'https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900', media: 'all', 'data-turbolinks-track': 'reload' %>
+	
+	<%= stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:400,700', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+      
+    <%= stylesheet_link_tag    '/assets/extralayers', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    '/assets/settings', media: 'all', 'data-turbolinks-track': 'reload' %>	
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+      
+<!--  End CSS Created By Designers    -->
+      
+      
+      
+      
+      
+
+<!--  Start JS Included from BACKEND Layout    -->
+	
+	<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js', 'data-turbolinks-track': 'reload' %>
+	
+	<%= javascript_include_tag '/assets/sweetalert.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag '/assets/swal-forms', 'data-turbolinks-track': 'reload' %>
+ 
+    <%= javascript_include_tag '/assets/bootstrap-switch', 'data-turbolinks-track': 'reload' %>
+
+	<%= javascript_include_tag '/assets/owl.carousel', 'data-turbolinks-track': 'reload' %>
+	
+	<%= javascript_include_tag '/assets/jquery.dd.min', 'data-turbolinks-track': 'reload' %>
+	
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      
+    <%#= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js', 'data-turbolinks-track': 'reload' %>
+<!--  End JS Included from BACKEND Layout    -->
+      
+      
+      
+      
+      
+      
+<!--  Start JS For Frontend Develoment    -->
+        
+    <%#= javascript_include_tag '/assets/verify.notify', 'data-turbolinks-track': 'reload' %>
+      
+    <%= javascript_include_tag '/assets/home-custom', 'data-turbolinks-track': 'reload' %>
+      
+<!--  END JS For Frontend Develoment    -->
+      
+      
+	
+	
+	
+  </head>
+
+  <body>
+ 		<%= render "layouts/header" %>
+    		
+    		<%= yield %>
+    
+    	<%= render "layouts/footer" %>
+	
+	
+  </body>
+</html>

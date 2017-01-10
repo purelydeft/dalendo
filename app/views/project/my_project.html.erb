@@ -1,0 +1,100 @@
+<div class="mini-slides-wrap">
+	<div class="mini-slides text-center">
+	 <h3>Lorem Ipsum is simply dummy </h3>
+	 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+	</div>
+	<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="guideline-top-bar">
+<div class="row">	
+	<div class="col-xs-12 col-sm-4 col-md-4">
+		<figure>
+		
+		<%= image_tag('guideline-1.png', :alt => '') %>
+		
+		</figure>
+		<h3>Guidelines</h3>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 guide-create-project-outer">
+		<figure>
+		
+		<%= image_tag('guideline-2.png', :alt => '') %>
+		
+		</figure>
+		<h3>Create Project</h3>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 active">
+		<figure>
+		
+		<%= image_tag('guideline-3.png', :alt => '') %>
+		
+		</figure>
+		<h3>My Projects</h3>
+	</div>
+	</div>
+</div>
+    
+<div class="row">	
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<ul class="my-project-listing-outer">
+
+   <% if @user_all_Projects.present? %>
+   <% @user_all_Projects.each do|user_all_projectData| %>        
+             
+     <!-- Getting Project Image From database -->
+                
+     <% @projectImages = ProjectFile.where(project_id: user_all_projectData['id'], project_file_type: 'image') %>
+     <% image_path = @projectImages[0]['project_image_path'] %>  
+     <% image_name = @projectImages[0]['project_file_name'] %>  
+                
+     <!-- Getting Project Image From database Ends -->  
+                
+     <%    
+     project_id    = user_all_projectData['id']
+     project_title = user_all_projectData['project_title']  
+     short_desp    = user_all_projectData['short_desp']
+     %>  
+                
+<!--Code checking for project-image-->
+
+    <% if File.exist?(Rails.root.join('app','assets','images','project', "#{project_id}" ,'project_images',image_name )) %>
+        <% projectimage = image_name  %>
+    <% end %>
+
+<!--Code checking for project-image end-->     
+                
+				<li class="active">
+					<div class="my-project-picture"><figure><%= image_tag File.join(image_path, projectimage), :alt => '' %></figure></div>
+					<div class="my-project-text">
+						<h4><%= project_title %></h4>
+						<p><%= short_desp %>.</p>
+					</div>
+					<div class="my-project-percentage"><figure><%= image_tag('project-100.png', :alt => '') %></figure></div>
+				</li>
+          <% end %> <!--Endforeach -->       
+          <% end %> <!--Endif -->        
+				<li>
+					<div class="my-project-picture"><figure><%= image_tag('project-picture-2.png', :alt => '') %></figure></div>
+					<div class="my-project-text">
+						<h4>Project 01</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis a nulla quis vulputate.</p>
+					</div>
+					<div class="my-project-percentage"><figure><%= image_tag('projcet-75.png', :alt => '') %></figure></div>
+				</li>
+<!--
+				<li>
+					<div class="my-project-picture"><figure><%#= image_tag('project-picture-2.png', :alt => '') %></figure></div>
+					<div class="my-project-text">
+						<h4>Project 01</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis a nulla quis vulputate.</p>
+					</div>
+					<div class="my-project-percentage"><figure><%#= image_tag('projcet-80.png', :alt => '') %></figure></div>
+				</li>
+-->
+			</ul>
+		</div>
+	</div>
+
+</div>

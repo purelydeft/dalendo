@@ -1,0 +1,102 @@
+<header class="desktop_header animated slideInDown">
+<div class="container-fluid">
+<ul class="col-md-5 pull-left left_nav">
+<li><a href="/" class="home"><i class="icon-home"></i></a></li>
+<li><a href="/projects/create" class="btn btn-blue pull-left start_project"><%= t :start_a_project %></a></li>
+<li class="faq_class"><a href="faq"><%= t :faq %></a></li>
+<li> 
+<select name="countries_lit" id="countries_lit">
+      <option value='' data-title="Andorra"><%= t :french_islands %></option>
+      <option value='' data-title="Antigua and Barbuda"><%= t :uk_islands %></option>
+      <option value='' data-title="Anguilla"><%= t :usa_islands %></option>
+      
+    </select>
+
+</li>
+</ul>
+<a href="/" class="logo col-md-2" title="logo" id="home-logo"><%= image_tag("logo.svg", :alt => "logo") %></a>
+<ul class="col-md-5 pull-right right_nav">
+<li><a href="javascript:;"><%= t :explore %></a></li>
+    
+    <% if session[:current_user_id].present? %>
+    
+        <li><a href="javascript:;"><i class="icon-signup"></i> <span><%= t :hi %>, <%= session[:current_user_first_name] %></span> </a></li>
+        
+        <li><a href="<%= root_url %>signout"><i class="icon-signin"></i> <span> <%= t :sign_out %> </span> </a></li>
+    
+    <% else %>
+    
+    
+    <li><a href="/user/signup"><i class="icon-signup"></i> <span><%= t :sign_up %></span> </a></li>
+    <li><a href="/user/signin"><i class="icon-signin"></i> <span><%= t :sign_in %></span> </a></li>
+    
+    
+    <% end %>
+    
+    
+
+    
+<li><a href="javascript;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-search"></i></a>
+
+<ul class="dropdown-menu search_box">
+      <div class="input-group">
+      <input type="text" class="form-control SearchBar" placeholder="<%= t :search_a_project %>">
+      <span class="input-group-btn">
+        <button class="btn" type="button">
+            <span><%= t :search %></span>
+        </button>
+      </span>
+    </div><!-- /input-group -->
+      <li><a href="/projects/search?discover=all"><%= t :project %></a></li>
+      <li><a href="#"><%= t :statistics %></a></li>
+      <li><a href="#"><%= t :how_it_works %></a></li>
+    </ul>
+	
+</li>
+<li>
+<select name="countries" id="countries" class="pull-right">
+      <option value='eng' data-image="/assets/blank.gif" data-imagecss="flag eng" data-title="Andorra"><%= t :eng %></option>
+      <option value='fr' data-image="/assets/blank.gif" data-imagecss="flag fr" data-title="Antigua and Barbuda"><%= t :fr %></option>
+      <option value='ch' data-image="/assets/blank.gif" data-imagecss="flag ch" data-title="Anguilla"><%= t :ch %></option>
+      
+    </select>
+</li>
+</ul>
+</div>
+</header>
+
+<header class="mobile_header animated slideInDown"> 
+<div class="container-fluid">
+<ul>
+<li><a href="javascript;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-search"></i></a>
+
+<ul class="dropdown-menu search_box">
+      <div class="input-group">
+      <input type="text" class="form-control SearchBar" placeholder="<%= t :search_a_project %>">
+      <span class="input-group-btn">
+        <button class="btn" type="button">
+            <span><%= t :search %></span>
+        </button>
+      </span>
+    </div><!-- /input-group -->
+      <li><a href="search"><%= t :project %></a></li>
+      <li><a href="#"><%= t :statistics %></a></li>
+      <li><a href="#"><%= t :how_it_works %></a></li>
+    </ul>
+	
+</li>
+<li><a href="guidelines"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+</ul>
+<a href="/" class="logo" title="logo"><%= image_tag("logo.svg", :alt => "logo") %></a>
+
+<div class="responsive_menu pull-right"><i class="fa fa-bars" aria-hidden="true"></i></div>
+<nav class="mobile_menu">
+
+<a href="home"><%= t :home %></a>
+<a href="faq"><%= t :faq %></a>
+<a href=""><%= t :explore %></a>
+<a href="signup"><%= t :sign_up %></a>
+<a href="signin"><%= t :sign_in %></a>
+</nav>
+</div>
+</header>

@@ -1,0 +1,320 @@
+
+<% if @getsingleUser.present? %>
+            
+    <% 
+        userid          = @getsingleUser[0]['id']
+        first_name      = @getsingleUser[0]['first_name']
+        last_name       = @getsingleUser[0]['last_name']
+        user_name       = @getsingleUser[0]['user_name']
+        email           = @getsingleUser[0]['email']
+        address         = @getsingleUser[0]['address']
+        country         = @getsingleUser[0]['country']
+        state           = @getsingleUser[0]['state']
+        user_role       = @getsingleUser[0]['user_role']
+        user_image      = @getsingleUser[0]['user_image']
+        phone_number    = @getsingleUser[0]['phone_number']
+        user_status     = @getsingleUser[0]['user_status']
+        register_ip     = @getsingleUser[0]['register_ip']
+        last_login_ip   = @getsingleUser[0]['last_login_ip']
+
+        facebook_id     = @getsingleUser[0]['facebook_id']
+        linkedin_id     = @getsingleUser[0]['linkedin_id']
+        twitter_id      = @getsingleUser[0]['twitter_id']
+
+    %>
+
+<% end %>
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>Edit User</h2>
+                            </div>
+                            
+    <%= form_for :edituser, :url => backend_update_user_path, :html => {:multipart => 'true', :id => 'useredit', :name => 'useredit'} do |f| %>  
+                            
+                            
+                            
+            <input type="hidden" name="userid" id="userid" value="<%= userid %>" >
+            <input type="hidden" name="hidden_user_image" id="hidden_user_image" value="<%= user_image %>" >
+                            
+                            
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="name" id="name" value="<%= first_name %> <%= last_name %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>User Name:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="username" id="username" value="<%= user_name %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Address:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="address" id="address" value="<%= address %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Contact No:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="contactno" id="contactno" value="<%= phone_number %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Country:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="country" id="country" value="<%= country %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>State:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="state" id="state" value="<%= state %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>User Role:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="userrole" id="userrole" value="<%= user_role %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Facebook Link:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="fb_link" id="fblink" value="<%= facebook_id %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Twitter Link:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="twitter_link" id="twitterlink" value="<%= twitter_id %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>LinkedIn Link:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                    <input type="text" name="linkedin_link" id="linkedinlink" value="<%= linkedin_id %>" class="form-control" type="text" />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                	<div class="upload-img-div">
+                                    <span><i><%= image_tag ('upload-img.png'), :alt => '' %></i>Upload image</span>
+                                   
+                                        <%= f.file_field :userimage, id: 'userimage' %>
+                                        
+                                        
+                                    </div>
+                                    <div class="upload-img-show">
+                                    <%= image_tag File.join('userImages', user_image) %>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                             
+                            
+                            <div class="row">
+                            	
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3">
+                                
+                                    <%= f.submit :Update, :class => 'login-btn btn-margin-top', :id => 'UpdateUser', :type => 'button' %>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+        <% end %>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+      
+        
+    </div>
+
+<script>
+    
+    
+    $(document).ready(function () {
+        
+        /*-- Start Update User --*/
+
+        $("#UpdateUser").click(function () {
+            
+            var userid        = $("#userid").val();
+            
+            var name = $("#name").val();
+            if (name === '') {
+                $("#name").focus();
+                $("#name").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var username = $("#username").val();
+            if (username === '') {
+                $("#username").focus();
+                $("#username").css('border-color', 'firebrick');
+                return false;
+            }
+
+
+            var address = $("#address").val();
+            if (address === '') {
+                $("#address").focus();
+                $("#address").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var contactno = $("#contactno").val();
+            if (contactno === '') {
+                $("#contactno").focus();
+                $("#contactno").css('border-color', 'firebrick');
+                return false;
+            }
+
+
+            var country = $("#country").val();
+            if (country === '') {
+                $("#country").focus();
+                $("#country").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var state = $("#state").val();
+            if (state === '') {
+                $("#state").focus();
+                $("#state").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var userrole = $("#userrole").val();
+            if (userrole === '') {
+                $("#userrole").focus();
+                $("#userrole").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var state = $("#state").val();
+            if (state === '') {
+                $("#state").focus();
+                $("#name").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var fblink = $("#fblink").val();
+            if (fblink === '') {
+                $("#fblink").focus();
+                $("#fblink").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var twitterlink = $("#twitterlink").val();
+            if (twitterlink === '') {
+                $("#twitterlink").focus();
+                $("#twitterlink").css('border-color', 'firebrick');
+                return false;
+            }
+
+            var linkedinlink = $("#linkedinlink").val();
+            if (linkedinlink === '') {
+                $("#linkedinlink").focus();
+                $("#linkedinlink").css('border-color', 'firebrick');
+                return false;
+            }
+
+            
+            var userimage = $("#userimage").val();
+            if (userimage === '')
+            {
+                var userimage = $("#hidden_user_image").val();
+            }
+            else
+            {
+                /*-- start validation for image extensions --*/
+
+                var file = $('#userimage')[0].files[0]
+                if (file)
+                {
+                    var imageName = file.name
+                    var imageSize = file.size
+                }
+
+                img_array = imageName.split('.');
+                name      = img_array[0];
+                exe       = img_array[1];
+
+
+                if (!(exe == 'jpg' || exe == 'jpeg' || exe == 'png'))
+                {
+                    $("#userimage").css('border-color', 'firebrick');
+                    return false;
+                }
+                else
+                {
+                    $("#userimage").css('border-color', '');
+                }
+                
+                /*-- end validation for image extensions --*/
+            }
+            
+             $("#useredit").submit();          
+               
+      
+	});
+
+
+	/*-- End Update User --*/
+        
+        
+        
+    });
+    
+
+</script>

@@ -1,0 +1,168 @@
+<div class="right-content-area">
+    <div class="inner-pages-main">  
+        <div class="heading-one"><h3>Category Management</h3>
+            <div class="right-add-btn-outer">
+                <a href="/backend/add-category">Add Category</a>
+            </div>
+        </div>
+        
+        
+                
+        <div class="table-responsive project-table-outer">
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Icon/Image</th>
+                    <th>Category Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <% if @getallcategories.present? %>       <!-- Checking If All Categories Exist Or Not -->
+
+                <% @getallcategories.each_with_index  do |categorydataval, index| %> <!-- All Categories Loop Started -->
+                <tr id="categoryviewline_<%= categorydataval['id'] %>">
+
+                    <td><%= index+1 %></td>
+
+                    <% if categorydataval['category_icon'] != '' %> <!-- If condition to check image or icon -->
+                    <td> <figure class="backend_category_box"> <i class="<%= categorydataval['category_icon'] %>"></i> </figure></td>
+                    <% else %>
+                    <td><figure> <%= image_tag File.join('categoryImages', categorydataval['category_image']), :class => "custom_category_image"  %> </figure></td>
+                    <% end %> <!-- If condition to check image or icon ends -->
+
+                    <td><%= categorydataval['category_name'] %></td>
+
+                    <% if categorydataval['category_status'] == 'active' %>
+                    <td><span class="btn-active">Active</span></td>
+                    <% else %>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <% end %>
+
+                    <td>
+                        <span class="tble-action-outer">
+                        <a href="/backend/view-category?cid=<%= categorydataval['id'] %>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="/backend/edit-category?cid=<%= categorydataval['id'] %>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="javascript:;" data-catid="<%= categorydataval['id'] %>" data-catimage="<%= categorydataval['category_image'] %> " class="trashcat"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span>
+                    </td>
+                </tr>
+                    
+                <%
+                    end # End Loop
+                    else
+                %>
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>No Categories Found</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+
+                    <% end %> <!-- End if-->
+
+                    <!--
+                <tr>
+                    <td>02</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>03</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active">Active</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>04</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>05</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active" >Active</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+-->
+
+
+                </tbody>
+            </table>
+            
+            <div class="table-pagination-outer">
+                <nav aria-label="Page navigation">
+                    <%= will_paginate @getallcategories %>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+<script src="javascripts/bootstrap-select.js"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"> </script>
+
+<script>
+ // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+</script>
+

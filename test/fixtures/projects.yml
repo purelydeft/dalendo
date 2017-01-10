@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 1
+  project_type: MyString
+  project_title: MyString
+  project_image: MyString
+  short_desp: MyString
+  project_location: MyString
+  project_startdate: MyString
+  project_enddate: MyString
+  currency: MyString
+  project_minimum_fundinggoal: 1
+  project_funding_goal: 1
+  user_id: 1
+  status: MyString
+  created_by: 1
+  updated_by: 1
+
+two:
+  category_id: 1
+  project_type: MyString
+  project_title: MyString
+  project_image: MyString
+  short_desp: MyString
+  project_location: MyString
+  project_startdate: MyString
+  project_enddate: MyString
+  currency: MyString
+  project_minimum_fundinggoal: 1
+  project_funding_goal: 1
+  user_id: 1
+  status: MyString
+  created_by: 1
+  updated_by: 1

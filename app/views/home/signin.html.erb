@@ -1,0 +1,461 @@
+
+<!-- If User Registered Successfuly -->
+
+    <% if flash[:success] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            alert('<%= flash[:success] %>');
+        });
+
+
+        </script>
+
+    <% end %> 
+
+
+
+
+<section class="cd-wrapper">
+<div class="login crd-gb-style">
+	<div class="top-icon">
+		<%= image_tag('login_icon.png', :alt => 'Login') %>
+	</div>
+	
+    <!--   Start Signin Form     -->
+    
+    <%= form_for :signin, :url => user_signin_path, :html => {:multipart => 'true', :id => 'signinform', :name => 'signinform'} do |f| %>  
+    
+    
+    <!-- Hidden Fields -->
+   
+    <input type="hidden" name="projectid" value="<%= params[:projectid] %>">
+    <input type="hidden" name="projectname" value="<%= params[:projecttitle] %>">
+    
+    
+    <% if cookies[:userpassword].present? %> <!-- Start Code For Checking Cookies-->
+
+        <% @username    = cookies[:username] %>
+        <% @password    = cookies[:userpassword] %>
+
+    <% end %> <!-- End Code For Checking Cookies-->
+    
+    
+    
+        
+        <div class="form-group">
+			<i class="fa fa-user"></i>
+            
+            <%= f.text_field :username, id: 'username', placeholder: 'Username', value: @username, class: 'form-control', :data => { :validate => 'required,alphanumeric' } %>
+            
+		</div>
+    
+		<div class="form-group">
+			<i class="fa fa-unlock-alt"></i>
+			
+            <%= f.password_field :userpassword, id: 'userpassword', placeholder: 'Password', value: @password, class: 'form-control', :data => { :validate => 'required' } %>
+            
+		</div>
+    
+		<div class="form-group">
+			<label class="checkbox-wrapper">
+                
+                
+                
+                <% if cookies[:username].present? %> <!-- Start Code For Checking Cookies-->
+                
+                    <%= f.check_box :remember_me, id: 'remember_me', class: 'chk-box', value: 'click', checked: "checked" %>
+
+                <% else %> 
+
+                    <%= f.check_box :remember_me, id: 'remember_me', class: 'chk-box', value: 'click' %>
+
+                <% end %> <!-- End Code For Checking Cookies-->
+
+                <i class="input-helper"></i>Remember Me</label>
+		</div>
+    
+    
+    
+	
+	<div class="bott-wrap-sec">
+		<h5>Please click on the image (anti-spam test) </h5>
+		<ul class="bott-list">
+			<li><a href="javascript:;"><%= image_tag('fish_img.png', :alt => 'Fish') %></a></li>
+			<li><a href="javascript:;"><%= image_tag('cam_icon.png', :alt => 'Camera') %></a></li>
+			<li><a href="javascript:;"><%= image_tag('lock_icon.png', :alt => 'Lock') %></a></li>
+			<li><a href="javascript:;"><%= image_tag('bt_fly_img.png',:alt => 'Butterfly') %></a></li>
+		</ul>
+        
+		<div class="btn-sec text-center">
+            
+			<%= f.button :Login, :class => 'btn btn-login text-uppercase sign-btn-mx', :id => 'usersignin', :type => 'button' %>
+            
+			<span class="circle-div-line">
+				<%= image_tag('cr_div_line.png', :alt => 'Image Divider') %>
+			</span>
+		</div>
+        
+		<div class="social-share-btn">
+			<div class="social-share-btn-inside">
+				<h5>Sign in With Social</h5>
+				<ul class="">
+                    
+				<li class="fb-lnk">
+                    <a href="javascript:;"><i class="fa fa-facebook" onclick="Facebooksignup();"></i></a>
+                </li>
+                    
+				<li class="ggl-link">
+                    <a href="javascript:;"><i class="fa fa-google-plus" onclick="login();"></i></a>
+                </li>
+                    
+				<li class="linkd-link">
+                    <a href="javascript:;"><i class="fa fa-linkedin" onclick="liLogin()"></i></a>
+                </li>
+                    
+				<li class="twt-link" style="display:none;">
+                    <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                </li>
+                
+                <!--<li><%#= link_to 'Twitter', '/auth/twitter' %></li>-->
+                    
+			</ul>
+			</div>
+			
+		</div>
+		
+	</div>
+    
+    
+    
+    <% end %>
+    
+    <!--   End Signin Form     -->
+    
+    
+	<div class="rest-links">
+	<ul>
+		<li><a href="/user/signup">Sign up</a></li>
+		<li><a href="javascript:;">Forgot Password</a></li>
+	</ul>
+	</div>
+    
+</div>
+</section>
+
+
+
+
+<!-- Start Facebook Login Code Using Javascript -->
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1845582532365626',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+</script>
+
+
+<script type="text/javascript">
+
+
+function Facebooksignup() { alert(123);
+
+FB.login(function(response){
+    
+  // Note: The call will only work if you accept the permission request
+
+  // FB.api('/me/feed', 'post', {message: ''+post+''}); 
+
+    FB.api('/me?fields=id,name,email,first_name,last_name,gender,picture,verified', function(response) 
+    {
+
+        if (!response || response.error)
+        {
+            alert('Error occured');
+        }
+        else
+        {
+            
+        //alert('Post ID: ' + response.id);
+        console.log(response);
+        console.log('Good to see you, ' + response.name + '.');
+
+         var email      = response.email;
+         var firstname  = response.first_name;
+         var lastname   = response.last_name;
+         var id         = response.id;
+            
+         $.ajax({
+
+                   url: "/user/facebook_signup",
+                   type: "Post",
+                   data: { email:email,
+                           firstname:firstname,
+                           lastname :lastname,
+                           facebook_id:id
+                         },
+                   success: function(resp)
+                   {
+                        //alert(resp);
+                        
+                        if(resp == 1)
+                        {
+                            alert("Congratulations..! You have registered with Dalendo successfuly.");
+                            window.location.href="/";
+                        }
+                        if(resp == 2)
+                        {
+                            window.location.href="/";
+                        }
+
+                   }
+
+
+               });
+
+
+        }
+
+    }); 
+   
+
+}, {scope: 'email'});
+}
+
+
+</script>
+
+<!-- End Facebook Login Code Using Javascript -->
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------->
+
+<!-- GOOGLEPLUS LOGIN With Custom button Working  -->
+
+
+
+<script type="text/javascript">
+ 
+function login() 
+{ 
+  var myParams = {
+    'clientid' : '868354526929-dv2a95al06290ck869np4u7gt5l2dios.apps.googleusercontent.com',
+    'cookiepolicy' : 'single_host_origin',
+    'callback' : 'loginCallback',
+    'approvalprompt':'force',
+    'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+  };
+  gapi.auth.signIn(myParams);
+}
+ 
+function loginCallback(result)
+{
+    if(result['status']['signed_in'])
+    {
+        var request = gapi.client.plus.people.get(
+        {
+            'userId': 'me'
+        });
+        
+        
+        request.execute(function (resp)
+        { 
+        
+            var email = '';
+            if(resp['emails'])
+            {
+                for(i = 0; i < resp['emails'].length; i++)
+                {
+                    if(resp['emails'][i]['type'] == 'account')
+                    {
+                        email       = resp['emails'][i]['value'];
+                        firstname   = resp['name']['givenName'];
+                        lastname    = resp['name']['familyName'];
+                        gender      = resp['gender'];
+                        id          = resp['id'];
+                        image       = resp['image'];
+                    }
+                }
+            }
+            
+            /*console.log(email); 
+            console.log(firstname); 
+            console.log(lastname); 
+            console.log(gender); 
+            console.log(id); 
+            console.log(image);*/ 
+            
+            
+//            return false;
+            
+            
+            $.ajax({
+
+                   url: "/user/google_signup",
+                   type: "Post",
+                   data: { email:email,
+                           firstname:firstname,
+                           lastname :lastname,
+                           google_id:id
+                         },
+                   success: function(resp)
+                   {
+                        //alert(resp);
+                        
+                        if(resp == 1)
+                        {
+                            alert("Congratulations..! You have registered with Dalendo successfuly.");
+                            window.location.href="/";
+                        }
+                        if(resp == 2)
+                        {
+                            window.location.href="/";
+                        }
+
+                   }
+
+
+               });
+            
+            
+ 
+            
+        });
+ 
+    }
+ 
+}
+function onLoadCallback()
+{
+    gapi.client.setApiKey('AIzaSyCvS9VzwWpQXLGQVQxi6dCFaA2TOqk2kHI');
+    gapi.client.load('plus', 'v1',function(){});
+}
+ 
+    </script>
+ 
+<script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+</script>
+
+<!-- Google Custom Button Working Ends -->
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------->
+
+
+
+<!-- START LINKEDIN LOGIN/SIGNUP -->
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+ api_key: 81n4p7lkua202b  
+ onLoad: onLinkedInLoad
+ authorize: true
+</script>
+
+
+<script>
+    
+var liLogin = function()
+{
+    alert('linkedin');
+    
+    // Setup an event listener to make an API call once auth is complete
+    
+    IN.UI.Authorize().params({"scope":["r_basicprofile", "r_emailaddress"]}).place();
+    IN.Event.on(IN, 'auth', getProfileData);
+}
+
+var getProfileData = function()
+{
+    // Use the API call wrapper to request the member's basic profile data
+    
+    IN.API.Profile("me").fields("id,firstName,lastName,email-address,picture-urls::(original),public-profile-url,location:(name)").result(function (me) {
+        
+    var profile         = me.values[0];
+        
+    var id              = profile.id;
+    var email           = profile.emailAddress;
+    var firstName       = profile.firstName;
+    var lastName        = profile.lastName;
+        
+    var pictureUrl      = profile.pictureUrls.values[0];
+    var profileUrl      = profile.publicProfileUrl;
+    var country         = profile.location.name;
+        
+    alert(firstName);
+        
+    return false;
+        
+        
+    $.ajax({
+
+           url: "/user/linkedin_signup",
+           type: "Post",
+           data: { email:email,
+                   firstname:firstName,
+                   lastname :lastName,
+                   linkedin_id:id
+                 },
+           success: function(resp)
+           {
+                //alert(resp);
+
+                if(resp == 1)
+                {
+                    alert("Congratulations..! You have registered with Dalendo successfuly.");
+                    window.location.href="/";
+                }
+                if(resp == 2)
+                {
+                    window.location.href="/";
+                }
+
+           }
+
+
+               });
+        
+        
+    });
+}
+
+
+</script>
+
+
+<!-- END LINKEDIN LOGIN/SIGNUP -->
+
+
+
+
+
+<!-- START TWITTER LOGIN/SIGNUP -->
+
+
+
+
+<!-- END TWITTER LOGIN/SIGNUP -->
+

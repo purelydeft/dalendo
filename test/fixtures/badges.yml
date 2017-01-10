@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  badge_name: MyString
+  badge_description: MyString
+  badge_image: MyString
+  badge_status: MyString
+
+two:
+  badge_name: MyString
+  badge_description: MyString
+  badge_image: MyString
+  badge_status: MyString

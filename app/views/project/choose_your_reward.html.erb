@@ -1,0 +1,197 @@
+<div class="mini-slides-wrap">
+<div class="mini-slides text-center">
+<h3>Lorem Ipsum is simply dummy </h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+</div>
+<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+<div class="payment-box-outer">
+    
+<div class="payment-title">
+<h2>Choose Your Reward</h2>
+</div>
+    
+<div class="payment-box-inside">
+
+<!-- Choose Reward Form Starts Here -->    
+<%= form_for :choosepaymenttype, :url => projects_checkout_choose_payment_path, :html => {:id => 'choosepaymenttype', :multipart => true} do |f| %>
+<div class="row choose-award-outer">
+<div class="col-xs-12 col-sm-12 col-md-12">
+<div class="donotwanna-reward">
+<ul>
+<li>
+<figure><%= image_tag('reward-icon-1.png', :alt => 'I do not want any reward') %></figure>
+<h4>I do not want any reward</h4>
+<div class="setting-outr">
+<div class="cstm-setting-rs">
+<select class=""  id="ruppes-drop"  > <option value='1' data-title="1">$1</option>
+<option value='2' data-title="2">$2</option>
+<option value='3' data-title="3">$3</option></select>
+</div>
+<input type="text" name="without_reward_amount" id="without_reward_amount" value="" placeholder="$0" />
+</div>
+<!--Hidden Reward Status Field-->
+<input type="hidden" name="rewardstatus" id="rewardstatus">
+</li>
+</ul>
+<div class="devider-or">OR</div>
+</div>
+    
+<div class="reward-amount-outer">
+<ul>
+<li class="active">
+<figure><%= image_tag('reward-icon-2.png', :alt => 'I do not want any reward') %></figure>
+<h4>Reward Amount</h4>
+<%#*<span class="amout-reward showed_reward_amount">$0</span>%>
+<span class="amout-reward hidden_parent_reward_amount" style="display:none;">$0</span>
+<input type="text" class="amout-reward" id="showed_reward_amount" name="with_reward_amount" value="" placeholder="$0" readonly="readonly" />
+</li>
+<li>
+<figure><%= image_tag('reward-icon-2.png', :alt => 'I do not want any reward') %></figure>
+<h4>Change Your Reward</h4>
+<ul class="change-price">
+<%#*<li class="active-price"><a href="javascript:;">$20</a></li>%>
+
+<% if @getRewardsAcctoProject.present? %>
+<% @getRewardsAcctoProject.each do|rewardsdata| %>
+    <li><a href="javascript:;" class="reward_develop_wrk" >$<%= rewardsdata['reward_amount'] %> </a></li>
+<% end %><!--Endforeach-->
+<% end %><!--Endif-->
+
+</ul>
+</li>
+</ul>
+</div>
+
+<div class="row rewards-quty">
+<div class="col-xs-12 col-sm-4 col-md-4"><label>Reward Quantity</label></div>
+<div class="col-xs-12 col-sm-8 col-md-8">
+<div class="custom-search-input custom-dropdown-inner">
+<select name="reward_qa_drop_quantity" id="reward-qa-drop" >
+<option value='1' data-title="1">1</option>
+<option value='2' data-title="2">2</option>
+<option value='3' data-title="3">3</option>
+</select>
+    
+</div>
+</div>
+</div>
+    
+    
+<div class="row choose-reward-btn-outer">
+<div class="col-xs-12 col-sm-6 col-md-6">
+<span><a title="Back" class="btn btn-blue custom_btn" href="<%= @back_url %>">BACK</a></span>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6">
+    <span class="pull-right"><button class="btn btn-blue custom_btn" type="submit">NEXT STEP</button></span>
+</div>
+</div>
+
+</div>
+</div>
+    
+<% end %><!--Form Ends-->
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<style>
+#choosepaymenttype .error
+{
+  color: red;
+}
+</style>
+
+<script>
+ 
+ jQuery(document).ready(function () {
+   
+	jQuery('#choosepaymenttype').validate({
+          
+rules: {
+            without_reward_amount:{
+                required: {
+                    depends: function(element) {
+                        return $("#showed_reward_amount").val() == ''
+                    }
+                },
+                number: true
+            },
+            with_reward_amount:{
+                required: {
+                    depends: function(element) {
+                        return $("#without_reward_amount").val() == ''
+                    }
+                }
+            }
+} 
+    });
+  });
+
+
+ /*Choosing Reward Amount And Selecting Reward*/
+ 
+  $(document).ready(function()
+  {
+    
+    $('.reward_develop_wrk').click(function()
+    {
+         $("#without_reward_amount").val(null);
+         var rewardstatus = '0';
+         $('#rewardstatus').val(rewardstatus);
+         var amount_val = $.trim($(this).text());
+         $('#showed_reward_amount').attr('value',amount_val);
+         $('.hidden_parent_reward_amount').text(amount_val);
+    });
+     
+     
+    $('select').on('change', function()
+    {
+        var reward_quantity = this.value;
+        var selected_reward_string = $('.hidden_parent_reward_amount').text();
+        var selected_reward = selected_reward_string.replace ( /[^\d.]/g, '' );
+        
+        var total_amount_mutiplication = parseInt(reward_quantity,10)*parseInt(selected_reward,10);
+        var total_amount = '$'+total_amount_mutiplication;
+        $("#showed_reward_amount").attr('value',total_amount);
+    });
+
+/*Show reward choosen div selected*/
+  $("ul.change-price li").click(function(){
+    $("ul.change-price li").removeClass("active-price");
+    $(this).addClass("active-price");
+  });
+  
+
+  
+  
+ /*Validation For Rewards Selecting*/
+ $( "#without_reward_amount" ).keyup(function() 
+ {
+    var currentvalue_withoutreward = $('#without_reward_amount').val();
+    
+     if(currentvalue_withoutreward !== '')
+     {
+           $('#showed_reward_amount').attr('value',''); 
+           $("ul.change-price li").removeClass("active-price");
+     }
+     
+     var rewardstatus = '1';
+     $('#rewardstatus').val(rewardstatus);
+  
+});
+  
+   });
+
+
+
+</script>
+ 
+     

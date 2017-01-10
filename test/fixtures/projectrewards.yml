@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  reward_tile: MyString
+  reward_amount: 1
+  reward_description: MyString
+  reward_shipping_details: MyString
+  reward_estimated_delivery: MyString
+  status: MyString
+
+two:
+  project_id: 1
+  reward_tile: MyString
+  reward_amount: 1
+  reward_description: MyString
+  reward_shipping_details: MyString
+  reward_estimated_delivery: MyString
+  status: MyString

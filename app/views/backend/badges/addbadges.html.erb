@@ -1,0 +1,130 @@
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+         <!---------Add Badges Form Starts Here---------->
+
+         <%= form_for :addbadges, :url => backend_add_badges_path, :html => {:id => 'addbadgesid', :multipart => true} do |f| %>
+
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>ADD Badges</h2>
+                            </div>
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :badgename, id: 'badgename', placeholder: 'Badge Name', class: 'form-control', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false" %></div>
+                            </div>
+
+                       <!-- Empty Error Message   -->
+                       <span id="badgename1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                       <span id="badgename3" class="alert alert-danger custom" style="display:none">Only characters are allowed.</span>             
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_area(:badge_decription, class: 'form-control', placeholder: 'Badge Description', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false") %></div>
+                            </div>
+                       <!-- Empty Error Message   -->
+                       <span id="addbadges_badge_decription1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                       <span id="addbadges_badge_decription2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>             
+                            </div>
+
+
+                           <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                	<div class="upload-img-div">
+                                    <span><i><%= image_tag ('upload-img.png'), :alt => "" %></i>Upload image</span>
+                                    <%= file_field_tag 'badge_image', id: "badgeimage", onchange: "ValidateSingleInput(this);" %>
+                                   </div>
+
+                                  <div class="upload-img-show">
+                                    <img id="blah" src="#" alt="" style="display:none;" />
+                                  </div>
+
+                                </div>
+                            </div>
+                       <!-- Empty Error Message   -->
+                       <span id="badgeimageerrmsz" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                            </div>
+
+                        <%= f.hidden_field :badges_status, :value => 'active', :class => 'badgesstatus'%>
+
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Status:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                	<div class="custom-on-off">
+                                    <ul class="active_bg">
+                                    <li class="active"><a href="javascript:void(0)">Active</a></li>
+                                    <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                                    </ul>
+                       			</div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="row">
+                            	
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3"><%= f.submit :Submit, :class => 'login-btn btn-margin-top', :id => 'badgesavebutton', :type => 'button' %> </div></div>
+                            </div>
+                            
+                        </div>
+                    <% end %> <!-- Add-Badges Form Ends -->
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+       
+    </div>
+
+
+
+
+<script>
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').css('display','block');
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function() {
+        $("#badgeimage").change(function () {
+            
+            $('#badgeimageerrmsz').css('display','none');
+            readURL(this);
+        });
+    });
+
+    
+$(document).ready(function(){
+$("#badgesavebutton").dblclick(function(e){
+e.preventDefault();
+});
+});
+</script>
+
+<script>
+  
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#badgesavebutton').click();
+    }
+}
+
+</script>

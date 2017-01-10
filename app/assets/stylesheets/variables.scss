@@ -1,0 +1,197 @@
+/*variable Css*/
+/* Variables */
+$width: 15em; // dropdown width
+$height: 2.5em; // dropdown height
+$ajust: 1em; // left & right padding in dropdown menu
+$radius: 3px;
+$transition:0.3s;
+
+/*fonts variable */
+$font-stack: 'Lato', sans-serif;
+$font-Montserrat:'Montserrat', sans-serif;
+
+/* Colors */
+$primary-color: #315481;
+$black: #383838;
+$grey: #888888;
+$dark-grey: #271b14;
+$green: #009925;
+$white-color: #fff;
+$donations: #d50f25;
+$loan: #ee6c14;
+$busness-loan: #eeb311;
+$footer-color: #184278;
+$footer-text: #acaba2;
+$title-font:1.8em;
+$sub-heading:1em;
+$para-font:0.9em;
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+}
+@function calc-percent($target, $container) {
+  @return ($target / $container) * 100%;
+}
+@mixin padding($padding) {
+  padding: $padding;
+}
+@mixin margin($margin) {
+  margin: $margin;
+}
+/* border-radius */
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin transition($transition){
+  -webkit-transiton:$transition;
+     -moz-transiton:$transition;
+      -ms-transiton:$transition;
+          transiton:$transition;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+// generic transform
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+ 
+// scale
+@mixin scale($scale) {
+	 @include transform(scale($scale));
+} 
+// translate
+@mixin translate ($x, $y) {
+   @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin ($origin) {
+    moz-transform-origin: $origin;
+	     -o-transform-origin: $origin;
+	    -ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+          transform-origin: $origin;
+}
+
+/* Global CSS */
+
+.custom-tooltip-wrap{
+	position: relative;
+	.custom-tooltip{
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		width: auto;
+		cursor: pointer;
+	}
+	&:hover .custom-tooltip{
+		opacity: 1;visibility: visible;
+	}
+}
+.blk-sec{
+	background-color: $white-color;
+	@include border-radius(5px);
+	@include padding(20px);
+	h3{
+		@include font-size(1.5);
+		font-weight: 600;
+		color: $primary-color;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 10px;
+		margin-bottom:20px;
+	}
+	h5{
+		@include font-size(1.8);
+		font-weight: 600;
+		color: $primary-color;
+	}
+	p{
+		@include font-size(1.5);
+		line-height: 1.5;
+		color: $black;
+		font-weight: 300;
+	}
+	
+}
+.blk-sec+.blk-sec{
+	@include margin(20px 0 0);	
+}
+.bott-padding-0{
+	padding-bottom: 0;
+}
+.btn{
+	text-transform: uppercase;
+	&:focus{
+		outline: 0;
+	}
+}
+.bg-white-radius{
+	background-color: $white-color;
+	@include border-radius(5px); 
+	@include padding(20px);
+}
+textarea{
+	resize: none;
+}
+.primary-btn{
+	border: 1px solid $primary-color;
+	color: $primary-color;
+	text-transform: uppercase;
+	background-color: transparent;
+	@include border-radius(50px);
+	font-weight: 600;
+		&:hover{
+			background-color: $primary-color;
+			color: $white-color;
+		}
+}
+/*variable Css*/
+
+$break-small: 320px;
+$break-large: 1024px;
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+}
+
+
+
+
+
+
+
+

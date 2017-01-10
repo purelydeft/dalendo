@@ -1,0 +1,146 @@
+<style>
+    
+ 
+    
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+
+
+
+
+</style>
+
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">  
+            	<div class="heading-one"><h3>User Management</h3>
+                
+                <div class="right-add-btn-outer">
+                    	<a href="/backend/add-user">Add User</a>
+                    </div>
+                </div>
+                
+            <% if @getUsers.present? %> <!-- Start if @getUsers.present? -->
+           
+       		<div class="table-responsive project-table-outer">
+            	<table class="table">
+              
+                	<thead>
+                	<tr>
+                    	<th>S.No.</th>
+                        <th><%= sortable "image" %></th>
+                        <th><%= sortable "name" %></th>
+                        <th><%= sortable "username" %></th>
+                        <th><%= sortable "email address" %></th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                <% @getUsers.each_with_index  do |userdata, index| %> <!-- Start @getUsers Main Foreach -->
+                        
+                        <% userImage = userdata['user_image'] %>
+                        
+                         <!-- Code for Image Checking  -->
+                        
+                            
+                        <% if File.exist?(Rails.root.join('app','assets','images','userImages',userImage )) %>
+                            <% user_pic = userImage  %>
+                        <% else %>
+                            <% user_pic = 'default' + '.jpg'  %>
+                        <% end %>
+                        
+                         <!-- Code for Image Checking  -->
+                        
+                    
+                    <tr id="usersAllshowingdiv_<%= userdata['id'] %>">
+                        
+                    	<td><%= index+1 %></td>
+                        <td><figure><%= image_tag File.join('userImages', user_pic), :alt => '' %></figure></td>
+                        <td><%= userdata['first_name'] %> <%= userdata['last_name'] %></td>
+                        <td><%= userdata['user_name'] %></td>
+                        <td><%= userdata['email'] %></td>
+                        
+                        
+                        
+                        
+                        <% if userdata['user_status'] == 'active' %>    
+                                    
+                             <td><span class="btn-active">
+                                 <a href="/backend/changeUserstatus?uid=<%= userdata['id'] %>&&status=<%= userdata['user_status'] %>" > Active </a> </span>
+                             </td>
+
+                             <% else %>
+
+                        <td><span class="btn-active btn-inactive"><a href="/backend/changeUserstatus?uid=<%= userdata['id'] %>&&status=<%= userdata['user_status'] %>"> Inactive </a></span>
+                             </td> 
+
+                        <% end %>
+                        
+                        
+
+                        
+                        <td>
+                        	<span class="tble-action-outer">
+                                
+                            <a href="/backend/view-user?uid=<%= userdata['id'] %>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                
+                            <a href="/backend/edit-user?uid=<%= userdata['id'] %>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                
+                            <a href="javascript:;"><i data-userid="<%= userdata['id'] %>" data-profileimage="<%= userdata['user_image'] %>" class="fa fa-trash trashusers" aria-hidden="true"></i></a>
+                                
+                            </span>
+                        </td>
+                    </tr>
+                        
+                <% end %> <!-- End @getUsers Main Foreach -->
+                        
+                            
+                                        
+                    </tbody>
+                </table>
+                
+                <div class="table-pagination-outer">
+                    <nav aria-label="Page navigation">
+                        
+                        <%= will_paginate @getUsers %>
+                        
+                    </nav>
+                </div>
+                
+                
+                
+                
+            </div>
+           
+           
+           <% else %>  
+                        
+            <div class="inner-pages-main">  
+            	
+                <div class="comming_soon"><h3>Oooooops...! There is no data in User Table.</h3></div>    
+       		
+            </div>            
+                        
+            <% end %> <!-- End if @getUsers.present? -->
+           
+           
+       </div>
+        
+       
+    </div>
+

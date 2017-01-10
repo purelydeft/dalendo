@@ -1,0 +1,167 @@
+<!-- Right Sec -->
+<aside class="col-sm-4 col-xs-12 aside-sec">
+<div class="blk-sec bott-padding-0">
+<div class="process-sec">
+	<%= image_tag('proc_img.png', :alt => 'Loader', :class => 'img-center') %>
+	</div>
+		<ul class="process-list">
+			<li><label>Raised:</label> <span>$50,0000</span></li>
+			<li><label>Goal:</label> <span>$<%= @Get_Project_By_Project_id[0]['project_funding_goal'] %></span></li>
+            
+<!--Days left for project-->        
+<%# current_date     = Time.now.strftime("%Y/%m/%d")  %>     
+<%#= current_date.inspect %>   
+
+<%# project_end_date = @Get_Project_By_Project_id[0]['project_enddate'] %>
+
+<%# project_days_left = (project_end_date.to_date - current_date.to_date).to_i %>               
+<%# project_days_left = (project_end_date - current_date) %>
+<%#= project_days_left.inspect %>            
+<!--Code checking for project-video-->
+            
+            
+			<li><label>Days left:</label> <span><%#= project_days_left %> Days</span></li>
+			<li><label>Location:</label> <span><%= @Get_Project_By_Project_id[0]['project_location'] %> </span></li>
+		</ul>
+	<div class="action-sec cntr-sec">
+	<a href="javascript:;"><%= image_tag('payment_img.png', :alt => 'Payment Process') %></a>
+    <% if session[:current_user_id].present? %>    
+	<a href="/<%= @Get_Project_By_Project_id[0]['project_title'].gsub(/\s+/, "") %>/choose-your-reward/<%= @Get_Project_By_Project_id[0]['id'] %>" class="btn btn-contribute">Contribute</a>
+    <% else %>
+    <a href="/user/signin/<%= @Get_Project_By_Project_id[0]['project_title'].gsub(/\s+/, "") %>/<%= @Get_Project_By_Project_id[0]['id'] %>" class="btn btn-contribute">Contribute</a>
+    <% end %>                    
+	</div>
+</div>
+
+<div class="blk-sec">
+	<h3>Supporters</h3>
+	<ul class="user-list-sec">
+        
+        <!--Working Of Project Supporters -->
+        <% if @project_supporters.present? %>
+        <% @project_supporters.each do|allprojectSupporters| %>
+
+            <% @projectSupporter_persondata = User.where(id: allprojectSupporters['supported_by']).all %>
+    
+            <% user_image = @projectSupporter_persondata[0]['user_image'] %> 
+
+            <!-- Code for Image Checking  -->
+
+            <% if user_image.present? %> 
+            <% if File.exist?(Rails.root.join('app','assets','images','userImages',user_image )) %>
+            <% supporter_user_pic = user_image  %>
+            <% else %>
+            <% supporter_user_pic = 'default' + '.jpg'  %>
+            <% end %>
+            <% else %>
+            <% supporter_user_pic = 'default' + '.jpg'  %>
+            <% end %>
+
+            <!-- Code for Image Checking  --> 
+        
+		<li><a href="javascript:;"><%= image_tag File.join('userImages', supporter_user_pic), :alt => '', :class => 'pull-left' %></a></li>
+        <% end %>
+        <% end %>
+        <!--Working Ends-->
+        
+
+	</ul>
+		<div class="action-sec">
+	<a href="/<%= @Get_Project_By_Project_id[0]['project_title'] %>/dalenders/<%= @Get_Project_By_Project_id[0]['id'] %>" class="btn btn-supports">All Supporters</a>
+	</div>
+</div>
+
+<div class="blk-sec">
+<h3>Testimonials</h3>
+ <div id="owl-demo" class="owl-carousel owl-theme">
+ 
+  <div class="item">
+  <div class="usr-test-sec">
+		<div class="id-sec">
+			<%= image_tag('_img1.png', :alt => 'Image 1') %>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orcieu.</p>
+		</div>
+	</div>
+  </div>
+    <div class="item">
+  <div class="usr-test-sec">
+		<div class="id-sec">
+			<%= image_tag('_img1.png', :alt => 'Image 1') %>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orcieu.</p>
+		</div>
+	</div>
+  </div>
+  
+  
+  
+  </div>
+</div>
+
+<div class="blk-sec">
+	<h3>Choose Your Reward</h3>
+ <div id="owl-demo3" class="owl-carousel owl-theme">
+ 
+  <% if @projectBeingEditedRewardData.present? %>
+  <% @projectBeingEditedRewardData.each_slice(2) do |slice| %>   <!-- Start Foreach for All Rewards acc project --> 
+     
+  <div class="item">
+  <ul class="reward-sec-wrap">
+       <% slice.each do |rewarddata| %>  <!-- Start Foreach for slice -->
+		<li>
+			<div class="reward-sec">
+<!--<h5>For € 10 or More</h5>-->
+				<h5>For € <%= rewarddata['reward_amount'] %> or More</h5>
+<!--
+				<span class="hrt-sec">
+					<i class="fa fa-heart"></i>495
+				</span>
+-->
+				<p><%= rewarddata['reward_description'] %>.</p>
+			</div>
+		</li>
+      <% end %>
+<!--
+		<li>
+			<div class="reward-sec">
+				<h5>For € 10 or More</h5>
+				<span class="hrt-sec">
+					<i class="fa fa-heart"></i>495
+				</span>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orcieu.</p>
+			</div>
+		</li>
+-->
+	</ul>
+  </div>
+  <% end %>
+  <% end %> 
+<!--
+    <div class="item">
+  <ul class="reward-sec-wrap">
+		<li>
+			<div class="reward-sec">
+				<h5>For € 10 or More</h5>
+				<span class="hrt-sec">
+					<i class="fa fa-heart"></i>495
+				</span>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orcieu.</p>
+			</div>
+		</li>
+		<li>
+			<div class="reward-sec">
+				<h5>For € 10 or More</h5>
+				<span class="hrt-sec">
+					<i class="fa fa-heart"></i>495
+				</span>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orcieu.</p>
+			</div>
+		</li>
+	</ul>
+  </div>
+-->
+  </div>
+
+	
+</div>
+
+</aside>

@@ -1,0 +1,1499 @@
+<!--Project Basic Section data-->
+
+<%
+
+if @projectBeingEditedData.present?
+
+project_id              = @projectBeingEditedData[0]['id']    
+project_type            = @projectBeingEditedData[0]['project_type']
+#previous_project_image  = @projectBeingEditedData[0]['project_image']
+project_user_id         = @projectBeingEditedData[0]['user_id']
+project_title           = @projectBeingEditedData[0]['project_title']
+short_desc              = @projectBeingEditedData[0]['short_desp']
+project_category        = @projectBeingEditedData[0]['category_id']
+project_location        = @projectBeingEditedData[0]['project_location']
+project_language        = @projectBeingEditedData[0]['projectlanguage']
+project_startdate       = @projectBeingEditedData[0]['project_startdate']
+project_enddate         = @projectBeingEditedData[0]['project_enddate']
+project_currency        = @projectBeingEditedData[0]['currency']
+pro_min_fundingGoal     = @projectBeingEditedData[0]['project_minimum_fundinggoal']
+project_funding_goal    = @projectBeingEditedData[0]['project_funding_goal']
+project_status          = @projectBeingEditedData[0]['status']
+
+
+end
+
+
+if @projectBeingEditedStoryData.present?
+
+story_id                = @projectBeingEditedStoryData[0]['id']
+project_video           = @projectBeingEditedStoryData[0]['project_video']
+project_description     = @projectBeingEditedStoryData[0]['project_description']
+project_risk            = @projectBeingEditedStoryData[0]['project_risk']
+
+end
+
+
+if @projectBeingEditedAboutData.present?
+
+project_about_id         = @projectBeingEditedAboutData[0]['id']   
+project_creator_image    = @projectBeingEditedAboutData[0]['project_creator_image']
+creator_image_status     = @projectBeingEditedAboutData[0]['creator_image_status']
+firstname                = @projectBeingEditedAboutData[0]['firstname']
+lastname                 = @projectBeingEditedAboutData[0]['lastname']
+structure                = @projectBeingEditedAboutData[0]['structure']
+address                  = @projectBeingEditedAboutData[0]['address']
+country                  = @projectBeingEditedAboutData[0]['country']
+nationality              = @projectBeingEditedAboutData[0]['nationality']
+phonenumber              = @projectBeingEditedAboutData[0]['phonenumber']
+
+
+end
+
+
+if @projectBeingEditedAccountData.present?
+   
+account_id               = @projectBeingEditedAccountData[0]['id']
+paymenttype              = @projectBeingEditedAccountData[0]['payment_type']
+fullname                 = @projectBeingEditedAccountData[0]['fullname']
+bankemail                = @projectBeingEditedAccountData[0]['bankemail']
+bankname                 = @projectBeingEditedAccountData[0]['bankname']
+account_number           = @projectBeingEditedAccountData[0]['account_number']
+bank_ifsc_code           = @projectBeingEditedAccountData[0]['bank_ifsc_code']
+account_type             = @projectBeingEditedAccountData[0]['account_type']
+    
+    
+end    
+    
+    
+
+
+%>
+
+
+
+
+<div class="right-content-area">
+<div class="inner-pages-main">
+<div class="inner-padding-all">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+<div class="inside-gray-bx">
+<div class="heading-two">
+<h2>Let’s get started</h2>
+</div>
+<div class="steps-status">
+<ul>
+
+<li id="basicli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click1">1</i>Basics</a></li>
+
+<li id="rewardli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click2">2</i>Rewards</a></li>
+
+<li id="storyli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click3">3</i>Story</a></li>
+
+<li id="aboutyouli"><a href="javascript:;"><i class="circle-helper" id="click4">4</i>About You</a></li>
+
+<li id="accountli"><a href="javascript:;"><i class="circle-helper" id="click5">5</i>Account</a></li>
+</ul>
+</div>
+
+<%= form_for :addprojects, :url => backend_saveedit_project_path, :html => {:id => 'editprojectsid', :multipart => true} do |f| %>
+
+<!--Hidden Project Id Used For Editing -->
+<input type="hidden" name="project_id" value="<%= project_id %>" %>
+<input type="hidden" name="project_main_status" value="<%= project_status %>" %>    
+<!--Hidden Id Ends  -->
+    
+<div class="steps-content-wrap">
+
+<!-- Step 1-->
+<div class="step-wrap-1" id="basicDiv">
+
+<!-- Project created By-->
+<input type="hidden" name="project_createdby" value="<% if session[:current_user_id].present? %><%= session[:current_user_id] %><% end %>">
+<!-- End -->
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project Type:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" id="project_type" name="projecttype" onchange= removevalidations(this); onblur = removevalidations(this);>
+
+      <option value="">Select Project</option>
+      <%
+        if @projecttype.present?
+          @projecttype.each_with_index  do |allprojectdataval, index|
+      %>
+<option <% if allprojectdataval == project_type  %> selected="selected" <% end %> value="<%= allprojectdataval %>"> <%= allprojectdataval.capitalize %></option>
+
+          <% end %> <!--Endloop -->
+      <% end %> <!--EndIf -->
+
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="project_type1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project image:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+
+  <div class="change-image-sec common-imagewrap-sec border-grey">
+    <div class="web_site-logo-wrap">
+        
+      <!-- Getting Project Image From database -->
+                
+     <% @projectImages = ProjectFile.where(project_id: project_id, project_file_type: 'image') %>
+
+                
+     <!-- Getting Project Image From database Ends -->         
+        
+     <!--Previous Hidden Project Image-->
+      <input type="hidden" id="project_location_latitude" name="project_location_latitude" value="">
+      <input type="hidden" id="project_location_longitude" name="project_location_longitude" value="">    
+     <!--Previous Hidden Project Image-->
+      
+      <% @projectImages.each do |allprojectimages|  %>
+      <input type="hidden" id="previousprojectimg" name="previous_project_image[]" value="<%= allprojectimages['project_file_name'] %>">    
+      <% image_path = allprojectimages['project_image_path'] %>  
+      <% image_name = allprojectimages['project_file_name'] %>      
+      <%= image_tag File.join(image_path, image_name), :alt => '', :id => "blah_#{allprojectimages['id']}", :onclick => "del_project_images(#{allprojectimages['project_file_name']},#{allprojectimages['id']},#{allprojectimages['project_id']})" %>
+      <% end %>
+        
+    </div>
+    <div class="choose-img-wrapper ">
+
+      <div class="upload-img-div">
+        <span><i class="fa fa-camera" aria-hidden="true"></i>Choose a Image to  upload</span>
+        <%= file_field_tag 'project_image', id: "projectimage", onchange: "ValidateSingleInput(this);" %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projectimgerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project User:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" id="project_user" name="project_user" onchange= removevalidations(this); onblur = removevalidations(this);>
+
+      <option value="">Select User</option>
+      <%
+        if @getUsers.present?
+          @getUsers.each_with_index  do |allusersdataval, index|
+            if allusersdataval['id'] != session[:current_user_id]
+      %>
+<option <% if allusersdataval['id'] == project_user_id %> selected="selected" <% end %> value="<%= allusersdataval['id'] %>"><%= allusersdataval['first_name'] %> <%= allusersdataval['last_name'] %></option>
+
+              <% end %> <!--Endif condition -->
+          <% end %> <!--Endloop -->
+      <% end %> <!--EndIf -->
+
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="project_user1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project title:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" name="project_title" type="text" value="<%= project_title %>" placeholder="Enter Project
+  Name" id="projecttitle" onkeyup= removevalidations(this); onblur = removevalidations(this); onkeypress = isalphanumeric(event,this); ondrop = return false; onpaste = return false;>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projecttitle1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="projecttitle3" class="alert alert-danger" style="display:none; margin-left:193px;">Only characters are allowed.</span>         
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project Language:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" id="projectlang" name="project_language" onchange= removevalidations(this); onblur = removevalidations(this);>
+      <option value="">Select Project Language</option>
+      <%
+        if @languages.present?
+          @languages.each_with_index  do |languagesdataval, index|
+      %>
+<option <% if languagesdataval.id == project_language.to_i %> selected="selected" <% end %> value="<%= languagesdataval.id %>"><%=
+languagesdataval.language_name %></option>
+          <% end %> <!-- Endif -->
+      <% end %> <!-- EndLoop -->
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projectlang1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Short blurb:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9"><textarea name="short_descp" placeholder="Short blurb" id="blurb" class="form-control" onkeyup= removevalidations(this); onblur = removevalidations(this);><%= short_desc %></textarea></div>
+</div>
+<!--Error Message span -->
+<span id="blurb1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Category:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" id="projectcategory" name="project_category" onchange= removevalidations(this); onblur = removevalidations(this);>
+      <option value="">Select Project Category</option>
+
+      <%
+        if @getallcategories.present?
+          @getallcategories.each_with_index  do |categoriesdataval, index|
+      %>
+<option <% if categoriesdataval['id'] == project_category %> selected="selected" <% end %> value="<%= categoriesdataval['id'] %>"><%= categoriesdataval['category_name'] %></option>
+
+          <% end %>  <!--Endloop-->
+      <% end %>  <!--Endif-->
+
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projectcategory1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project location:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" type="text" placeholder="Enter Location" id="location" name="project_location"
+         value="<%= project_location %>" onkeyup= removevalidations(this); onblur = removevalidations(this);>
+</div>
+</div>
+<!--Error Message span -->
+<span id="location1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project startdate:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="form-group datepicker-wrap">
+    <div class="input-group date" id="datetimepicker1">
+      <input type="text" class="form-control" value="<%= project_startdate %>" id="projectstart" placeholder="Starting Date" name="project_startdate" onkeyup= removevalidations(this); onblur = removevalidations(this); />
+      <span class="input-group-addon">
+<i class="duration-selecter">
+  <%= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                </i>
+</span>
+    </div>
+  </div>
+</div>
+
+</div>
+<!--Error Message span -->
+<span id="projectstart1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project enddate:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="form-group datepicker-wrap">
+    <div class="input-group date" id="datetimepicker2">
+      <input type="text" name="project_enddate" value="<%= project_enddate %>" class="form-control"
+             id="projecend" placeholder="Ending Date" onkeyup= removevalidations(this); onblur = removevalidations(this); />
+      <span class="input-group-addon">
+<i class="duration-selecter">
+  <%= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                </i>
+</span>
+    </div>
+  </div>
+</div>
+
+</div>
+<!--Error Message span -->
+<span id="projecend1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="projectgreatererr" class="alert alert-danger" style="display:none; margin-left:193px;">End date must be greater than start date.</span>
+<span id="onemontherr" class="alert alert-danger" style="display:none; margin-left:193px;">Project must be of 30 days minimum
+.</span>
+</div>
+
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Currency:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" id="projectcurrency" name="projectcurrency" onchange= removevalidations(this); onblur = removevalidations(this);>
+      <option value="">Select Currency</option>
+      <%
+        if @currency.present?
+          @currency.each_with_index  do |currencydataval, index|
+      %>
+<option <% if currencydataval.id == project_currency.to_i %> selected="selected" <% end %> value="<%= currencydataval.id
+%>"><%= currencydataval.currency_name %></option>
+
+          <% end %> <!-- Endif -->
+      <% end %> <!-- EndLoop -->
+
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projectcurrency1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Minimum funding goal:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" value="<%= pro_min_fundingGoal %>" name="min_fundinggoal" id="minfundinggoal" type="text"placeholder="Minimum Goal Amount" onkeyup= removevalidations(this); onblur = removevalidations(this);>
+</div>
+</div>
+<!--Error Message span -->
+<span id="minfundinggoal1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="fundnumric_msz" class="alert alert-danger" style="display: none; margin-left:193px; "> Please enter only numeric value. </span>
+</div>
+
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Funding goal:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" value="<%= project_funding_goal %>" name="funding_goal" id="fundinggoal" type="text" placeholder="Funding Goal Amount" onkeyup= removevalidations(this); onblur = removevalidations(this);>
+</div>
+</div>
+
+
+<!--Error Message span -->
+<span id="fundinggoal1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="fundnumric2_msz" class="alert alert-danger" style="display: none; margin-left:193px; "> Please enter only numeric value.
+</span>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" value="Discard changes" name="Submit"
+       id="discardbutton" />
+<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="savebasicpro" />
+</div>
+</div>
+</div>
+
+<!--step1 Ends-->
+
+
+<!--  Start Step-2  -->
+
+<% if @projectBeingEditedRewardData.present? %>
+<% @projectBeingEditedRewardData.each_with_index  do |projectcurrentrewarddata, index| %>
+    
+    
+<!--Hidden Reward Id Used While editing-->
+ <input type="hidden" name="rewardid[]" value="<%= projectcurrentrewarddata['id'] %>"> 
+<!--Hidden Ends -->
+    
+  <div class="step-wrap-2 mainRewardDiv" id="rewardsDiv">
+
+  <label style="color: #1A375D;"><b>REWARD #<%= index+1 %></b></label>
+
+  <div class="form-group">
+  <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3"><label>Title:</label></div>
+  <div class="col-xs-12 col-sm-9 col-md-9">
+    <input name="title[]" class="form-control testing1" type="text" placeholder="Enter Title" value="<%= projectcurrentrewarddata['reward_tile'] %>">
+
+    <span id="title_empty" class="rewardsalert alert-danger"> Title is required. </span>
+
+  </div>
+  </div>
+  </div>
+
+  <div class="form-group">
+  <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3"><label>Reward amount:</label></div>
+  <div class="col-xs-12 col-sm-9 col-md-9">
+    <input name="rewardamount[]" class="form-control" type="text" placeholder="$0" value="<%= projectcurrentrewarddata['reward_amount'] %>">
+
+    <span id="rewardamount_empty" class="rewardsalert alert-danger"> Reward amount is required. </span>
+
+    <span id="rewardamount1_empty" class="rewardsalert alert-danger"> Please enter only numeric value. </span>
+
+  </div>
+  </div>
+  </div>
+
+  <div class="form-group">
+  <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+  <div class="col-xs-12 col-sm-9 col-md-9">
+    <textarea name="reward_desc[]" class="form-control"><%= projectcurrentrewarddata['reward_description'] %></textarea>
+
+    <span id="rewarddesc_empty" class="rewardsalert alert-danger"> Description is required. </span>
+
+  </div>
+  </div>
+  </div>
+
+
+<!--
+  <div class="form-group">
+
+  <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3"><label>Estimate Delivery:</label></div>
+  <div class="col-xs-12 col-sm-9 col-md-9">
+    <div class="form-group datepicker-wrap">
+      <div class="input-group date commobdatepicker">
+        <input type="text" name="estimated_deliv_month[]" class="form-control" placeholder="Delivery Date" value="<%#=  projectcurrentrewarddata['reward_estimated_delivery'] %>" />
+        <span class="input-group-addon">
+                          <i class="duration-selecter">
+                              <%#= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                          </i>
+                      </span>
+
+
+      </div>
+
+      <span id="month_empty" class="rewardsalert alert-danger"> Please Select a date. </span>
+
+
+    </div>
+  </div>
+
+  </div>
+
+  Error Message span 
+
+  <span id="" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+
+  </div>
+-->
+
+
+
+  <div class="form-group">
+  <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3"><label>Shipping details:</label></div>
+  <div class="col-xs-12 col-sm-9 col-md-9">
+    <textarea name="reward_shipping_details[]" class="form-control"><%= projectcurrentrewarddata['reward_shipping_details']  %></textarea>
+
+    <span id="shipping_empty" class="rewardsalert alert-danger"> Shipping Detail is required. </span>
+
+
+  </div>
+
+  </div>
+  </div>
+
+
+  <div class="abc"></div>
+
+  <!--<div class="form-group">-->
+  <!--<div class="row">-->
+  <!--<div class="col-xs-12 col-sm-3 col-md-3"><label></label></div>-->
+  <!--<div class="col-xs-12 col-sm-5 col-md-5">-->
+    <!--<div class="rewards-system">-->
+      <!--<a href="javascript:;" id="duplicateReward" class="add-rwd-btn">-->
+        <!--<i class="fa fa-plus"></i>ADD A NEW REWARD-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="col-xs-12 col-sm-4 col-md-4">-->
+    <!--<div class="rewards-system">-->
+      <!--<a href="javascript:;" class="remove-rwd-btn">-->
+        <!--<i class="fa fa-plus"></i>REMOVE REWARD-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--</div>-->
+  <!--</div>-->
+
+
+
+  </div>
+
+  <% end %><!--End Loop -->
+<% end %><!--End If -->
+
+
+<div class="row" id="rewardSub">
+
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+
+<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" id="backtobasic" value="Back" name="Submit" />
+
+<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="rewardSubmit" />
+
+</div>
+</div>
+
+
+<!--  End Step-2  -->
+
+
+
+<!-- Start Step-3 -->
+
+<div class="step-wrap-2" data-id="1" id="storyDiv">
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project video:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+
+  <div class="change-image-sec common-imagewrap-sec border-grey">
+    <div class="web_site-logo-wrap vid">
+
+     <!--Hidden story id useful while editing -->
+      <input type="hidden" name="story_id" value="<%= story_id %>" >  
+      <!-- Start Video Preview -->
+
+      <video width="125" height="75" controls="autoplay" style="display: none" id="video_tag">
+        <source src="mov_bbb.mp4" id="video_here">
+        Your browser does not support HTML5 video.
+      </video>
+        
+       <!-- Getting Project Image From database -->
+                
+        <% @projectVideos = ProjectFile.where(project_id: project_id, project_file_type: 'video') %>
+ 
+                
+       <!-- Getting Project Image From database Ends -->  
+        
+      <% @projectVideos.each do |allprojectvideos|  %>
+      <input type="hidden" id="video" name="previous_uploaded_video[]" value="<%= allprojectvideos['project_file_name'] %>">        
+      <% video_path = allprojectvideos['project_image_path'] %>  
+      <% video_name = allprojectvideos['project_file_name'] %>    
+        
+      <%= video_tag File.join(video_path, video_name), :class => 'vid_style', :autoplay =>
+          false, :controls => true, :alt => '', :id => 'blahs' %>        
+      <% end %>
+        
+
+      <!-- End Video Preview -->
+
+
+    </div>
+    <div class="choose-img-wrapper ">
+
+      <div class="upload-img-div">
+        <span><i class="fa fa-camera" aria-hidden="true"></i>Choose a video to  upload</span>
+
+        <%= file_field_tag 'project_video', id: 'project_video' %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <span class="rewardsalert alert-danger" id="emptyicon">please select a project video.</span>
+  <span class="rewardsalert alert-danger" id="wrongicon">Only MP4 file format is acceptable.</span>
+
+</div>
+</div>
+
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project Description:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+
+  <textarea name="project_desc" id="project_desc" class="form-control commontxt" onkeyup= removevalidations(this); onblur = removevalidations(this);><%= project_description %></textarea>
+
+  <span class="alert alert-danger" id="project_desc1" style="display:none; margin-left:0px">Field is required.</span>
+
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Risks and challenges</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+
+  <textarea name="project_risk" id="project_risk" class="form-control commontxt" onkeyup= removevalidations(this); onblur = removevalidations(this);><%= project_risk %></textarea>
+
+  <span class="alert alert-danger" id="project_risk1" style="display:none; margin-left:0px">Field is required.</span>
+
+</div>
+</div>
+</div>
+
+
+<!--
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Project FAQs</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9"><p> You'll be able to add FAQs on your project page once your project goes live. </p></div>
+</div>
+</div>
+-->
+
+<div class="row">
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" value="Back" id="backtorewards" name="Submit" />
+
+<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="storySubmit" />
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- End Step-3 -->
+
+
+
+<!-- Step 4 Starts -->
+
+
+<!--Hidden Current Profile Image And About you id useful while editing-->
+<input type="hidden" name="hidden_existing_userImage" value="<%= project_creator_image %>">
+<input type="hidden" name="project_about_id" value="<%= project_about_id %>" >    
+<!--Hidden Current Profile Image-->
+
+
+<div class="step-wrap-1" id="aboutyouDiv" style="display:none;">
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Profile image:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+
+  <div class="change-image-sec common-imagewrap-sec border-grey">
+    <div class="web_site-logo-wrap">
+
+
+       <%= image_tag File.join('project/projectcreator', project_creator_image), :id => 'userimg' %>
+       <input type="hidden" class="creator_image_status" name="creator_image_status" value="new">
+
+
+    </div>
+    <div class="choose-img-wrapper ">
+
+      <div class="upload-img-div">
+        <span><i class="fa fa-camera" aria-hidden="true"></i>Choose a Image to  upload</span>
+        <%= file_field_tag 'aboutyou_image', id: "aboutyou_userimage", onchange: "ValidateSingleInput(this);" %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="projectimgerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Firstname:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" name="aboutyou_firstname" type="text" placeholder="Enter Firstname" id="aboutyou_firstname" value="<%= firstname %>" onkeyup= removevalidations(this); onblur = removevalidations(this); onkeypress = isalphanumeric(event,this); ondrop = return false; onpaste = return false;>
+</div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_firstname1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="aboutyou_firstname3" class="alert alert-danger" style="display:none; margin-left:193px;">Only characters are allowed.</span>  
+</div>
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Lastname:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" name="about_lastname" type="text" placeholder="Enter Lastname" id="aboutyou_lastname" value="<%= lastname %>" onkeyup= removevalidations(this); onblur = removevalidations(this); onkeypress = isalphanumeric(event,this); ondrop = return false; onpaste = return false;>
+</div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_lastname1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="aboutyou_lastname3" class="alert alert-danger" style="display:none; margin-left:193px;">Only characters are allowed.</span>     
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Structure:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input class="form-control" name="aboutyou_structure" type="text" placeholder="Company name, association,
+  club,..." id="aboutyou_stucture" value="<%= structure %>" onkeyup= removevalidations(this); onblur = removevalidations(this);>
+</div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_stucture1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Address:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <textarea placeholder="Address" name="aboutyou_address" id="aboutyou_address" class="form-control" onkeyup= removevalidations(this); onblur = removevalidations(this);><%= address %></textarea></div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_address1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Country:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select class="selectpicker" name="aboutyou_country" id="aboutyou_countryyy" onchange="getnationality(this.value);" onchange= removevalidations(this); onblur = removevalidations(this);>
+
+      <!--<option value="">Select Country</option>-->
+      <%
+        if @allcountriesAndNationalty.present?
+          @allcountriesAndNationalty.each_with_index  do |countriesAndNationalty, index|
+      %>
+
+              <option  <% if country == countriesAndNationalty.id %> selected="selected" <% end %>  value="<%= countriesAndNationalty.id %>">  <%= countriesAndNationalty.country_name.capitalize %>
+
+              </option>
+
+          <% end %> <!--Endloop -->
+      <% end %> <!--EndIf -->
+
+    </select>
+  </div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_countryyy1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Nationality:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <div class="project-select-main">
+    <select name="aboutyou_nationality" class="selectpicker" id="aboutyou_nationality" onchange= removevalidations(this); onblur = removevalidations(this);>
+      <!--<option value="">Select Country</option>-->
+      <%
+        if @allcountriesAndNationalty.present?
+          @allcountriesAndNationalty.each_with_index  do |countriesAndNationalty, index|
+      %>
+
+<option <% if nationality == countriesAndNationalty.id %> selected="selected" <% end %> value="<%= countriesAndNationalty.id %>">  <%= countriesAndNationalty.nationality.capitalize %></option>
+
+          <% end %> <!--Endloop -->
+      <% end %> <!--EndIf -->
+
+    </select>
+  </div>
+</div>
+</div>
+
+<!--Error Message span -->
+<span id="aboutyou_nationality1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+</div>
+
+
+
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Phone number:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+  <input name="aboutyou_phoneno" class="form-control" type="text" placeholder="Phone number"
+         id="aboutyou_phoneno" value="<%= phonenumber %>" onkeyup= removevalidations(this); onblur = removevalidations(this);>
+</div>
+</div>
+<!--Error Message span -->
+<span id="aboutyou_phoneno1" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+<span id="aboutyou_phoneno3" class="alert alert-danger custom" style="display:none; margin-left:193px;">Phone number length should between 10 to 12 integers.</span>     
+</div>
+
+
+
+
+
+<div class="row">
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" value="Back" name="Submit"
+       id="backstorybutton" />
+<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="saveaboutpro" />
+</div>
+</div>
+</div>
+
+
+<!-- Step 4 Ends -->
+
+
+
+<!--Step 5 Starts-->
+<div class="step-wrap-1" id="accountdiv" style="display:none;">
+
+    
+<!--Account Id hidden parameter used while editing-->
+<input type="hidden" name="account_id" value="<%= account_id %>" >    
+
+<div class="project-tabs-outer view-user-content-tabs">
+
+<div id="parentHorizontalTab">
+<ul class="resp-tabs-list hor_1">
+
+     <li class="" id="bank">Bank Account Details</li>
+
+   
+     <li class="" id="paypal">Paypal Details</li>
+  
+</ul>
+
+
+<div class="resp-tabs-container hor_1">
+    
+ 
+  <div class="tabs-inside account-tabs-outer" >
+
+    <!--first tab-->
+
+    <div class="account-tabs-inside first-tab-inside custom1tab">
+
+
+      <input type="hidden" id="payment_type" name="payment_type" value="<%= paymenttype %>">
+      <input type="hidden" id="bankemail" name="bankemail" value="<%= bankemail %>">
+        
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Full Name:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input name="accountholdername" id="accountholdername" value="<%= fullname %>" placeholder="Account holder name" class="form-control" type="text" onkeyup= removevalidations(this); onblur = removevalidations(this); onkeypress = isalphanumeric(event,this); ondrop = return false; onpaste = return false; /></div>
+        </div>
+        <span id="accountholdername1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+<span id="accountholdername3" class="alert alert-danger" style="display:none; margin-left:193px; width: 333px;">Only characters are allowed.</span>          
+      </div>
+
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Email:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input name="accountholderemail" id="accountholderemail" value="" placeholder="Account holder email" class="form-control" type="email" onkeyup= removevalidations(this); onblur = removevalidations(this); /></div>
+        </div>
+        <span id="accountholderemail1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+<span id="accountholderemail3" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Only characters are allowed.</span> 
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Bank Name:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input name="bankname" id="bankname" value="<%= bankname %>" placeholder="Bank name" class="form-control" type="text" name="bankname" onkeyup= removevalidations(this); onblur = removevalidations(this); onkeypress = isalphanumeric(event,this); ondrop = return false; onpaste = return false; /></div>
+        </div>
+        <span id="bankname1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+<span id="bankname2" class="alert alert-danger" style="display:none; margin-left:193px; width: 333px;">Special Characters not allowed.</span>               
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Account No:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input id="accountno" name="accountno" value="<%= account_number %>" placeholder="xxxx xxxx xxxx 0123" class="form-control" type="text" onkeyup= removevalidations(this); onblur = removevalidations(this); /></div>
+        </div>
+        <span id="accountno_msz" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Enter only numeric value.</span>
+        <span id="accountno1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+      </div>
+
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>IFSC Code:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input name="ifsccode" value="<%= bank_ifsc_code %>" placeholder="12xxxx" class="form-control" type="text" id="ifsc" onkeyup= removevalidations(this); onblur = removevalidations(this);/></div>
+        </div>
+        <span id="ifsc1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+
+      </div>
+
+
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Account Type:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6">
+            <div class="project-select-main">
+              <select class="selectpicker" id="accountselect" name="accounttype" onchange= removevalidations(this); onblur = removevalidations(this);>
+                <option value="">Select type of account</option>
+                <option <% if account_type == 'current_account' %> selected="selected" <% end %>value="current_account">Current</option>
+                <option <% if account_type == 'saving_account' %> selected="selected" <% end %>value="saving_account">Saving</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <span id="accountselect1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+      </div>
+
+
+
+
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-9 col-sm-offset-2 btn-sec">
+          <input class="btn btn-trans-bg btn-radius btn-cancel backaboutyoubutton" type="button" value="Back" name="Submit"
+          />
+          <input class="btn btn-praimary-bg btn-radius btn-save editaccount" type="button" value="Submit" name="Submit" id="editaccount" />
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <!--first tab end-->
+ 
+  <!--Second tab-->
+
+  <div class="tabs-inside account-tabs-outer" id="cust">
+    <div class="account-tabs-inside second-tab-inside custom2tab">
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-3"><label>Email:</label></div>
+          <div class="col-xs-12 col-sm-9 col-md-6"><input name="paypalemail" value="" placeholder="Paypal email" class="form-control" type="text" id="paypalemail" onkeyup= removevalidations(this); onblur = removevalidations(this); /></div>
+        </div>
+                            <span id="paypalemail3" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Email is not valid.</span>
+        <span id="paypalemail1" class="alert alert-danger" style="display:none; margin-left:182px; width: 333px;">Field is required.</span>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-9 col-sm-offset-2 btn-sec">
+          <input class="btn btn-trans-bg btn-radius btn-cancel backaboutyoubutton" value="Back to aboutyou" name="Submit" type="button">
+          <input class="btn btn-praimary-bg btn-radius btn-save editaccount1" type="button" value="Submit" name="Submit" id="editaccount1" />
+        </div>
+      </div>
+
+
+    </div>
+
+    
+  </div>
+
+
+    
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!--Step 5 Ends-->
+
+
+
+</div>
+
+</div>
+
+<% end %> <!--Form Ends-->
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+
+
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"> </script>
+
+<script>
+// Setup - add a text input to each footer cell
+$('#example tfoot th').each( function () {
+var title = $(this).text();
+$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+} );
+
+// DataTable
+var table = $('#example').DataTable();
+
+// Apply the search
+table.columns().every( function () {
+var that = this;
+
+$( 'input', this.footer() ).on( 'keyup change', function () {
+if ( that.search() !== this.value ) {
+that
+.search( this.value )
+.draw();
+}
+} );
+} );
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+$(function () {
+
+var date = new Date();
+date.setDate(date.getDate());
+
+$("#datetimepicker1").datepicker
+({
+startDate: date
+});
+
+$("#datetimepicker2").datepicker
+({
+startDate: date
+});
+
+$(".commobdatepicker").datepicker
+({
+startDate: date
+});
+});
+
+
+$('#datetimepicker1').on('changeDate', function(ev){
+$(this).datepicker('hide');
+});
+
+});
+
+</script>
+
+<script>
+
+function readURL(input) {
+
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+$('#blah').css('display','block');
+$('#blah').attr('src', e.target.result);
+}
+
+reader.readAsDataURL(input.files[0]);
+}
+}
+
+$(document).ready(function() {
+$("#projectimage").change(function () {
+readURL(this);
+});
+});
+
+
+function showImg(input) {
+
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+$('#userimg').css('display','block');
+$('#userimg').attr('src', e.target.result);
+}
+
+reader.readAsDataURL(input.files[0]);
+}
+}
+
+$(document).ready(function() {
+$("#aboutyou_userimage").change(function () {
+var editimage_status = 'new'
+$('.creator_image_status').val(editimage_status);
+showImg(this);
+});
+});
+
+</script>
+
+
+
+
+<!-- Start Script For Video Preview -->
+
+<script>
+
+$(document).on("change", "#project_video", function(evt) {
+
+$('#video_tag').show();
+$('#blahs').css('display','none');
+var video = $('#video').val();
+
+var $source = $('#video_here');
+
+$source[0].src = URL.createObjectURL(this.files[0]);
+$source.parent()[0].load();
+
+});
+
+</script>
+
+
+<!-- End Script For Video Preview -->
+
+
+
+<!-- START SCRIPT FOR AUTO PLACE-SEARCH -->
+
+<script>
+
+function init()
+{
+var input = document.getElementById('location');
+var input1 = document.getElementById('aboutyou_country');
+var autocomplete = new google.maps.places.Autocomplete(input);
+var autocomplete = new google.maps.places.Autocomplete(input1);
+}
+
+google.maps.event.addDomListener(window, 'load', init);
+</script>
+
+<!-- END SCRIPT FOR AUTO PLACE-SEARCH -->
+
+
+<script>
+
+$(document).ready(function () {
+
+    $('#minfundinggoal').bind('keyup paste', function()
+    {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });     
+    
+    $('#fundinggoal').bind('keyup paste', function()
+    {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    }); 
+        
+    $('#aboutyou_phoneno').bind('keyup paste', function()
+    {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    }); 
+    
+
+//$("#minfundinggoal").keypress(function(event) {
+//// Backspace, tab, enter, end, home, left, right
+//// We don't support the del key in Opera because del == . == 46.
+//var controlKeys = [8, 9, 13, 35, 36, 37, 39, 48];
+//// IE doesn't support indexOf
+//var isControlKey = controlKeys.join(",").match(new RegExp(event.which));
+//// Some browsers just don't raise events for control keys. Easy.
+//// e.g. Safari backspace.
+//if (!event.which || // Control keys in most browsers. e.g. Firefox tab is 0
+//(49 <= event.which && event.which <= 57) || // Always 1 through 9
+//(48 == event.which && $(this).attr("value")) || // No 0 first digit
+//isControlKey) { // Opera assigns values for control keys.
+//
+//$("#fundnumric_msz").css('display', 'none');
+//
+//return;
+//} else {
+//$("#projectminfundgoalerr").css('display', 'none');
+//$("#fundnumric_msz").css('display', 'block');
+//event.preventDefault();
+//}
+//});
+//
+//
+//$("#fundinggoal").keypress(function(event) {
+//// Backspace, tab, enter, end, home, left, right
+//// We don't support the del key in Opera because del == . == 46.
+//var controlKeys = [8, 9, 13, 35, 36, 37, 39, 48];
+//// IE doesn't support indexOf
+//var isControlKey = controlKeys.join(",").match(new RegExp(event.which));
+//// Some browsers just don't raise events for control keys. Easy.
+//// e.g. Safari backspace.
+//if (!event.which || // Control keys in most browsers. e.g. Firefox tab is 0
+//(49 <= event.which && event.which <= 57) || // Always 1 through 9
+//(48 == event.which && $(this).attr("value")) || // No 0 first digit
+//isControlKey) { // Opera assigns values for control keys.
+//
+//$("#fundnumric2_msz").css('display', 'none');
+//
+//return;
+//} else {
+//$("#projectfundgoalerr").css('display', 'none');
+//$("#fundnumric2_msz").css('display', 'block');
+//event.preventDefault();
+//}
+//});
+
+$("#accountno").keypress(function(event) {
+// Backspace, tab, enter, end, home, left, right
+// We don't support the del key in Opera because del == . == 46.
+var controlKeys = [8, 9, 13, 35, 36, 37, 39, 48];
+// IE doesn't support indexOf
+var isControlKey = controlKeys.join(",").match(new RegExp(event.which));
+// Some browsers just don't raise events for control keys. Easy.
+// e.g. Safari backspace.
+if (!event.which || // Control keys in most browsers. e.g. Firefox tab is 0
+(49 <= event.which && event.which <= 57) || // Always 1 through 9
+(48 == event.which && $(this).attr("value")) || // No 0 first digit
+isControlKey) { // Opera assigns values for control keys.
+
+$("#accountno_msz").css('display', 'none');
+
+return;
+} else {
+
+//$("#projectfundgoalerr").css('display', 'none');
+$("#accountno_msz").css('display', 'block');
+event.preventDefault();
+}
+});
+
+
+$('#parentHorizontalTab').easyResponsiveTabs({
+type: 'default', //Types: default, vertical, accordion
+width: 'auto', //auto or any width like 600px
+fit: true, // 100% fit in a container
+tabidentify: 'hor_1', // The tab groups identifier
+activate: function(event) { // Callback function if tab is switched
+var $tab = $(this);
+var $info = $('#nested-tabInfo');
+var $name = $('span', $info);
+$name.text($tab.text());
+$info.show();
+}
+});
+
+});
+
+
+
+
+
+
+//        $("#minfundinggoal").ForceNumericOnly();
+//    $("#fundinggoal").ForceNumericOnly();
+
+</script>
+
+
+
+<script>
+
+
+
+$(document).ready(function() {
+
+
+function validate_trigger(){
+
+var date = new Date();
+
+date.setDate(date.getDate());
+
+$(".commobdatepicker").datepicker
+({
+startDate: date
+});
+
+
+
+}
+
+
+validate_trigger();
+
+jQuery('body').on('click','#duplicateReward',function(){
+
+setTimeout(validate_trigger(), 1000);
+
+});
+
+
+/*-- Add/Remove New Reward --*/
+
+
+var counter = 1;
+
+$("#duplicateReward").click(function ()
+{
+if(counter<=2)
+{
+var counterr = counter+1;
+
+$(".abc").append('<br>');
+
+$(".abc").append('<div id="mainDivv'+counterr+'"><label style="color: #1A375D;"><b>REWARD #'+counterr+'</b></label> <a href="javascript:;" data-id="'+counterr+'"><label style="float: right; cursor: pointer; color: #1A375D;"><b>REMOVE REWARD #'+counterr+'</b></label></a> <div class="form-group"></div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Title:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <input name="title[]" class="form-control testing'+counterr+'" type="text" placeholder="Enter Title"> <span id="title_empty" class="rewardsalert alert-danger"> Title is required. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Reward amount:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <input name="rewardamount[]" class="form-control" type="text" placeholder="$0"> <span id="rewardamount_empty" class="rewardsalert alert-danger"> Reward amount is required. </span> <span id="rewardamount1_empty" class="rewardsalert alert-danger"> Please enter only numeric value. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <textarea name="reward_desc[]" class="form-control"></textarea> <span id="rewarddesc_empty" class="rewardsalert alert-danger"> Description is required. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Estimate Delivery:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <div class="form-group datepicker-wrap"> <div class="input-group date commobdatepicker"> <input type="text" name="estimated_deliv_month[]" class="form-control" placeholder="Delivery Date" /> <span class="input-group-addon"> <i class="duration-selecter"> <img src="/assets/cal_img-3506669552c0b6f43501f6b57783b4424e4d0ea78c2c2542fb480004c68f2c13.png" alt="Calender"> </i> </span> </div> <span id="month_empty" class="rewardsalert alert-danger"> Please Select a date. </span> </div> </div> </div> <span id="" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Shipping details:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <textarea name="reward_shipping_details[]" class="form-control"></textarea> <span id="shipping_empty" class="rewardsalert alert-danger"> Shipping Detail is required. </span> </div> </div> </div> </div>');
+
+counter++;
+}
+
+
+});
+
+
+
+});
+
+</script>
+
+
+<!--Important Function-->
+
+
+<script>
+
+jQuery(document).ready(function()
+{
+var paymenttype = $('#payment_type').val();
+var bankemail   = $('#bankemail').val();    
+    
+    show_hide();
+    
+  jQuery('#bank').on('click',function(){
+    //  show_hide();
+      jQuery('#cust').hide();
+  });
+    
+    function show_hide() {
+        if(paymenttype == 'paypal') {
+          jQuery('#bank').removeClass('resp-tab-active');
+          jQuery('#paypal').addClass('resp-tab-active');
+          jQuery('div[aria-labelledby=hor_1_tab_item-1]').show();
+          jQuery('#paypalemail').val(bankemail);    
+          jQuery('div[aria-labelledby=hor_1_tab_item-0]').hide();
+
+        }else {
+          jQuery('#bank').addClass('resp-tab-active');
+          jQuery('#paypal').removeClass('resp-tab-active');
+
+            jQuery('div[aria-labelledby=hor_1_tab_item-1]').hide();
+          jQuery('div[aria-labelledby=hor_1_tab_item-0]').show();
+            jQuery('#accountholderemail').val(bankemail);
+        }
+    }
+    
+});
+
+ 
+    
+/*Get Latitude and Longitude with Google Search Bar*/
+    
+   $('#savebasicpro').click(function()
+   {                        
+    geocoder = new google.maps.Geocoder();
+    var address = document.getElementById("location").value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+
+      //alert("Latitude: "+results[0].geometry.location.lat());
+      //alert("Longitude: "+results[0].geometry.location.lng());
+      var latitude  = results[0].geometry.location.lat();      
+      var longitude = results[0].geometry.location.lng();      
+      $('#project_location_latitude').val(latitude);      
+      $('#project_location_longitude').val(longitude);      
+      } 
+
+      else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+   });   
+        
+/*Get Latitude and Longitude with Google Search Bar Ends*/
+    
+    
+$(document).ready(function(){
+$("#editaccount").dblclick(function(e){
+e.preventDefault();
+});
+$("#editaccount1").dblclick(function(e){
+e.preventDefault();
+});
+});  
+
+
+/*Delete Project Images While Editing*/
+
+function del_project_images(project_file_id,project_id,project_file_name)
+{
+swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this imaginary file!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes, delete it!",
+  cancelButtonText: "No, cancel plx!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},
+function(isConfirm){
+  if (isConfirm) 
+  {
+    $.ajax({
+               url: "/backend/delete-files",
+               type: "Post",
+               data: {
+                       file_id:project_file_id,
+                       project_id:project_id,
+                       project_file_name:project_file_name
+                     },
+               success: function(resp)
+               {
+                 if(resp == 1)
+                 {
+                   $('#blah_'+project_file_id).hide();
+                   swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                   
+                 }
+               }
+      
+           });
+    
+  } else {
+	    swal("Cancelled", "Your imaginary file is safe :)", "error");
+  }
+});
+}
+</script>

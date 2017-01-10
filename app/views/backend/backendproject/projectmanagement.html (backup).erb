@@ -1,0 +1,215 @@
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">  
+            	<div class="heading-one project-manag-hdr"><h3>Project Management</h3>
+                	<div class="conetent-dropdown-outer">
+                    	<div class="all-pro-dropdown">
+                        	<select class="selectpicker">
+                            	<option>All Projects</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="short-by-dropdown"><label>Sort by Category</label>
+                        	<div class="short-by-dropdown-inside">
+                        	<select class="selectpicker">
+                            	<option>All</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    
+                    <div class="right-search-area-outer">
+               	        <form>
+                	       <div class="form-group">
+                    	       <input type="search" placeholder="Search" class="form-control">
+                               <input type="submit" class="search-submit-icon">
+                               
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+                	<div class="right-add-btn-outer margin-top-5">
+                    	<a href="/backend/add-project">Add Project</a>
+                    </div>
+                </div>
+           
+       		<div class="table-responsive project-table-outer globel-search-hide">
+            	
+               <table id="example" class="display table" cellspacing="0" width="100%">
+              
+                   
+                	<thead>
+                	<tr>
+                    	<th>S.No.</th>
+                        <th>Project Type</th>
+                        <th>Created By</th>
+                        <th>Project Image</th>
+                        <th>Project Title</th>
+                        <th>Project Category</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% if @getallProjectsByPaginate.present? %>  <!-- Checking If All Projects Exist Or Not -->
+
+                        <% @getallProjectsByPaginate.each_with_index  do |allprojectsdataval, index| %> <!-- All Projects Loop Started -->
+
+                            <!--Code checking for project-image-->
+                            <% project_image = allprojectsdataval['project_image'] %>
+                            <% if File.exist?(Rails.root.join('app','assets','images','backend','projectimages',project_image )) %>
+                                <% projectimage = project_image  %>
+                            <% end %>
+
+                            <!--Code checking for project-image end-->
+
+
+                    <tr id="projectid_<%= allprojectsdataval['id'] %>">
+                    	<td><%= index+1 %></td>
+                        <td><%= allprojectsdataval['project_type'] %></td>
+
+                      <% if @getUsers.present? %>
+                      <% @getUsers.each_with_index  do |userdata, index| %>
+                          <% if userdata['id'] == allprojectsdataval['created_by'] %>
+
+                        <td><%= userdata['first_name'].capitalize %> <%= userdata['last_name'].capitalize %></td>
+
+                      <% end %><!--Endif -->
+                      <% end %><!--EndLoop -->
+                      <% end %><!--Endif -->
+                        <td><figure><%= image_tag File.join('backend/projectimages', projectimage), :alt => '' %></figure></td>
+                        <td><%= allprojectsdataval['project_title'] %></td>
+
+                      <% if @getallcategories.present? %>
+                      <% @getallcategories.each_with_index  do |categorydata, index| %>
+                         <% if categorydata['id'] ==  allprojectsdataval['category_id'] %>
+                        <td><%= categorydata['category_name'] %></td>
+                      <% end %><!--Endif-->
+                      <% end %><!--Endloop-->
+                      <% end %><!--Endif-->
+                        <td><span><a class="btn-active btn-approve" href="#">Approved</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+
+                     <% end %> <!--EndIf-->
+                        
+                     <% end %> <!--EndLoop -->
+
+                    <tr>
+                    	<td>02</td>
+                        <td>Solidarity</td>
+                        <td>Lorem ipsum</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Lorem ipsum</td>
+                        <td>Arts, Music</td>
+                        <td><span><a class="btn-active btn-disapprove" href="#">Disapproved</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>03</td>
+                        <td>Pre Sale</td>
+                        <td>Ipsum Lorem</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Dummy ammet</td>
+                        <td>Women Entrepreneuship</td>
+                        <td><span><a class="btn-active btn-pending" href="#">Pending</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>04</td>
+                        <td>Donation</td>
+                        <td>Agro ipsum</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Lorem ipsum</td>
+                        <td>Agriculture</td>
+                        <td><span><a class="btn-active" href="#">Completed</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>05</td>
+                        <td>Solidarity</td>
+                        <td>Lorem ipsum</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Lorem ipsum</td>
+                        <td>Wine & Vineyard</td>
+                        <td><span><a class="btn-active btn-inprogress" href="#">Inprogress</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                    	<td>06</td>
+                        <td>Solidarity</td>
+                        <td>Lorem ipsum</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Lorem ipsum</td>
+                        <td>Consuming</td>
+                        <td><span><a class="btn-active btn-disapprove" href="#">Disapproved</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>07</td>
+                        <td>Charities </td>
+                        <td>Communities ipsum</td>
+                        <td><figure><%= image_tag ('listing-category-1.jpg'), :alt => '' %></figure></td>
+                        <td>Lorem ipsum</td>
+                        <td>Charities & Communities</td>
+                        <td><span><a class="btn-active btn-pending" href="#">Pending</a></span></td>
+                        <td>
+                        	<span class="tble-action-outer">
+                            	<i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    
+                    </tbody>
+                </table>
+                
+            </div>
+       </div>
+        
+       
+        
+    </div>

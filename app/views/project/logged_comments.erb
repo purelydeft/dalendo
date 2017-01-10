@@ -1,0 +1,48 @@
+<div class="mini-slides-wrap">
+	<div class="mini-slides text-center">
+	 <h3>Lorem Ipsum is simply dummy </h3>
+	 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+	</div>
+	<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+	<div class="row">		
+	<%= render "layouts/header_projects" %>
+		<div class="col-xs-12 two-parts-cmnt">
+			<div class="row">
+				<!-- Left Sec -->
+				<div class="col-sm-8 col-xs-12">
+					<ul class="cmnt-listing-wrap">
+						<li>
+							<div class="user-cmnt-sec">
+								<a href="javascript:;"><%= image_tag('by_user_cmnt.png', :alt => 'User Name', :class => 'pull-left') %></a>
+								<div class="time-sec pull-right"><i class="fa fa-clock-o"></i>4 hours ago</div>
+							</div>
+							<div class="user-cmnt-des">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at. Mauris sem urna, tincidunt quis orci non, posuere sagittis enim. Etiam sem lacus, blandit eu egestas quis, mattis at urna. Cras maximus augue eros, a tempus orci mattis in. Phase llus non sollicitudin metus, eu congue urna. Aenean dapibus finibus luctus. Donec vitae consequat est, sit amet aliquam turpis. </p>
+							</div>
+						</li>
+						<li>
+							<div class="user-cmnt-sec">
+								<a href="javascript:;"><%= image_tag('by_user_cmnt.png', :alt => 'User Name', :class => 'pull-left') %></a>
+								<div class="time-sec pull-right"><i class="fa fa-clock-o"></i>4 hours ago</div>
+							</div>
+							<div class="user-cmnt-des">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at. Mauris sem urna, tincidunt quis orci non, posuere sagittis enim. Etiam sem lacus, blandit eu egestas quis, mattis at urna. Cras maximus augue eros, a tempus orci mattis in. Phase llus non sollicitudin metus, eu congue urna. Aenean dapibus finibus luctus. Donec vitae consequat est, sit amet aliquam turpis. </p>
+							</div>
+						</li>
+					</ul>
+					<div class="logon-sec">
+						<h4>You have to be logged to leave a comment</h4>
+						<%= link_to "Sign In","signin" , :class => "btn btn-sign-in",:target => "_blank" %>
+						<%= link_to "Sign Up" ,"signup" , :class => "btn btn-signup" , :target => "_blank" %>
+					</div>
+				</div>
+				
+				<%= render "layouts/sidebar_projects" %>
+			</div>
+		</div>
+		
+	</div>
+</div>

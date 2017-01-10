@@ -1,0 +1,212 @@
+<!-- If Category Added Successfuly Success Swal Message -->
+
+    <% if flash[:addcategory] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "Your category has been added.", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+<!-- If Category Updated Successfuly Success Swal Message -->
+
+    <% if flash[:editcategory] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "Your category has been updated.", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+
+<!-- If Category Status Changed Successfuly Success Swal Message -->
+
+
+    <% if flash[:status_inactive] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "Category status has been changed to Inactive", "success");
+        });
+
+
+        </script>
+
+    <% end %>
+
+
+
+    <% if flash[:status_active] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "Category status has been changed to Active", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+<!-- End If Category Status Changed Successfuly -->
+
+
+
+
+<div class="right-content-area">
+    <div class="inner-pages-main">  
+        <div class="heading-one"><h3>Category Management</h3>
+            <div class="right-add-btn-outer">
+                <a href="/backend/add-category">Add Category</a>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <div class="table-responsive project-table-outer globel-search-hide">
+            	
+               <table id="example" class="display table" cellspacing="0" width="100%">
+                   <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Icon/Image</th>
+                            <th>Category Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                   
+                   <tbody>
+
+
+                <% if @getallcategories.present? %>       <!-- Checking If All Categories Exist Or Not -->
+
+                <% @getallcategories.each_with_index  do |categorydataval, index| %> <!-- All Categories Loop Started -->
+                       
+                       
+                       
+                <tr id="categoryviewline_<%= categorydataval['id'] %>">
+
+                    <td><%= index+1 %></td>
+
+                    <% if categorydataval['category_icon'] != '' %> <!-- If condition to check image or icon -->
+                    <td> <figure class="backend_category_box"> <i class="<%= categorydataval['category_icon'] %>"></i> </figure></td>
+                    <% else %>
+                    <td><figure> <%= image_tag File.join('categoryImages', categorydataval['category_image']), :class => "custom_category_image"  %> </figure></td>
+                    <% end %> <!-- If condition to check image or icon ends -->
+
+                    <td><%= categorydataval['category_name'] %></td>
+
+                    <% if categorydataval['category_status'] == 'active' %>
+                    <td><span class="btn-active">Active</span></td>
+                    <% else %>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <% end %>
+
+                    <td>
+                        <span class="tble-action-outer">
+                        <a href="/backend/view-category?cid=<%= categorydataval['id'] %>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="/backend/edit-category?cid=<%= categorydataval['id'] %>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="javascript:;" onclick="changeCategorystatus('<%= categorydataval['id'] %>','<%= categorydataval['category_status'] %>');" data-catid="<%= categorydataval['id'] %>" data-catimage="<%= categorydataval['category_image'] %> " class="trashcats"><i class="fa fa-random" aria-hidden="true"></i></a>
+                        </span>
+                    </td>
+                </tr>
+                    
+                <%
+                    end # End Loop
+                    else
+                %>
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>No Categories Found</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+
+                    <% end %> <!-- End if-->
+
+                    <!--
+                <tr>
+                    <td>02</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>03</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active">Active</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>04</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active btn-inactive">Inactive</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+
+                <tr>
+                    <td>05</td>
+                    <td><figure> <%#= image_tag ('listing-category-1.jpg'), :alt => "" %> </figure></td>
+                    <td>Lorem ipsum is simply dummy</td>
+                    <td><span class="btn-active" >Active</span></td>
+                    <td><span class="tble-action-outer">
+                        <a href="view_category.html"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="edit_category.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                         <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </span></td>
+                </tr>
+-->
+
+
+                </tbody>
+                  
+                   
+                   
+    </table>
+</div>
+        
+        
+       
+    </div>
+    
+</div>
+
+

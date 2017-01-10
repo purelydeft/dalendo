@@ -1,0 +1,232 @@
+
+<!-- If User mail Invalid -->
+
+    <% if flash[:mail_error] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            alert('<%= flash[:mail_error] %>');
+        });
+
+
+        </script>
+
+    <% end %> 
+
+
+
+
+
+
+<section class="cd-wrapper">
+    
+    <div class="signup-sec crd-gb-style">
+        <div class="top-icon">
+            <%= image_tag('sign_up_icon.png', :alt => 'Login') %>
+        </div>
+    
+<!--   Start Signup Form     -->
+        
+	<%= form_for :signup, :url => user_signup_path, :html => {:multipart => 'true', :id => 'signupform', :name => 'signupform'} do |f| %>
+        
+        
+        <!-- If Email Already Existed -->
+
+			<% if flash[:alert] %>
+
+				<script type="text/javascript">
+
+				$(document).ready(function()
+				{
+					alert('<%= flash[:alert] %>');
+				});
+									
+
+				</script>
+				
+		    <% end %> 
+        
+        
+        
+		<div class="form-group">
+			<i class="fa fa-user"></i>
+            
+            <%= f.text_field :name, id: 'name', placeholder: 'Name', class: 'form-control', :data => { :validate => 'required' } %>
+            
+		</div>
+        
+		<div class="form-group">
+			<i class="fa fa-user"></i>
+            
+            <%= f.text_field :username, id: 'username', placeholder: 'Username', class: 'form-control', :data => { :validate => 'required,alphanumeric' } %>
+		</div>
+        
+		<div class="form-group">
+			<i class="fa fa-envelope"></i>
+            
+            <%= f.text_field :useremail, id: 'useremail', placeholder: 'Email Address', class: 'form-control', :data => { :validate => 'required,email' } %>
+            
+		</div>
+        
+		<div class="form-group">
+			<i class="fa fa-unlock-alt"></i>
+            
+            <%= f.password_field :userpassword, id: 'userpassword', placeholder: 'Password', class: 'form-control', :data => { :validate => 'required' } %>
+		</div>
+        
+		<div class="form-group">
+			<i class="fa fa-unlock-alt"></i>
+            
+            <%= f.password_field :cpassword, id: 'cpassword', placeholder: 'Confirm Password', class: 'form-control', :data => { :validate => 'required,checkPassword' }  %>
+		</div>
+	
+	
+		
+        <div class="bott-wrap-sec">
+            <h5>Please click on the image (anti-spam test) </h5>
+            
+            <ul class="bott-list">
+                <li><a href="javascript:;"><%= image_tag('fish_img.png', :alt => 'Fish') %></a></li>
+                <li><a href="javascript:;"><%= image_tag('cam_icon.png', :alt => 'Camera') %></a></li>
+                <li><a href="javascript:;"><%= image_tag('lock_icon.png', :alt => 'Lock') %></a></li>
+                <li><a href="javascript:;"><%= image_tag('bt_fly_img.png',:alt => 'Butterfly') %></a></li>
+            </ul>
+            
+            <div class="form-group">
+                <label class="checkbox-wrapper">
+                    
+                    <%= f.check_box :agree, id: 'chk-bx-23', class: 'chk-box', value: 'agree', :data => { :validate => 'agreement' } %>
+                    
+                    <i class="input-helper"></i>I agree to the Dalendo terms of service
+                </label>
+            </div>
+
+
+
+            <div class="btn-sec text-center">
+
+                
+                <%#= f.button :SignUp, :class => 'btn btn-login text-uppercase sign-btn-mx', :id => 'usersignup', :type => 'button', :data => { :toggle => 'modal', :target => '#mysignupModal' } %>
+                
+                
+                <%= f.button :SignUp, :class => 'btn btn-login text-uppercase sign-btn-mx', :id => 'usersignup', :type => 'button' %>
+                
+            </div>
+
+        </div>
+        
+    <% end %>   <!--   End Signup Form     -->
+        
+        
+        <div class="rest-links">
+            <ul>
+                <li><a href="javascript:;">Already have an Account</a></li>
+                <li><a href="signin">Login</a></li>
+            </ul>
+        </div>
+        
+    </div>
+</section>
+
+
+
+
+
+<div id="mysignupModal" class="ds-project-popup ds-signup-popup modal fade-in" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+	  <button type="button" class="close" data-dismiss="modal">×</button>
+	  	<div class="signup-first-content">
+		
+      	<h4>Please note, investment in unlisted companies the specific risks:</h4>
+			<ul>
+				<li>Risk of total or partial loss of the invested capital</li>
+				<li>Liquidity risk: the resale of the security is not guaranteed, it may be uncertain or impossible</li>
+				<li>The return on investment depends on the success of the project financed.</li>
+			</ul>
+			
+			
+			
+        <h4>You are warned:</h4>
+            <ul>
+                <li>Capital loss risk: investing in the capital of unlisted companies, you are liable to a high risk of partial or total loss of the amount invested. You must check in advance that you have sufficient income to cope with the risks of loss of capital. Do not take the risk of investing the money that you do not need.</li>
+                <li>Liquidity risk: in the absence of regulated market of unlisted corporate securities, you get no liquidity guarantee your investments. Your investment may remain illiquid on a long-term horizon, over an indefinite period of time.</li>
+            </ul>
+        </div>
+				<div class="signup-yesno">
+					<div class="signup-yesno-inside">
+						<ul>
+							<li>
+								<div class="left-yesno-signup">
+									<p class="project_switcher">
+              <input type="checkbox" name="my-checkbox" data-on-text="Yes" data-off-text="No" checked>
+            </p>
+								</div>
+								<div class="right-yesno-signup">Are you aware that you could lose your entire investment?</div>
+							</lii>
+							
+							<li>
+								<div class="left-yesno-signup"><p class="project_switcher">
+              <input type="checkbox" name="my-checkbox" data-on-text="Yes" data-off-text="No" checked>
+            </p></div>
+								<div class="right-yesno-signup">Are you aware that the resale of your shares can be complicated if not impossible?</div>
+							</lii>
+							
+							
+							<li>
+								<div class="left-yesno-signup"><p class="project_switcher">
+              <input type="checkbox" name="my-checkbox" data-on-text="Yes" data-off-text="No" checked>
+            </p></div>
+								<div class="right-yesno-signup"> Are you aware of the <a href="#">Terms and Conditions</a></div>
+							</lii>
+							
+							
+							<li>
+								<div class="left-yesno-signup"><p class="project_switcher">
+              <input type="checkbox" name="my-checkbox" data-on-text="Yes" data-off-text="No" checked>
+            </p></div>
+								<div class="right-yesno-signup">I want to be informed of new projects by subscribing to your newsletter. Dalendo does not disclose your personal information to 
+third parties</div>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+			
+			<div class="row signup-popup-btn-outer">
+		  	<div class="col-xs-12 col-sm-12 col-md-12 text-center"><span><a title="CONFIRM" class="btn btn-blue custom_btn" href="" data-dismiss="modal">CONFIRM</a></span></div>
+		  </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script>
+
+
+/*-------------------------------- START Function For Verify.js ------------------------------------------*/
+
+$.verify.addRules({
+      checkPassword: function (r) {
+          if ($('#userpassword').val() != $('#cpassword').val()) {
+              return "Password do not match!";
+              return false;
+          }
+          return true;
+      }
+    
+  });
+    
+
+/*-------------------------------- END Function For Verify.js ------------------------------------------*/
+
+
+</script>
+
+

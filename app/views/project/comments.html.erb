@@ -1,0 +1,173 @@
+<!--Checking Session Varibales Starts-->
+
+<% if @loggedIn_UserData.present? %>
+
+<% userid     = @loggedIn_UserData[0]['id'] %>
+<% user_image = @loggedIn_UserData[0]['user_image'] %>
+
+<% end %>
+
+<!-- Code for Image Checking  -->
+
+<% if user_image.present? %> 
+<% if File.exist?(Rails.root.join('app','assets','images','userImages',user_image )) %>
+<% user_pic = user_image  %>
+<% else %>
+<% user_pic = 'default' + '.jpg'  %>
+<% end %>
+<% else %>
+<% user_pic = 'default' + '.jpg'  %>
+<% end %>
+
+<!-- Code for Image Checking  -->
+
+
+<!--Checking Session Varibales Ends-->
+<div class="mini-slides-wrap">
+<div class="mini-slides text-center">
+<h3>Lorem Ipsum is simply dummy </h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+</div>
+<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="row">		
+<%= render "layouts/header_projects" %>
+<div class="col-xs-12 two-parts-cmnt">
+<div class="row">
+<!-- Left Sec -->
+<div class="col-sm-8 col-xs-12">
+<ul class="cmnt-listing-wrap ulcalss1">
+
+<!--Comments Data -->
+<% if @getProjectComments.present? %>
+<% @getProjectComments.each do|getallcommentsdata| %>
+    
+<% @commentsBypersondata = User.where(id: getallcommentsdata['commented_by']).all %>
+    
+<% user_image = @commentsBypersondata[0]['user_image'] %> 
+    
+<!-- Code for Image Checking  -->
+
+<% if user_image.present? %> 
+<% if File.exist?(Rails.root.join('app','assets','images','userImages',user_image )) %>
+<% user_pics = user_image  %>
+<% else %>
+<% user_pics = 'default' + '.jpg'  %>
+<% end %>
+<% else %>
+<% user_pics = 'default' + '.jpg'  %>
+<% end %>
+
+<!-- Code for Image Checking  -->    
+    
+<li class="clas1">
+<div class="user-cmnt-sec">
+    <a href="logged_comments"><%= image_tag File.join('userImages', user_pics), :alt => '', :class => 'pull-left' %></a>
+    <div class="time-sec pull-right"><i class="fa fa-clock-o"></i><%= time_ago_in_words(getallcommentsdata['created_at']) %> ago </div>
+</div>
+<div class="user-cmnt-des">
+    <p><%= getallcommentsdata['comment'] %> </p>
+</div>
+</li>
+
+<% end %>    
+<% end %>   
+<div class="comments-btn-outr"> 
+<button type="button" id="seeAllComments" class="btn btn-blue custom_btn seeAllProjects">Load More</button>   
+</div> 
+<!-- Add Comment Div Starts -->
+
+<% if session[:current_user_id].present? %>    
+<li>
+<!--Comment Form-->
+<%= form_for :commentform, :url => savecomments_path, :html => {:id => 'commentform', :multipart => true} do |f| %>      
+ 
+<!--Hidden fields -->
+ <input type="hidden" name="commented_by" value="<%= userid %>">   
+ <input type="hidden" name="project_id" value="<%= params[:pid] %>">   
+<!--Hidden fields Ends-->
+    
+<div class="user-cmnt-sec">
+    <a href="javascript:;"><%#= image_tag('by_user_cmnt.png', :alt => 'User Name', :class => 'pull-left') %><%= image_tag File.join('userImages', user_pic), :alt => '', :class => 'pull-left' %></a>
+<!--    <div class="time-sec pull-right"><i class="fa fa-clock-o"></i>4 hours ago</div>-->
+</div>
+<div class="user-cmnt-des user-txt-area">
+    <textarea name="comment" placeholder="Leave a Message" class="form-control msg-control"></textarea>
+</div>
+<div class="user-sbmt-btn">
+<button type="submit" class="btn btn-sbmt">Post</button>
+</div>
+<% end %> <!--Form Ends-->
+    
+<!--Comment form ends -->
+</li>
+<% end %>    
+<!-- Add Comment Div Ends -->    
+    
+</ul>
+
+</div>
+
+<%= render "layouts/sidebar_projects" %>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<script>
+
+jQuery(document).ready(function () {
+   
+	jQuery('#commentform').validate({
+            rules:{
+				"comment":{
+                    required: true
+				},		
+			}
+
+	});
+    
+}); 
+    
+/*Loading Comments After Clicking Load More Comments*/    
+
+$(function () {
+  if($("li.clas1" ).length<=2)
+  {
+    $("#seeAllComments").fadeOut();
+  }
+  $(".two-parts-cmnt .clas1").slice(0, 2).show();
+  $("#seeAllComments").on('click', function (e) {
+      e.preventDefault();
+      $(".two-parts-cmnt .clas1:hidden").slice(0, 2).slideDown();
+      if ($(".two-parts-cmnt .clas1:hidden").length == 0) {
+          $("#seeAllComments").fadeOut('slow');
+      }
+      $('html,body').animate({
+          scrollTop: $(this).offset().top
+      }, 1500);
+  });
+  });
+
+/*Loading Comments After Clicking Load More Comments*/  
+
+</script>
+
+<style>
+
+#commentform .error 
+{
+    color: red;
+}
+
+</style>
+
+<script>
+    /*For Showing Home Menus Active*/
+    jQuery('#submenuid li').eq(2).find('a').addClass('active');
+</script>

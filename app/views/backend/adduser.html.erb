@@ -1,0 +1,647 @@
+
+<div class="right-content-area">
+<div class="inner-pages-main">
+<div class="inner-padding-all">
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+        <div class="inside-gray-bx">
+            <div class="heading-two">
+                <h2>ADD User</h2>
+            </div>
+
+<%= form_for :adduser, :url => backend_user_add_path, :html => {:multipart => 'true', :id => 'useradd', :name => 'useradd'} do |f| %>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+
+                    <%= f.text_field :name, id: 'name', class: 'form-control', placeholder: "Name", :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false" %>
+                </div>
+<!--, :onkeyup => 'isalphanumeric(this)' -->
+
+            </div>
+            <!--Error Message-->
+            <span id="name1" class="alert alert-danger custom" style="display:none">Field is required.</span> 
+            <span id="name2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span> 
+            <span id="name3" class="alert alert-danger custom" style="display:none">Only characters are allowed.</span> 
+             <!--Error Message Ends-->    
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>User Name:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :username, id: 'username', class: 'form-control', placeholder: "Username", :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false"%>
+
+                </div>
+            </div>
+            <!--Error Message-->
+            <span id="username1" class="alert alert-danger custom" style="display:none">Field is required.</span>
+            <span id="username3" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>     
+             <!--Error Message Ends-->       
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Email Address:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :useremail, placeholder: "Email Address", id: 'useremail', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+
+                </div>
+            </div>
+            <!--Error Message-->
+            <span id="useremail1" class="alert alert-danger custom" style="display:none">Field is required.</span> 
+            <span id="useremailvalidError" class="alert alert-danger custom" style="display:none">Valid email required.</span> 
+             <!--Error Message Ends-->
+                
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Address</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+
+                    <%= f.text_field :address, placeholder: "Address", id: 'address', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+
+                </div>
+            </div>
+                
+            <!--Error Message-->       
+            <span id="address1" class="alert alert-danger custom" style="display:none">Field is required.</span>   <!--Error Message-->    
+                
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Password:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+<%= f.password_field :userpassword, placeholder: "Password", id: 'userpassword', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+
+
+                </div>
+            </div>
+                
+    <!--Error Message-->
+    <span id="result" class="alert alert-danger custom"></span>  
+                
+    <span id="userpassword1" class="alert alert-danger custom" style="display:none">Field is required.</span>  
+    <span id="userpassword2" class="alert alert-danger custom" style="display:none">Your password length should between 8 to 15 characters.</span>  
+                
+    <!--Error Message-->            
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Confirm Password:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.password_field :cpassword, placeholder: "Confirm Password", id: 'cpassword', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+
+                </div>
+            </div>
+   <!--Error Message-->                 
+   <span id="cpassword1" class="alert alert-danger custom" style="display:none">Field is required.</span> 
+  <span id="cpasswordcnfError" class="alert alert-danger custom" style="display:none">Passwords do not match.</span> 
+    <!--Error Message-->             
+            </div>
+
+             <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Contact No:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9" id="staticParent">
+                    <%= f.text_field :contactno, placeholder: "Contact Number", id: 'contactno', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+                </div>
+            </div>
+   <!--Error Message-->                  
+<span id="contactno1" class="alert alert-danger custom" style="display:none">Field is required.</span>             <span id="contactno3" class="alert alert-danger custom" style="display:none">Contact number length should between 10 to 12 integers.</span>        
+      
+                 
+<!--Error Message-->             
+            </div>
+
+<div class="form-group">
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-3"><label>Country:</label></div>
+<div class="col-xs-12 col-sm-9 col-md-9">
+<div class="project-select-main">
+<select class="selectpicker" name="user_country" id="country" onchange="removevalidations(this)">
+
+<option value="">Select Country</option>
+<%
+if @allcountriesAndNationalty.present?
+@allcountriesAndNationalty.each_with_index  do |countriesAndNationalty, index|
+%>
+
+<option value="<%= countriesAndNationalty.id %>">  <%= countriesAndNationalty.country_name.capitalize %>
+
+    </option>
+
+<% end %> <!--Endloop -->
+<% end %> <!--EndIf -->
+
+</select>
+</div>
+</div>
+</div>
+<!--Error Message span -->
+<span id="country1"  class="alert alert-danger custom" style="display:none;">Field is required.</span>
+</div>
+
+
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>State:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :state, id: 'state', placeholder: "State", class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false"  %>
+
+                </div>
+            </div>
+   <!--Error Message-->                 
+<span id="state1" class="alert alert-danger custom" style="display:none">Field is required.</span>
+<span id="state3" class="alert alert-danger custom" style="display:none">Only characters are allowed.</span>
+               
+   <!--Error Message-->                 
+            </div>
+
+<!--
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>User Role:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%#= f.text_field :userrole, placeholder: "Userrole", id: 'userrole', class: 'form-control', :onblur => 'removevalidations(this)', :onkeyup => 'removevalidations(this)' %>
+
+
+                </div>
+            </div>
+-->
+   <!--Error Message-->                 
+<!--
+<span id="userrole1" class="alert alert-danger custom" style="display:none">Field is required.</span>  
+   Error Message                 
+            </div>
+-->
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Facebook Link:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :fblink, placeholder: "Facebook link", id: 'fblink', class: 'form-control' %>
+
+
+                </div>
+            </div>
+   <!--Error Message-->                 
+<span id="fblink1" class="alert alert-danger custom" style="display:none">Field is required.</span>   
+   <!--Error Message-->                 
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Twitter Link:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :twitterlink, placeholder: "Twitter link", id: 'twitterlink', class: 'form-control' %>
+
+                </div>
+            </div>
+   <!--Error Message-->                 
+<span id="twitterlink1" class="alert alert-danger custom" style="display:none">Field is required.</span>   
+   <!--Error Message-->                 
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>LinkedIn Link:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :linkedinlink, placeholder: "LinkedIn link", id: 'linkedinlink', class: 'form-control' %>
+
+                </div>
+            </div>
+     <!--Error Message-->               
+<span id="linkedinlink1" class="alert alert-danger custom" style="display:none">Field is required.</span>  
+   <!--Error Message-->                 
+            </div>
+
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="upload-img-div" id="emptyfile">
+
+                        <span><i><%= image_tag ('upload-img.png'), :alt => '' %></i>Upload image</span>
+
+                        <%= f.file_field :userimage, id: 'userimage', onchange: "ValidateSingleInput(this);" %>
+
+
+                    </div>
+                    
+                    
+                    <div class="upload-img-show">
+                        <img id="image_src" src="/assets/website_logo-a9356860cc605bca9adfa92af29d80c92ec6a64bfbc3de3a8f58e8b764544ddc.png" alt="2d4754a7d262 user">
+                    </div>
+
+
+                </div>
+            </div>
+   <!--Error Message-->                 
+<span id="userimage1" class="alert alert-danger custom" style="display:none">Image is required.</span>      
+   <!--Error Message-->                 
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3">
+                    <%= f.submit :Submit, :class => 'login-btn btn-margin-top', :id => 'AddUser', :type => 'button' %>
+                </div>
+            </div>
+
+
+            <% end %>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+
+<script>
+
+
+$(document).ready(function () {
+    
+    
+    
+    
+    $('#cpassword').keyup(function() {
+        
+        $("#result").css('display', 'none');
+        
+    });
+    
+    
+    
+    
+    $('#contactno').bind('keyup paste', function()
+    {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    }); 
+    
+    
+    
+    
+    $('#userpassword').keyup(function() {
+        
+        $("#result").css('display', 'block');
+        
+        $('#result').html(checkStrength($('#userpassword').val()))
+        
+    });
+    
+    
+    
+    function checkStrength(password) {
+        
+        var strength = 0
+        if (password.length < 6) {
+        $('#result').removeClass()
+        $('#result').addClass('alert alert-danger custom short')
+        return 'Password is Too Short'
+        }
+        
+        if (password.length > 7) strength += 1
+        // If password contains both lower and uppercase characters, increase strength value.
+        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+        // If it has numbers and characters, increase strength value.
+        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+        // If it has one special character, increase strength value.
+        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+        // If it has two special characters, increase strength value.
+        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+        // Calculated strength value, we can return messages
+        // If value is less than 2
+
+        if (strength < 2)
+        {
+            $('#result').removeClass()
+            $('#result').addClass('alert alert-danger custom weak')
+            return 'Password is Weak'
+        }
+        else if (strength == 2)
+        {
+            $('#result').removeClass()
+            $('#result').addClass('alert alert-danger custom good')
+            return 'Password is Good'
+        }
+        else
+        {
+            $('#result').removeClass()
+            $('#result').addClass('alert alert-danger custom strong')
+            return 'Password is Strong'
+        }
+    }
+    
+    
+
+
+/*--------------------- START ADD-USER -------------------------*/
+
+
+$('#AddUser').on('click', function () {
+
+        var errorchecker = 0;
+    
+        var name = $("#name").val();
+		if (name == '') { 
+			$("#name").focus();
+			$("#name1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            
+            errorchecker = 1;
+            return false;
+		}
+    
+    
+        if(name != '')
+        {
+            if( !lettersonly(name))
+            {
+                $("#name").focus();
+                $("#name3").css('display','block').css('color','#A94442');	
+                //$('html, body').animate({scrollTop: 0 }, 1000);
+                errorchecker = 1;
+                return false;
+            }
+            else
+            {
+                $("#name3").css('display','none');	
+            }
+        }
+    
+
+        var username = $("#username").val();
+		if (username == '') {
+            $("#username").focus();
+	 		$("#username1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);            
+            errorchecker = 1;
+            return false;
+		}
+    
+    
+     
+        if(username != '')
+        {
+        if (!alphanum(username))
+        {
+            $("#username").focus();
+            $("#username3").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);            
+            errorchecker = 1;
+            return false;
+        }
+        }
+    
+
+        var useremail = $("#useremail").val();
+		if (useremail == '') {
+            $("#useremail").focus();
+			$("#useremail1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+		}
+
+        if( !isEmailAddress(useremail) && useremail != '')
+        {
+            $("#useremail").focus();
+            $("#useremailvalidError").css('display','block').css('color','#A94442').delay(1000).fadeOut();
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+        }
+
+
+
+        var password = $("#userpassword").val();
+
+    
+        if(password.length < 8 || password.length > 15 )
+        {
+            $("#userpassword").focus();
+            $("#userpassword2").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+        }
+        else
+        {
+            $("#result").css('display','none');
+            $("#userpassword2").css('display','none');
+        }
+        
+    
+        if(password == '')
+        {
+            $("#userpassword").focus();
+            $("#userpassword1").css('display','block').css('color','#A94442');
+            $('#userpassword2').css('display','none');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+        }
+    
+
+        var confirm_password = $("#cpassword").val();
+
+        if(confirm_password == '')
+        {
+            $("#cpassword").focus();
+            $("#cpassword1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+        }
+
+        if(password != confirm_password)
+        {
+            $("#cpassword").focus();
+            $("#cpasswordcnfError").css('display','block').css('color','#A94442').delay(1000).fadeOut();
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+        }
+
+
+        var address = $("#address").val();
+		if (address === '') {
+            $("#address").focus();
+			$("#address1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+		}
+
+        var contactno = $("#contactno").val();
+		if (contactno === '') {
+            $("#contactno").focus();
+			$("#contactno1").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);
+            errorchecker = 1;
+            return false;
+		}
+
+        if(contactno != '')
+        {
+            if (!isContactNumber(contactno)) {
+                $("#contactno").focus();
+                $("#contactno3").css('display','block').css('color','#A94442');
+                //$('html, body').animate({scrollTop: 0 }, 1000);
+                errorchecker = 1;
+                return false;
+            }
+            else if(contactno.length < 10 || contactno.length > 12 )
+            {
+                $("#contactno").focus();
+                $("#contactno3").css('display','block').css('color','#A94442');
+                //$('html, body').animate({scrollTop: 0 }, 1000);
+                errorchecker = 1;
+                return false;
+            }        
+            else
+            {
+                $("#contactno3").css('display','none');
+            }
+         }
+  
+
+
+        var country = $("#country").val();
+		if (country === '') {
+            $("#country").focus();
+			$("#country1").css('display','block').css('color','#A94442');
+            errorchecker = 1;
+            return false;
+		}
+
+        var state = $("#state").val();
+		if (state === '') {
+            $("#state").focus();
+            $("#state1").css('display','block').css('color','#A94442');
+            errorchecker = 1;
+            return false;
+		}
+    
+        if(state != '')
+        {
+        if (!alphanum(state))
+        {
+            $("#state").focus();
+            $("#state3").css('display','block').css('color','#A94442');
+            //$('html, body').animate({scrollTop: 0 }, 1000);            
+            errorchecker = 1;
+            return false;
+        }
+        }
+
+        /*var userrole = $("#userrole").val();
+		if (userrole === '') {
+            $("#userrole").focus();
+			$("#userrole1").css('display','block').css('color','#A94442');
+            errorchecker = 1;
+            return false;
+		}*/
+
+        var userimage = $("#userimage").val();
+		if (userimage === '')
+        {
+            $("#userimage1").css('display','block').css('color','#A94442');
+            errorchecker = 1;
+		}
+
+    
+         if (errorchecker > 0)
+         {
+            return false;
+         }
+         else
+         {
+            $('#useradd').submit();   
+         }
+
+
+	});
+
+});
+
+
+
+/*--------------------- END ADD-USER -------------------------*/
+
+
+/*-------------Hide Image Erron On change--------------------*/
+
+    $("#userimage").change(function(){
+    $("#userimage1").css('display','none')
+    });
+    
+
+
+</script>
+
+
+
+
+
+<!-- Start Image Preview -->
+
+<script>
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image_src').css('display','block');
+            $('#image_src').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    
+
+$(document).ready(function() {
+        
+    $("#userimage").change(function () {
+        $('#userimage1').css('display','none');
+        readURL(this);
+    });
+});
+
+
+
+</script>
+
+<!-- End Image Preview -->
+
+<script>
+
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#AddUser').click();
+    }
+}
+
+</script>
+

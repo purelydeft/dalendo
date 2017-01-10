@@ -1,0 +1,59 @@
+<%
+
+  if @singlebadgeData.present?
+
+    badgeid             = @singlebadgeData[0]['id']
+    badgename           = @singlebadgeData[0]['badge_name']
+    badgedescription    = @singlebadgeData[0]['badge_description']
+    badgeimage          = @singlebadgeData[0]['badge_image']
+    badgestatus         = @singlebadgeData[0]['badge_status']
+
+  end
+
+
+
+%>
+
+
+
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>View Badges</h2>
+                            </div>
+                            
+                            	<div class="view-badge-pic-outer text-center">
+                                	<div class="view-badegs-profile">
+                                    <%= image_tag File.join('backend/badgeimages', badgeimage)  %>
+                                    </div>
+                                    <h5><%= badgename.capitalize  %></h5>
+                                    <p><%= badgedescription %>.</p>
+
+                                <% if badgestatus == 'active' %>
+                                    <span class="btn-active">Active</span>
+                                <% else %>
+                                    <span class="btn-active btn-inactive">Inactive</span>
+                                <% end %>
+
+                                 <div class="row margin-top-30 edit-back-btn-group">
+                            	
+                           <div class="col-xs-12 col-sm-12 col-md-6"><a href="/backend/edit-badges?bid=<%= badgeid %>" class="active small-btn login-btn">Edit</a></div>
+                           <div class="col-xs-12 col-sm-12 col-md-6"><a href="<%= backend_badges_management_path %>" class="small-btn login-btn">Back</a></div>
+                            </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+      
+        
+    </div>

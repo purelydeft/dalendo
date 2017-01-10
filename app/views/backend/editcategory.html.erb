@@ -1,0 +1,252 @@
+<%
+   if @editsinglecategoryData.present?
+
+    categoryid         = @editsinglecategoryData[0]['id']
+    categoryname         = @editsinglecategoryData[0]['category_name']
+    category_description = @editsinglecategoryData[0]['category_description']
+    category_icon        = @editsinglecategoryData[0]['category_icon']
+    category_image       = @editsinglecategoryData[0]['category_image']
+    category_status      = @editsinglecategoryData[0]['category_status']
+
+
+   end
+%>
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+                    <!-- Edit-Category-Form-Starts -->
+                    <%= form_for :editcategory, :url => backend_edit_category_path, :html => {:id => 'editcategoryid', :multipart => true} do |f| %>
+
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>Edit Category</h2>
+                            </div>
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :editcategoryname, id: 'editcategoryname', placeholder: 'Category Name', class: 'form-control', value: categoryname, :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :onblur => 'removevalidations(this)', :onkeypress => 'isalphanumeric(event,this)', :ondrop => "return false", :onpaste => "return false" %></div>
+                            </div>
+                              <!--Error Message For Blank Field-->
+                          <span id="editcategoryname1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                          <span id="editcategoryname2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>                                
+                              <!--Error Message Ends-->
+                            </div>
+                            
+                            <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_area(:editcategory_decription, class: 'form-control', placeholder: 'Category Description', value: category_description, :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :onblur => 'removevalidations(this)', :onkeypress => 'isalphanumeric(event,this)', :ondrop => "return false", :onpaste => "return false") %></div>
+                            </div>
+                      <!--Error Message For Blank Field-->
+                      <span id="editcategory_editcategory_decription1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                      <span id="editcategory_editcategory_decription2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>                                 
+                      <!--Error Message Ends-->
+                            </div>
+
+
+                        <div class="form-group">
+                          <div class="row" id="icon-image">
+                            <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload:</label></div>
+                            <div class="col-xs-12 col-sm-9 col-md-9">
+                              <ul class="custom_radio_button">
+                                <li>
+                                  <div>
+                                    <input <% if category_icon != '' %> checked="checked" <% end %> type="radio" id="radio01" name="radios" value="icon_request" />
+                                    <label for="radio01"><span></span>An icon</label>
+                                  </div>
+                                </li>
+
+                                <li>
+                                  <div>
+                                    <input <% if category_image != '' %> checked="checked" <% end %> type="radio" id="radio02" name="radios" value="image_request" />
+                                    <label for="radio02"><span></span>An image</label>
+                                  </div>
+                                </li>
+                              </ul>
+
+
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <!--Hidden Fields Here-->
+
+                        <%= f.hidden_field :hidden_catId, :value => categoryid %>
+                        <%= f.hidden_field :previousHidden_categoryImage, :value => category_image %>
+                        <%= f.hidden_field :previousHidden_categoryIcon,  :value => category_icon %>
+
+                        <% if category_status == 'active' %>
+                        <%= f.hidden_field :editedcategorystatus,  :value => 'active', :class => 'categorystatus' %>
+                        <% else %>
+                        <%= f.hidden_field :editedcategorystatus,  :value => 'inactive', :class => 'categorystatus' %>
+                        <% end %>
+
+
+                        <!--Hidden Fields Ends-->
+
+
+
+             <% if category_image != '' %> <!-- If CategoryImage is in db -->
+
+              <div class="form-group">
+                  <div class="row" id="cat-image">
+                    <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                      <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="upload-img-show">
+                          <%= image_tag File.join('categoryImages', category_image) %>
+
+
+                        </div>
+                        <div class="upload-img-div">
+                          <span><i><%= image_tag ('upload-img.png'), :alt => "" %></i>Upload image</span>
+                         <%= file_field_tag 'edit_category_images', id: "edit_categoryimages", onchange: "ValidateSingleInput(this);" %>
+                          </div>
+                          <div class="upload-img-show">
+                            <img id="blah" src="#" alt="" style="display:none;" />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+                  <!-- Hidden Icon div show on click when category Image is in db-->
+                  <div class="form-group">
+                  <div class="row" id="editicon-images" style="display: none;">
+                  <div class="col-xs-12 col-sm-3 col-md-3"><label>Icon name:</label></div>
+                  <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :iconname, id: 'iconname', placeholder: 'Icon Name', class: 'form-control', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)' %></div>
+                  </div>
+                  <span id="iconname1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                  </div>
+                  <!-- Icon div Hidden end-->
+
+
+               <% else %> <!-- If icon is in db -->
+
+                    <div class="form-group">
+                      <div class="row" id="icon-images">
+                        <div class="col-xs-12 col-sm-3 col-md-3"><label>Icon name:</label></div>
+                        <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :iconname, id: 'iconname', placeholder: 'Icon Name', class: 'form-control', value: category_icon, :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)' %></div>
+                      </div>
+                      <span id="iconname1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                    </div>
+
+
+                <div class="form-group">
+                  <div class="row" id="editcat_image" style="display: none;">
+                    <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                      <div class="upload-img-div">
+                        <span><i><%= image_tag ('upload-img.png'), :alt => "" %></i>Upload image</span>
+                        <%= file_field_tag 'edit_category_images', id: "edit_categoryimages", onchange: "ValidateSingleInput(this);" %>
+                      </div>
+
+                      <div class="upload-img-show">
+                        <!--<%#= f.hidden_field :previous_categoryImage, :value => category_image %>-->
+                        <img id="blah" src="#" alt="" style="display:none;" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                            <span id="newcatimgerrmsz" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+                        <% end %> <!-- end -->
+
+
+
+                             <div class="form-group">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-3 col-md-3"><label>Status:</label></div>
+                                <div class="col-xs-12 col-sm-9 col-md-9">
+                                	<div class="custom-on-off">
+
+                                    <% if category_status == 'active' %>
+                                    <ul class="active_bg">
+
+                                    <li class="active"><a href="javascript:void(0)" >Active</a></li>
+                                    <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                                    </ul>
+                                    <% else %>
+                                    <ul class="inactive_bg">
+
+                                      <li class="active"><a href="javascript:void(0)" >Active</a></li>
+                                      <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                                    </ul>
+                                    <% end %>
+                       			</div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="row">
+                            	
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3">
+                                  <!--<input class="login-btn btn-margin-top" type="submit" value="Update" name="Update" />-->
+   <%= f.submit :Update, :class => 'login-btn btn-margin-top', :id => 'categoryupdatebutton', :type => 'button' %>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <% end %> <!-- Edit form ends -->
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+       
+        
+    </div>
+
+
+<script>
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').css('display','block');
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#edit_categoryimage").change(function(){
+        $('#iconname').val('');
+        readURL(this);
+    });
+
+
+    $('#edit_categoryimages').change(function () {
+
+       $('#iconname').val('');
+       readURL(this);
+
+    });
+    
+    
+$(document).ready(function(){
+$("#categoryupdatebutton").dblclick(function(e){
+e.preventDefault();
+});
+});
+
+</script>
+
+<script>
+  
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#categoryupdatebutton').click();
+    }
+}
+
+</script>

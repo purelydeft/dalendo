@@ -1,0 +1,157 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  start_a_project: "START A PROJECT"
+  faq: "FAQ"
+  french_islands: "French Islands"
+  uk_islands: "Uk Islands"
+  usa_islands: "USA Islands"
+  explore: "Explore"
+  hi: "Hi"
+  sign_out: "Sign out"
+  sign_up: "Sign up"
+  sign_in: "Sign in"
+  search: "Search"
+  search_a_project: "Search a project"
+  project: "Project"
+  statistics: "statistics"
+  how_it_works: "How it works"
+  eng: "ENG"
+  fr: "FR"
+  ch: "CH"
+  home: "HOME"
+  
+  let’s_impact_the_world_positively_with_dalendo: "let’s impact the world positively with dalendo"
+  invest_to_inspire_the_others: "invest to inspire the others"
+  project_to_finance: "Project to finance"
+  view_all: "VIEW ALL"
+  
+  
+  donations: "Donations"
+  solidarity_loans: "Solidarity loans"
+  business_loans: "Business loans"
+  equity: "Equity"
+  our_projects: "OUR PROJECTS"
+  
+  
+  by: "By"
+  funded: "Funded"
+  pledged: "Pledged"
+  restant: "Restant"
+  supporters: "Supporters"
+  recolets: "Recolets"
+  likes: "Likes"
+  
+  see_all_projects: "SEE ALL PROJECTS"
+  get_started_today: "Get Started Today"
+  
+  
+  copyright: "Copyright"  
+  dalendo: "dalendo"  
+  aboutus: "About us"
+  privacy_policy: "Privacy Policy"
+  what_is_dalendo: "What is dalendo"
+  who_we_are: "Who we are"
+  jobs: "Jobs"
+  press: "Press"
+  stats: "Stats"
+  newsletters: "Newsletters"
+  spotlight: "Spotlight"
+  drip: "Drip"
+  help: "Help"
+  new: "New"
+  faq: "FAQ"
+  our_rules: "Our Rules"
+  creator_handbook: "Creator Handbook"
+  campus: "Campus"
+  trust: "Trust"
+  safety: "Safety"
+  support: "Support"
+  terms_of_use: "Terms of Use"
+  privacy_policy: "Privacy Policy"
+  cookie_policy: "Cookie Policy"
+  discover: "Discover"
+  art: "Art"
+  comics: "Comics"
+  crafts: "Crafts"
+  dance: "Dance"
+  design: "Design"
+  fashion: "Fashion"
+  film: "Film"
+  video: "Video"
+  food: "Food"
+  games: "Games"
+  journalism: "Journalism"
+  music: "Music"
+  photography: "Photography"
+  publishing: "Publishing"
+  technology: "Technology"
+  theater: "Theater"
+  hello: "Hello"
+  happening: "Happening"
+  company_blog: "Company Blog"
+  engineering_blog: "Engineering Blog"
+  
+  
+  #Project-Create-locales
+  guidelines: "Guidelines"
+  create_project: "Create Project"
+  my_project: "My Project"
+  creating_a_new_project: "CREATING A NEW PROJECT"
+  basic_of_your_project: "Basic Of Your Project"
+  select_project: "Select Project"
+  choose_a_project_image_to_upload: "Choose a Project Image to  upload"
+  project_name: "Project Name"
+  project_language: "Project Language"
+  select_category: "Select Category"
+  short_description: "Short Description"
+  project_location: "Project Location"
+  short_description: "Short Description"
+  project_starting_date: "Project Starting Date"
+  project_ending_date: "Project Ending Date"
+  select_currency: "Select Currency"
+  minimum_funding_goal: "Minimum Funding Goal"
+  funding_goal: "Funding Goal"
+  rewards_of_your_project: "Rewards Of Your Project"
+  enter_reward_title: "Enter Reward Title"
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  

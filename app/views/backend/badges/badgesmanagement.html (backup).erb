@@ -1,0 +1,115 @@
+<div class="right-content-area">
+       <div class="inner-pages-main">  
+            	<div class="heading-one"><h3>Badges Management</h3>
+                	<div class="right-add-btn-outer">
+                    	<a href="/backend/add-badges">Add Badges</a>
+                    </div>
+                </div>
+       		<div class="table-responsive project-table-outer">
+            	<table class="table">
+              
+                	<thead>
+                	<tr>
+                    	<th>S.No.</th>
+                        <th>Image</th>
+                        <th>Badges Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% if @getallbadges.present? %>       <!-- Checking If All Badges Exist Or Not -->
+
+                    <% @getallbadges.each_with_index  do |badgesdataval, index| %> <!-- All Badges Loop Started -->
+                      <tr id="badgesviewline_<%= badgesdataval['id'] %>">
+
+                    	<td><%= index+1 %></td>
+                      <td><figure> <%= image_tag File.join('backend/badgeimages', badgesdataval['badge_image'])  %> </figure></td>
+                      <td><%= badgesdataval['badge_name'].capitalize %></td>
+
+                        <% if badgesdataval['badge_status'] == 'active' %>
+                            <td><span class="btn-active">Active</span></td>
+                        <% else %>
+                            <td><span class="btn-active btn-inactive">Inactive</span></td>
+                        <% end %>
+
+                        <td>
+                        	<span class="tble-action-outer">
+                                <a href="/backend/view-badges?bid=<%= badgesdataval['id'] %>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            	<a href="/backend/edit-badges?bid=<%= badgesdataval['id'] %>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a class="trashbadge" href="javascript:;" data-badgeid="<%= badgesdataval['id'] %>" data-badgeimage="<%=  badgesdataval['badge_image'] %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <% end %> <!-- EndLoop -->
+                    <% end %> <!-- Endif -->
+
+                    <!--<tr>-->
+                    	<!--<td>02</td>-->
+                        <!--<td><figure> <%#= image_tag ('listing-badges-2.png'), :alt => "" %> </figure></td>-->
+                        <!--<td>New Dalender</td>-->
+                        <!--<td><span class="btn-active btn-inactive">Inactive</span></td>-->
+                        <!--<td><span class="tble-action-outer">-->
+                            <!--<a href="view_badges.html"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            	<!--<a href="edit_badges.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+                             <!--<a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+                            <!--</span></td>-->
+                    <!--</tr>-->
+                    <!---->
+                    <!--<tr>-->
+                    	<!--<td>03</td>-->
+                        <!--<td><figure> <%#= image_tag ('listing-badges-3.png'), :alt => "" %> </figure></td>-->
+                        <!--<td>Enthusiast</td>-->
+                        <!--<td><span class="btn-active">Active</span></td>-->
+                        <!--<td><span class="tble-action-outer">-->
+                            <!--<a href="view_badges.html"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            	<!--<a href="edit_badges.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+                             <!--<a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+                            <!--</span></td>-->
+                    <!--</tr>-->
+                    <!---->
+                    <!--<tr>-->
+                    	<!--<td>04</td>-->
+                        <!--<td><figure><%#= image_tag ('view-badges-profile-pic.jpg'), :alt => "" %></figure></td>-->
+                        <!--<td>Helper</td>-->
+                        <!--<td><span class="btn-active btn-inactive">Inactive</span></td>-->
+                        <!--<td><span class="tble-action-outer">-->
+                            <!--<a href="view_badges.html"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            	<!--<a href="edit_badges.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+                             <!--<a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+                            <!--</span></td>-->
+                    <!--</tr>-->
+                    <!---->
+                    <!--<tr>-->
+                    	<!--<td>05</td>-->
+                        <!--<td><figure> <%#= image_tag ('listing-badges-5.png'), :alt => "" %> </figure></td>-->
+                        <!--<td>Brainer</td>-->
+                        <!--<td><span class="btn-active">Active</span></td>-->
+                        <!--<td><span class="tble-action-outer">-->
+                            <!--<a href="view_badges.html"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            	<!--<a href="edit_badges.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+                             <!--<a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+                            <!--</span></td>-->
+                    <!--</tr>-->
+                    
+                    
+                    </tbody>
+                </table>
+                
+                
+                <div class="table-pagination-outer">
+                    <nav aria-label="Page navigation">
+                        
+                        <%= will_paginate @getallbadges %>
+                    </nav>
+                </div>
+                
+                
+                    
+            </div>
+       </div>
+        
+       
+    </div>

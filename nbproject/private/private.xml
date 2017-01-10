@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/views/project/choose_your_reward.html.erb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/views/backend/backendproject/editproject.html.erb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/config/routes.rb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/models/project_file.rb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/views/backend/backendproject/projectmanagement.html.erb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/assets/javascripts/backend-custom.js</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/views/project/create_project.html.erb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/controllers/project_controller.rb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/views/project/projectdetails.html.erb</file>
+            <file>file:/F:/Ruby%20Projects/dalendo/app/controllers/backend/backendproject_controller.rb</file>
+        </group>
+    </open-files>
+</project-private>

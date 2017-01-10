@@ -1,0 +1,226 @@
+
+<div class="right-content-area">
+
+        <div class="row">
+        	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 ds-number-user-outer">
+            	<div class="inside-four">
+                	<div class="inside-four-icon">
+                    	<figure><%= image_tag ('number-icon-1.png'), :alt => '' %></figure> 
+                    </div>
+                    <div class="inside-four-txt">
+                    	<h3><% if @getUserscount.present? %> <%= @getUserscount %> <% end %></h3>
+                        <p>Number of User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 ds-number-project-outer">
+            	<div class="inside-four">
+                	<div class="inside-four-icon">
+                    	<figure><%= image_tag ('number-icon-2.png'), :alt => '' %></figure> 
+                    </div>
+                    <div class="inside-four-txt">
+                    	<h3><% if @getProjectscount.present? %> <%=@getProjectscount %> <% end %></h3>
+                        <p>Number of Projects</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 ds-number-total-cate">
+            	<div class="inside-four">
+                	<div class="inside-four-icon">
+                    	<figure><%= image_tag ('number-icon-3.png'), :alt => '' %></figure> 
+                    </div>
+                    <div class="inside-four-txt">
+                    	<h3><% if @allcategoriesCount.present? %> <%= @allcategoriesCount %> <% end %></h3>
+                        <p>Total Categories</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 ds-number-admin-ear">
+            	<div class="inside-four">
+                	<div class="inside-four-icon">
+                    	<figure><%= image_tag ('number-icon-4.png'), :alt => '' %></figure> 
+                    </div>
+                    <div class="inside-four-txt">
+                    	<h3>$1,21400</h3>
+                        <p>Admin Earning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row margin-top-30 ds-dashboard-pichart-outer">
+        	<div class="col-xs-12 col-sm-12 col-md-6 ds-total-project">
+            	<div class="heading-one"><h3>Total Projects : <b>9061</b></h3></div>
+                <div class="inside-total-pro-active">
+                <div id="chartContainer11" style="height: 400px; width: 100%;"></div>
+                	
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-6 ds-total-user-active">
+            	<div class="heading-one"><h3>User Active : <b>140</b></h3></div>
+                	<div class="inside-total-pro-active">
+                	<div id="chartContainer22" style="height: 400px; width: 100%;">
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row margin-top-30 total-pro-earning">
+        	<div class="col-xs-12 col-sm-12 col-md-7 total-pro-outer">
+            	<div class="heading-one"><h3>Running Projects</h3></div>
+                	<div class="total-pro-earning-inside total-pro-inside">
+                    	<ul>
+                        	<li class="to-donation">
+                            	<div class="number"><span>110</span></div>
+                                <h4>Donations</h4>
+                            </li>
+                            <li class="to-solidarity">
+                            	<div class="number"><span>48</span></div>
+                                <h4>Solidarity loans</h4>
+                            </li>
+                            <li class="to-business">
+                            	<div class="number"><span>15</span></div>
+                                <h4>Business loans</h4>
+                            </li>
+                            <li class="to-equity">
+                            	<div class="number"><span>50</span></div>
+                                <h4>Equity</h4>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 total-earning-outer">
+            	<div class="heading-one"><h3>Earning</h3></div>
+                	<div class="total-pro-earning-inside">
+                	<ul>
+                    	<li>
+                        	<div class="total-icon-outer">
+                            	<figure><%= image_tag ('total-earning-dollar-icon.png'), :alt => '' %></figure>
+                            </div>
+                            <div class="total-price-outer">
+                            	<span>Total</span>
+                            	<h6>$120.00</h6>
+                            </div>
+                        </li>
+                        
+                        <li>
+                        	<div class="total-icon-outer">
+                            	<figure><%= image_tag ('total-earning-dollar-icon.png'), :alt => '' %></figure>
+                            </div>
+                            <div class="total-price-outer">
+                            	<span>Pending</span>
+                            	<h6>$120.00</h6>
+                            </div>
+                        </li>
+                        
+                        <li>
+                        	<div class="total-icon-outer">
+                            	<figure><%= image_tag ('total-earning-dollar-icon.png'), :alt => '' %></figure>
+                            </div>
+                            <div class="total-price-outer">
+                            	<span>Actual</span>
+                            	<h6>$120.00</h6>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="row margin-top-30">
+        	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading-one"><h3>Top 5 Projects</h3></div>
+        	<div class="table-responsive project-table-outer home-page-tble">
+            	<table class="table">
+                
+            	
+                	<thead>
+                	<tr>
+                    	<th>S.No.</th>
+                        <th>Project</th>
+                        <th>Budget</th>
+                        <th>Actual Earning</th>
+                        <th>Status</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    	<td>01</td>
+                        <td>Lorem Ipsum is simply dummy </td>
+                        <td>$90,0000</td>
+                        <td>$2,60,0000</td>
+                        <td><span class="tble-complete-btn">Complete</span></td>
+                        <td><div class="star"><i class="fa fa-star" aria-hidden="true"></i>
+                        	<i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i></div></td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>02</td>
+                        <td>Lorem Ipsum is simply dummy </td>
+                        <td>$90,0000</td>
+                        <td>$2,60,0000</td>
+                          <td><span class="tble-complete-btn">Complete</span></td>
+                        <td><div class="star"><i class="fa fa-star" aria-hidden="true"></i>
+                        	<i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i></div></td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>03</td>
+                        <td>Lorem Ipsum is simply dummy </td>
+                        <td>$90,0000</td>
+                        <td>$2,60,0000</td>
+                       <td><span class="tble-complete-btn">Complete</span></td>
+                        <td><div class="star"><i class="fa fa-star" aria-hidden="true"></i>
+                        	<i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i></div></td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>04</td>
+                        <td>Lorem Ipsum is simply dummy </td>
+                        <td>$90,0000</td>
+                        <td>$2,60,0000</td>
+                         <td><span class="tble-complete-btn">Complete</span></td>
+                        <td><div class="star"><i class="fa fa-star" aria-hidden="true"></i>
+                        	<i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i></div></td>
+                    </tr>
+                    
+                    <tr>
+                    	<td>05</td>
+                        <td>Lorem Ipsum is simply dummy </td>
+                        <td>$90,0000</td>
+                        <td>$2,60,0000</td>
+                         <td><span class="tble-complete-btn">Complete</span></td>
+                        <td><div class="star"><i class="fa fa-star" aria-hidden="true"></i>
+                        	<i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i></div></td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+     
+</div>
+
+<!--</section>-->
+
+<!--</div>-->
+
+

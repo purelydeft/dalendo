@@ -1,0 +1,28 @@
+/* Scss Document */
+
+
+@import "variables";
+@import "styles.scss";
+@import "home";
+@import "project";
+@import "create";
+@import "social-share-button";
+@import "responsive";
+@import "media-queries";
+body {
+	background: #f4f4f4;
+	font-size: 100%;
+}
+a,
+.btn,
+button,
+input[type="submit"] {
+	@include transition(all ease-in-out 350ms);
+}
+
+
+
+
+
+
+

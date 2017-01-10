@@ -1,0 +1,111 @@
+// Place all the styles related to the backend controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+@import "font-awesome.min";
+
+.btn {text-transform:none;}
+
+	.pagination{@include border-radius(0px);margin:0px;
+			a{@include border-radius(30px);background:none; border:none; color:$primary-color;@include font-size(1.8);font-weight:600; cursor:pointer; width:35px; height:35px; line-height:1.2;margin:0px 4px;padding: 7px; display: inline-block;
+				&:hover{background:$primary-color; color:$white-color;}
+                
+			}
+			span{@include border-radius(30px);background:none; border:none; color:$primary-color;@include font-size(1.8);font-weight:600; cursor:pointer; width:35px; height:35px; line-height:1.2;margin:0px 4px;padding: 7px; display: inline-block;
+				&:hover{background:$primary-color; color:$white-color;}
+                
+			}
+			.next_page{font-size: 0px;position:relative;top:-17px;
+					&::after{content: "\f105";font-family: FontAwesome;font-size: 21px;height: 35px;left: 2px;margin: 0 auto;position: absolute;right: 0;text-align: center;top: 5px;width: 35px;
+}
+				}
+				
+				.previous_page{font-size: 0px;position:relative;top:-17px;
+					&::after{content: "\f104";font-family: FontAwesome;font-size: 21px;height: 35px;left: -1px;margin: 0 auto;position: absolute;right: 0;text-align: center;top: 5px;width: 35px;
+}
+				}
+				
+				
+        
+        em.current{background:$primary-color; color:$white-color;@include border-radius(30px);border:none; font-style: normal;@include font-size(1.8);font-weight:600; cursor:pointer; width:35px; height:35px; line-height:1.2;margin:0px 4px;padding: 7px; display: inline-block;}
+			&.active a{background:$primary-color; color:$white-color;}
+		
+	}
+
+    .globel-search-hide .dataTables_filter{display: none;}
+
+table.table {
+    tr
+    {
+        .sorting{
+            background:rgba(0, 0, 0, 0) url("sort_both.png") no-repeat scroll 100% 24px; cursor: pointer;
+        }
+        
+        .sorting_desc{
+            background:rgba(0, 0, 0, 0) url("sort_desc.png") no-repeat scroll 100% 24px; cursor: pointer;
+        }
+        
+        .sorting_asc{
+            background:rgba(0, 0, 0, 0) url("sort_asc.png") no-repeat scroll 100% 24px; cursor: pointer;
+        }
+        
+    }
+}
+
+
+
+/*table.table {
+    tr th
+    {
+        
+    }
+}*/
+        
+        
+        
+        
+
+.swal-form {
+    input.patch-swal-styles-for-inputs.swal-form-field {margin: 0 3px;}
+    label {margin-right: 15px;}
+}
+.tble-action-outer a .fa-random {padding: 1px 0 0;}
+
+.steps-status ul a{cursor: default;}
+.steps-status ul a:hover i {
+  background-color:#fff;
+  color:#a3a3a3;
+  border-color: #dfdfdf;
+}
+
+.steps-status ul li.last a:hover i{ background:#315481; border-color:#315481;}
+.steps-status ul li.last i::after{background:#315481; padding: 4px; }
+.btn-active:focus{ color: #fff;}
+.btn-active a{ cursor: default;}
+.project-table-outer .dataTables_paginate .paginate_button.previous.disabled::after, .project-table-outer .dataTables_paginate .paginate_button.next.disabled::after {  color:#d8d8d8;  cursor: auto;}
+table{
+.btn-active, .btn-inactive{
+   &:hover{ background:#8bc34a;
+   a{color:#fff;}
+   } 
+a{color:#fff;}
+}}
+
+.btn-active.btn-inactive{
+    &:hover{ background:#d9534f;}
+}
+.btn-active.btn-pending{
+   &:hover{ background:#eeb311;cursor:auto;} 
+}
+.btn-active.btn-disapprove{
+   &:hover{ background:#f4655d;cursor:auto;} 
+}
+.btn-active.btn-approve{
+   &:hover{ background:#315481 ; cursor:auto;} 
+}
+
+
+
+
+

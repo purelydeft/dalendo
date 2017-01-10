@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>:: Dalendo Admin ::</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="/assets/fav.png" type="image/png" sizes="16x16">
+  
+<!-- END CSS/JS FOR ADMIN LOGIN -->
+
+    <%= stylesheet_link_tag    '/assets/screen', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag    '/assets/font-awesome.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    '/assets/backend-custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+    <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag '/assets/backend', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag '/assets/backend-custom', 'data-turbolinks-track': 'reload' %>
+
+<!-- END CSS/JS FOR ADMIN LOGIN -->
+
+</head>
+    
+<body>
+
+
+
+<div class="login-main-outer">
+	<div class="login-main-inner">
+    	<div class="login-bx">
+        	<div class="login-logo"><a href="#"> <%= image_tag ('admin_logo.png'), :alt => '' %></a></div>
+            <div class="login-page-form-outer">
+                
+        <%= form_for :adminlogin, :url => backend_adminlogin_path, :html => {:id => 'adminloginsubmit'} do |f| %>
+                
+                
+                <% if cookies[:adminpassword].present? %> <!-- Start Code For Checking Cookies-->
+                
+                    <% @email       = cookies[:adminemail] %>
+                    <% @password    = cookies[:adminpassword] %>
+                
+                <% end %> <!-- End Code For Checking Cookies-->
+                
+                
+                <span id="adminCreditionlsmsz" class="alert alert-danger"> Ooops...! wrong email & password. </span>
+                
+                	<div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            
+                            <%= f.text_field :email, id: 'email', placeholder: 'Email Address', class: 'form-control', value: @email %>
+                            
+                        </div>
+                        
+                        <span id="adminemailerr" class="alert alert-danger"> Admin email required. </span>
+                        
+                    </div>
+                        
+                
+                    <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            
+                            <%= f.password_field :password, id: 'password', placeholder: 'Password', class: 'form-control', value: @password %>
+                            
+                        </div>
+                        
+                        <span id="adminpassworderr" class="alert alert-danger"> Admin password required. </span>
+                        
+                    </div>
+                
+                
+                    <div class="form-group">
+                        <div class="custom-checkbox checkbox checkbox-color">
+                            
+                            <% if cookies[:adminpassword].present? %> <!-- Start Code For Checking Cookies-->
+                
+                                <%= f.check_box :remember_me, id: 'remember_me', value: 'click', checked: "checked" %>
+
+                            <% else %> 
+                            
+                                <%= f.check_box :remember_me, id: 'remember_me', value: 'click' %>
+                            
+                            <% end %> <!-- End Code For Checking Cookies-->
+                            
+                            <label for="singleCheckbox1"> Remember Password </label>
+                   	    </div>
+                    </div>
+                
+                    <%= f.submit :Login, :class => 'fullwidbtn login-btn margin-top-10', :id => 'loginAdminButton', :type => 'button' %>
+                                
+                <% end %>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>
+
+
+<script>
+
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#loginAdminButton').click();
+    }
+}
+
+</script>

@@ -1,0 +1,37 @@
+
+<%= form_for :addimage, :url => image_path, :html => {:id => 'addimagesid', :multipart => true} do |f| %>        
+
+
+<input id="sam" type="file" class="form-control" name="test_image[]" multiple>
+    
+    
+    
+<input type="submit" name="Upload" class="form-control">
+
+
+<% end %>
+<div class="gallery">
+<script>
+
+
+    
+var inputLocalFont = document.getElementById("sam");
+inputLocalFont.addEventListener("change",previewImages,false); //bind the function to the input
+
+function previewImages(){
+    var fileList = this.files;
+
+    var anyWindow = window.URL || window.webkitURL;
+
+        for(var i = 0; i < fileList.length; i++){
+          //get a blob to play with
+          var objectUrl = anyWindow.createObjectURL(fileList[i]);
+          // for the next line to work, you need something class="preview-area" in your html
+          $('.gallery').append('<img src="' + objectUrl + '" />');
+          // get rid of the blob
+          window.URL.revokeObjectURL(fileList[i]);
+        }
+
+
+}   
+</script>

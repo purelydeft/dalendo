@@ -1,0 +1,104 @@
+<script>
+$(function () {
+    Highcharts.chart('donation_chart', {
+            title: {
+            text: '',
+            x: -20 //center
+        },
+           xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#d9273a'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '$'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Donations',
+            color: '#d50f25',
+            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        }, ]
+    });
+	
+	
+});
+
+
+</script>
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">  
+            	
+            <div class="inner-padding-all">
+            <div class="row">
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="heading-two">
+                            	<h2>Donations Reports & Statistics</h2>
+                            </div>
+                       
+            </div>
+            </div>
+            
+            <div class="row">
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="reports_list">
+            <ul>
+            <li><h3>1,97,224</h3> <p>Total Projects</p>          </li>
+           <li><h3>1,224</h3> <p>Running Projects</p>          </li>
+           <li><h3>5224</h3> <p>Complete Projects</p>          </li>
+           <li><h3>5224</h3> <p>Approved Projects</p>          </li>
+           <li><h3>1,97,224</h3> <p>Total Supporters</p>          </li>
+           <li><h3>224</h3> <p>Disapproved Projects</p>          </li>
+           <li><h3>$ 59,077,186</h3> <p>Total Funded Amount</p>          </li>
+
+            </ul>
+            </div>
+                       
+            </div>
+            </div>
+            
+            <div class="row">
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+             <div id="donation_chart" class="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div class="reports_list_button">
+           <ul>
+           <li><a href="" class="total_projects">Total Projects</a></li>
+           <li><a href="" class="running_projects">Running Projects</a></li>
+           <li><a href="" class="completel_projects">Complete Projects</a></li>
+           <li><a href="" class="approved_projects">Approved Projects</a></li>
+           <li><a href="" class="overfunded_projects">Overfunded Projects</a></li>
+           <li><a href="" class="disapproved_projects">Disapproved Projects</a></li>
+           <li><a href="" class="totalfunded_projects">Total Funded Amount</a></li>
+           </ul>
+            </div>
+            
+            </div>
+            </div>
+            </div> 
+            
+              
+       		
+       </div>
+       
+        
+       
+    </div>

@@ -1,0 +1,106 @@
+<div class="mini-slides-wrap">
+<div class="mini-slides text-center">
+<h3>Lorem Ipsum is simply dummy </h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+</div>
+<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="row">		
+<%= render "layouts/header_projects" %>
+<div class="col-xs-12 two-parts-cmnt"> 
+<div class="row">
+<!-- Left Sec -->
+<div class="col-sm-8 col-xs-12">
+<ul class="event-wrapper news-wrap-sec">
+<li>
+<figure>
+<%= link_to (image_tag('_1_evt_det_img.jpg', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</figure>
+<div class="img-slider-wrap">
+<ul class="">
+<li>
+<%= link_to (image_tag('1_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</li>
+<li>
+<%= link_to (image_tag('2_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</li>
+<li>
+<%= link_to (image_tag('3_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</li>
+<li>
+<%= link_to (image_tag('4_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</li>
+<li>
+<%= link_to (image_tag('5_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+</li>
+</ul>
+</div>
+<div class="map-img-wrap">
+<figure>
+<%= image_tag('_map_img.jpg',:alt=>'Map Wrap') %>
+</figure>
+<ul class="social-evt-btns">
+<li><a class="fb" href="javascript:;"><i class="fa fa-facebook"></i> Share</a></li>
+<li><a class="twt" href="javascript:;"><i class="fa fa-twitter"></i> Share</a></li>
+<li><a class="g-plus" href="javascript:;"><i class="fa fa-google-plus"></i> Share</a></li>
+<li><a class="lnkd-in" href="javascript:;"><i class="fa fa-linkedin"></i> Share</a></li>
+<li><a class="whtsapp" href="javascript:;"><i><%= image_tag('whats-app-icon.png', :alt => 'whatsapp') %></i> Share</a></li>
+<li><a class="sms-link" href="javascript:;"><i><%= image_tag('sms-social-icon.png', :alt => 'whatsapp') %></i> Share</a></li>
+<li><a class="skype-share" href="javascript:;"><i class="fa fa-skype"></i> Share</a></li>
+<li><a class="pint-rest" href="javascript:;"><i class="fa fa-pinterest"></i> Share</a></li>
+</ul>
+</div>
+<div class="evt-dt-wrap">
+<div class="evt-det-des">
+<h2><%= link_to "Lorem Ipsum", "javascript:;" %></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at. Mauris sem urna, tincidunt quis orci non, posuere sagittis enim. Etiam sem lacus, blandit eu egestas quis, mattis at urna.</p>
+</div>
+
+
+</div>
+</li>
+<li>
+
+
+
+<video width="100%" controls>
+<source src="http://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+<source src="http://www.w3schools.com/tags/movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+
+
+</figure>
+<div class="evt-dt-wrap">
+<div class="evt-det-des">
+<h2><%= link_to "Lorem Ipsum", "javascript:;" %></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at. Mauris sem urna, tincidunt quis orci non, posuere sagittis enim. Etiam sem lacus, blandit eu egestas quis, mattis at urna. Cras maximus augue eros, a tempus orci mattis in. Phase llus non sollicitudin metus, eu congue urna. Aenean dapibus finibus luctus. Donec vitae consequat est, sit amet aliquam turpis. </p>
+</div>
+
+
+</div>
+</li>
+<li>
+<div class="evt-dt-wrap no-img">
+<div class="evt-det-des">
+<h2><%= link_to "FAQ", "javascript:;" %></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at.</p>
+</div>
+<div class="action_btns">
+<%= link_to "Ask a Question","javascritp:;",:class => "btn btn-ask text-uppercase primary-btn" %>
+<%= link_to "Report This project to Dalendo","javascritp:;",:class => "btn btn-str primary-btn" %>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+<%= render "layouts/sidebar_projects" %>
+</div>
+</div>
+
+</div>
+</div>

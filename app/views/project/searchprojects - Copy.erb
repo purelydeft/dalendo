@@ -1,0 +1,368 @@
+
+<div class="mini-slides-wrap">
+	<div class="mini-slides text-center">
+	 <h3>Lorem Ipsum is simply dummy </h3>
+	 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+	</div>
+	<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="search-page-top-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-6 left-search-top-bar">
+				<div class="form-group">
+				<div class="custom-search-top-input">
+					<select name="search_project" id="search_project" >
+					  <option value='' data-title="All Projects">All Projects</option>
+					  <option value='' data-title="All Projects">All Projects</option>
+					 </select>
+					</div>
+				
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 right-search-top-bar">
+				<div class="form-group">
+					<label>Sort by</label>
+					
+						<div class="custom-search-top-input">
+					<select name="search_shortby" id="search_shortby" >
+					  <option value='' data-title="Popular">Popular</option>
+					  <option value='' data-title="Popular">Popular</option>
+					 </select>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container iner-control">
+
+	<div class="row search-pag-top-txt">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<div class="title">
+				<p>Showing 1-6 of 20 Results</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row margin-bottom-30">
+		<div class="col-xs-12 col-sm-6 col-md-8 search-left-area">
+            
+            <section class="projects">
+			
+                <div class="row">
+                
+                
+                <% if @Get_Projects_By_Cat_id.present? %>
+       
+                    <!-- Start Foreach for @Get_Projects_By_Cat_id -->     
+                    <% @Get_Projects_By_Cat_id.each do |project_data_by_catid| %>  
+                
+                
+                        <% project_image = project_data_by_catid['project_image'] %>
+                
+                
+                            <!--Code checking for project-image-->
+
+                            <% project_image = project_data_by_catid['project_image'] %>
+                
+                            <% if File.exist?(Rails.root.join('app','assets','images','project','projectimages',project_image )) %>
+                                <% projectimage = project_image  %>
+                
+                            <% end %>
+
+                            <!--Code checking for project-image end-->
+			
+			
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="project_box 
+                      
+                            <% if project_data_by_catid['project_type'] == 'Presale' %>
+
+                            donation_project
+
+                            <% end %>
+
+
+
+                            <% if project_data_by_catid['project_type'] == 'Donations' %>
+
+                            donation_project
+
+                            <% end %>
+
+
+
+                            <% if project_data_by_catid['project_type'] == 'Solidarity' %>
+
+                            soild_loan_project
+
+                            <% end %>
+
+
+
+                            <% if project_data_by_catid['project_type'] == 'Business' %>
+
+                            business_loan_project
+
+                            <% end %>
+
+
+
+                            <% if project_data_by_catid['project_type'] == 'Equity' %>
+
+                            equiety_project
+
+                            <% end %>
+                      
+                            appear-animation animated fadeInUp appear-animation-visible">
+              
+              
+              
+                        <figure class="image-box">
+                            <h3> <%= project_data_by_catid['project_type'] %> </h3>
+                                <div class="creator_logo">
+                                    <div class="creator-logo-outer">
+                                        <div class="creator-logo-inside">
+                                            <%= image_tag("user_logo.png", :alt => "home") %>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                             <%= image_tag File.join('project/projectimages', projectimage), :alt => "home" %>
+                             
+                        </figure>
+                            
+                        <div class="lower-content">
+                            <div class="row project-place-info">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+            
+            
+                                    <% if @getUsersData.present? %> 
+                                        <% @getUsersData.each do |alldata| %>   <!--Start foreach-->
+
+                                        <% 
+                                            first_name =  alldata['first_name'] 
+                                            last_name  =  alldata['last_name']
+
+                                            fullname = "#{first_name} #{last_name}"
+                                        %>
+
+
+                                    <h4>
+
+                                            <% if project_data_by_catid['created_by'] == alldata['id'] %> <!--Start-->
+
+                                                <% if fullname.length <= 13 %> <!--Start if lenght-->
+                                                    By <a href="javascript:;"> <%= fullname %> </a>
+                                                <% else %>
+                                                    By <a href="javascript:;"> <%= fullname[0..12] %> </a>
+
+                                                    <a href="javascript:;">..</a>
+
+                                                <% end %> <!--End if lenght-->
+
+                                            <% end %> <!--End-->
+
+
+
+                                    </h4>
+
+                                            <% end %>   <!--End foreach-->
+                                        <% end %>
+        
+                                </div>
+                                
+                        
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <h6><i class="fa fa-map-marker" aria-hidden="true"></i>
+
+
+                                    <% if project_data_by_catid['project_location'].length <= 18 %> <!--Start if lenght-->
+
+                                        <%= project_data_by_catid['project_location'] %>
+
+                                    <% else %>
+
+                                        <%= project_data_by_catid['project_location'][0..17] %>
+                                        <a href="javascript:;">..</a>
+
+                                    <% end %> <!--End if lenght-->
+
+
+                                    </h6>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="row project-name-txt">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <h4><a href="projectdetails"> <%= project_data_by_catid['project_title'] %> </a></h4>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row project-basic-details">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <ul>
+                                    <li>
+                                        <figure><i class="icon-rich"></i></figure>
+                                        <h5>72%</h5>
+                                        <p>Funded</p>
+                                    </li>
+                                    <li>
+                                        <figure><i class="icon-piggy-bank"></i></figure>
+                                        <h5>$50,0000</h5>
+                                        <p>Pledged</p>
+                                    </li>
+                                    <li>
+                                        <figure><i class="icon-clock"></i></figure>
+                                        <h5>150 Hours</h5>
+                                        <p>Restant</p>
+                                    </li>
+                                </ul>
+                                
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                        <span class="sr-only">70% Complete</span>
+                                    </div>
+                                </div>
+                                
+                                <ul>
+                                    <li>
+                                        <figure><i class="icon-supporters"></i></figure>
+                                        <h5>10</h5>
+                                        <p>Supporters</p>
+                                    </li>
+                                    <li>
+                                        <figure><i class="icon-checked"></i></figure>
+                                        <h5>50$</h5>
+                                        <p>Recolets</p>
+                                    </li>
+                                    <li>
+                                        <figure><i class="icon-heart"></i></figure>
+                                        <h5>700</h5>
+                                        <p>Likes</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                
+                    <% end %>   <!-- End Foreach for @Get_Projects_By_Cat_id --> 
+                <% end %>
+                
+
+                </div>
+                
+			 </section>
+            
+            
+			
+				<div class="row text-center search-pagination-outer">
+					<div class="col-xs-12 col-sm-12 col-sm-12">
+						<nav aria-label="Page navigation">
+                            <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                                <span class="sr-only"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                              </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                <span class="sr-only"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+					</div>
+				</div>
+			
+		</div>
+		
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="search-right-search-box">
+				<h3>Search</h3>
+				<form>
+				<input type="search" class="form-control form-control-radius white-place"  placeholder="Search a project" />
+				<input class="custom-submit-btn" type="submit" value="SEARCH" name="SEARCH" />
+				</form>
+			</div>
+			<div class="tags">
+				<h3>Tags</h3>
+					<ul>
+						<li><a href="#">All (7)</a></li>
+						<li><a href="#">Awarness (1)</a></li>
+						<li><a href="#">Music (6)</a></li>
+						<li><a href="#">Education (4)</a></li>
+						<li><a href="#">Food (3)</a></li>
+						<li><a href="#">Gallery (18)</a></li>
+						<li><a href="#">Health (4)</a></li>
+						<li><a href="#">LifeSaving (3)</a></li>
+						<li><a href="#">Our Projects (3)</a></li>
+						<li><a href="#">Seniors (4)</a></li>
+						</ul>
+						
+						<span><a href="">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a></span>
+			</div>
+			
+			<div class="search-lang-outer">
+				<div class="search-lang-inside">
+					<h3>Language</h3>
+					<div class="form-group">
+					
+						<div class="custom-search-input">
+										<select name="search_lang" id="search_lang" >
+					  <option value='' data-title="English">English</option>
+					  <option value='' data-title="Japnese">Japnese</option>
+					 </select>
+					</div>
+					</div>
+				</div>
+				
+				<div class="search-lang-inside">
+					<h3>Type of Project</h3>
+					<div class="form-group">
+					<div class="custom-search-input">
+										<select name="search_filter" id="search_filter" >
+					  <option value='' data-title="Andorra">Pre - sale</option>
+					  <option value='' data-title="Antigua and Barbuda">Sale Islands</option>
+					 </select>
+					</div>
+					
+					</div>
+				</div>
+				
+				<div class="search-lang-inside">
+					<h3>Countries</h3>
+					<div class="form-group">
+						
+						<div class="custom-search-input">
+										<select name="search_countr" id="search_countr" >
+					  <option value='' data-title="France">France</option>
+					  <option value='' data-title="India">India</option>
+					 </select>
+					</div>
+						
+						
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+</div>

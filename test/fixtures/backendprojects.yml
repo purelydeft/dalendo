@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  categoryid: 1
+  project_title: MyString
+  project_image: MyString
+  shortblurb: MyString
+  projectlocation: MyString
+  projectlanguage: MyString
+  project_startdate: MyString
+  projectend_date: MyString
+  project_fundinggoal: MyString
+  userid: 1
+  projectcreated_by: 1
+  projectupdated_by: 1
+
+two:
+  categoryid: 1
+  project_title: MyString
+  project_image: MyString
+  shortblurb: MyString
+  projectlocation: MyString
+  projectlanguage: MyString
+  project_startdate: MyString
+  projectend_date: MyString
+  project_fundinggoal: MyString
+  userid: 1
+  projectcreated_by: 1
+  projectupdated_by: 1

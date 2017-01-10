@@ -1,0 +1,61 @@
+<%
+    if @sinlecategoryData.present?
+
+      categoryid          = @sinlecategoryData[0]['id']
+      categoryname        = @sinlecategoryData[0]['category_name']
+      categorydescription = @sinlecategoryData[0]['category_description']
+      categoryicon        = @sinlecategoryData[0]['category_icon']
+      categoryimage       = @sinlecategoryData[0]['category_image']
+      categorystatus      = @sinlecategoryData[0]['category_status']
+
+    end
+%>
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>View Category</h2>
+                            </div>
+                            
+                            	<div class="view-badge-pic-outer text-center">
+                                	<div class="view-badegs-profile">
+
+                                    <% if categoryicon != '' %> <!-- To check icon or image condition-->
+
+                                    <figure class="backend_category_box larg_icone"> <i class="<%= categoryicon %>"></i> </figure>
+
+                                    <% else %>
+
+                                        <%#= image_tag ('view-category-profile.jpg'), :alt => "" %>
+                                        <%= image_tag File.join('categoryImages', categoryimage)  %>
+
+                                    <% end %> <!-- To check icon or image condition ends-->
+
+                                    </div>
+                                    <h5><%= categoryname %></h5>
+                                    <p><%= categorydescription %>.</p>
+                <% if categorystatus == 'active' %>
+								<span class="btn-active">Active</span>
+                <% else %>
+                <span class="btn-active btn-inactive">Inactive</span>
+                <% end %>
+                                 <div class="row margin-top-30 edit-back-btn-group">
+                            	
+                           <div class="col-xs-12 col-sm-12 col-md-6"><a href="/backend/edit-category?cid=<%= categoryid %>" class="active small-btn login-btn">Edit</a></div>
+                           <div class="col-xs-12 col-sm-12 col-md-6"><a href="<%= backend_category_management_path %>" class="small-btn login-btn">Back</a></div>
+                            </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+      
+        
+    </div>

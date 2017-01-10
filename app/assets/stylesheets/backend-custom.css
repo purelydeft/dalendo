@@ -1,0 +1,175 @@
+/*-------------- START CSS FOR ADMIN LOGIN ---------------------*/
+#result { display: none}
+
+#adminemailerr { display: none; }
+#adminpassworderr { display: none; }
+#adminCreditionlsmsz { display: none; }
+
+.alert { padding: 5px; margin-left: 40px; }
+
+/*.error { color: #a94442; }*/
+
+.user_image { height: 34px; width: 34px; }
+
+.user_image > img { border-radius: 50%; }
+
+
+
+/* Start Include Your CSS file for password here */
+
+
+#useradd .short{
+color:#FF0000;
+}
+#useradd .weak{
+color:orange;
+}
+#useradd .good{
+color:#2D98F3;
+}
+#useradd .strong{
+color: limegreen;
+}
+
+/* End Include Your CSS file for password here */
+
+
+#rewardsDiv { display: none; }
+#rewardSub { display: none; }
+#storyDiv { display: none; }
+#storySub { display: none; }
+
+.tbselect{  width: 48%; }
+.yearselect { margin-top: -2.5em; margin-left: 17.3em; }
+
+#emptyrisk { display: none; color: firebrick; }
+#emptyicon { display: none; color: firebrick; }
+#wrongicon { display: none; color: firebrick; }
+#emptydescription { display: none; color: firebrick; }
+
+
+/*-------------- END CSS FOR ADMIN LOGIN ---------------------*/
+
+
+/*-------------- START CSS FOR ADD USER ---------------------*/
+
+
+/*-------------- START CSS FOR ADD Reward ---------------------*/
+
+
+
+.rewardsalert{
+        margin-left: 0px;
+        padding: 5px;
+    }    
+
+#title_empty { display: none; color: firebrick; }
+#rewardamount_empty { display: none; color: firebrick; }
+#rewardamount1_empty { display: none; color: firebrick; }
+#rewarddesc_empty { display: none; color: firebrick; }
+#month_empty { display: none; color: firebrick; }
+#year_empty { display: none; color: firebrick; }
+#shipping_empty { display: none; color: firebrick; }
+
+
+
+/*-------------- END CSS FOR ADD Reward ---------------------*/
+
+
+#emptyname { display:  none; color: firebrick; }
+#emptyusername { display:  none; color: firebrick; }
+#emptyemail { display:  none; color: firebrick; }
+#invalidemail { display:  none; color: firebrick; }
+#emptyaddress { display:  none; color: firebrick; }
+#emptycontact { display:  none; color: firebrick; }
+#invalidnumber { display:  none; color: firebrick; }
+#emptycountry { display:  none; color: firebrick; }
+#emptystate { display:  none; color: firebrick; }
+#emptyuserrole { display:  none; color: firebrick; }
+#emptyfb { display:  none; color: firebrick; }
+#emptytwitter { display:  none; color: firebrick; }
+#emptylinkedin { display:  none; color: firebrick; }
+#emptyuserimage { display:  none; color: firebrick; }
+#wronguserimage { display:  none; color: firebrick; }
+
+
+/*-------------- END CSS FOR ADD USER ---------------------*/
+
+
+
+/*-------------- START CSS FOR CATEGORY ADD ---------------------*/
+
+
+.custom { margin-left: 151px;}
+/*-------------- END CSS FOR CATEGORY ADD ---------------------*/
+
+
+.backend_category_box i {  border: 2px solid #062f65;  border-radius: 50%;  color: #062f65;  display: inline-block;  font-size: 30px;  height: 50px;  line-height: 50px;  text-align: center;  width: 50px;}
+.larg_icone i{height: 150px;  line-height: 150px; width: 150px; font-size: 90px;}
+.custom_radio_button li{ display:inline-block;}
+.custom_radio_button li+li{ margin-left:50px;}
+.custom_radio_button input[type="radio"] {
+    display:none;
+}
+.custom_radio_button input[type="radio"] + label {
+    color: #4d4d4d;
+    font-size:14px;
+}
+.custom_radio_button input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    border-radius:  50%;
+}
+
+.custom_radio_button input[type="radio"] + label span {
+     background-color:transparent;
+	 border:1px solid #4d4d4d;
+}
+
+.custom_radio_button input[type="radio"]:checked + label span{
+     background-color:#5cb85c;
+	 border:1px solid #5cb85c;
+}
+
+.custom_radio_button input[type="radio"] + label span,
+.custom_radio_button input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+
+
+
+.custom_category_image{border: 2px solid #062f65 !important;}
+
+.smallcustom
+{
+    background-color: #315481 !important;
+    border-color: #315481 !important;
+    color: white !important;
+}
+
+.custom-input-outer-valid{position:relative;}
+.custom-validation-div {left: 0;margin-left: 0;position: absolute;width: 100%;z-index: 99;}
+
+.vid_style
+{
+     width: 125px;
+     height: 75px;
+}
+.sam
+{
+    display:none;
+}
+
+
+
+
+.checkbox input[type="checkbox"] {
+    margin-left: -17px;
+    position: absolute;
+    top: 5px;
+}

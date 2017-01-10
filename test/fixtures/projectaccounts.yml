@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  fullname: MyString
+  payment_type: MyString
+  bankemail: MyString
+  bankname: MyString
+  account_number: MyString
+  bank_ifsc_code: MyString
+  account_type: MyString
+  status: MyString
+
+two:
+  project_id: 1
+  fullname: MyString
+  payment_type: MyString
+  bankemail: MyString
+  bankname: MyString
+  account_number: MyString
+  bank_ifsc_code: MyString
+  account_type: MyString
+  status: MyString

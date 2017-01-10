@@ -1,0 +1,221 @@
+<% if @Get_Project_By_Project_id.present? %> <!-- Start @Get_Projects_By_Cat_id -->   
+<% project_id = @Get_Project_By_Project_id[0]['id'] %>
+ <!-- Getting Project video From database -->
+
+ <% @projectVideo = ProjectFile.where(project_id: project_id, project_file_type: 'video') %>
+ <% video_path = @projectVideo[0]['project_image_path'] %>  
+ <% video_name = @projectVideo[0]['project_file_name'] %>  
+
+
+<!--Code checking for project-video-->
+
+    <% if File.exist?(Rails.root.join('app','assets','images','project', "#{project_id}" ,'project_videos',video_name )) %>
+        <% projectvideo = video_name  %>
+    <% end %>
+
+<!--Code checking for project-video end-->  
+   
+
+
+<div class="mini-slides-wrap">
+<div class="mini-slides text-center">
+<h3>Lorem Ipsum is simply dummy </h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+</div>
+<%= image_tag('mini_slide_bg.jpg', :alt => 'Login Here') %>
+</div>
+
+<div class="container iner-control">
+<div class="row">		
+<%= render "layouts/header_projects" %>
+<div class="col-xs-12 two-parts-cmnt">
+<div class="row">
+<!-- Left Sec -->
+<div class="col-sm-8 col-xs-12">
+<ul class="event-wrapper news-wrap-sec">
+
+     <!-- Getting Project Image From database -->
+                
+     <% @projectImages = ProjectFile.where(project_id: project_id, project_file_type: 'image') %>
+     <% image_path = @projectImages[0]['project_image_path'] %>  
+     <% image_name = @projectImages[0]['project_file_name'] %>  
+                
+     <!-- Getting Project Image From database Ends -->  
+    
+
+     <!--Code checking for project-image-->
+
+     <% project_image = @Get_Project_By_Project_id[0]['project_image'] %>
+
+     <% if File.exist?(Rails.root.join('app','assets','images','project', "#{project_id}" ,'project_images',image_name )) %>
+        <% projectimage = image_name  %>
+
+     <% end %>
+
+     <!--Code checking for project-image end-->
+
+
+
+
+        <li>
+            <figure>
+
+                <%= image_tag File.join(image_path, projectimage), :alt => "Group Event Celebration" %>
+
+                <%#= link_to (image_tag('_1_evt_det_img.jpg', :alt => 'Group Event Celebration')) , "javascript:;" %>
+
+            </figure>
+
+            <div class="img-slider-wrap">
+                <ul class="">
+                    <li>
+                        <%= link_to (image_tag('1_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+                    </li>
+                    <li>
+                        <%= link_to (image_tag('2_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+                    </li>
+                    <li>
+                        <%= link_to (image_tag('3_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+                    </li>
+                    <li>
+                        <%= link_to (image_tag('4_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+                    </li>
+                    <li>
+                        <%= link_to (image_tag('5_slide_small_img.png', :alt => 'Group Event Celebration')) , "javascript:;" %>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="map-img-wrap">
+                <figure>
+                    <%#= image_tag('_map_img.jpg',:alt=>'Map Wrap') %>
+                    <div class="map-outer" id="map-canvas"></div>
+                </figure>
+                <ul class="social-evt-btns">
+                    <li><a class="fb" href="javascript:;"><i class="fa fa-facebook"></i> Share</a></li>
+                    <li><a class="twt" href="javascript:;"><i class="fa fa-twitter"></i> Share</a></li>
+                    <li><a class="g-plus" href="javascript:;"><i class="fa fa-google-plus"></i> Share</a></li>
+                    <li><a class="lnkd-in" href="javascript:;"><i class="fa fa-linkedin"></i> Share</a></li>
+                    <li><a class="whtsapp" href="javascript:;"><i><%= image_tag('whats-app-icon.png', :alt => 'whatsapp') %></i> Share</a></li>
+                    <li><a class="sms-link" href="javascript:;"><i><%= image_tag('sms-social-icon.png', :alt => 'whatsapp') %></i> Share</a></li>
+                    <li><a class="skype-share" href="javascript:;"><i class="fa fa-skype"></i> Share</a></li>
+                    <li><a class="pint-rest" href="javascript:;"><i class="fa fa-pinterest"></i> Share</a></li>
+                </ul>
+            </div>
+
+            <div class="evt-dt-wrap">
+                <div class="evt-det-des">
+                    <h2><%= link_to @Get_Project_By_Project_id[0]['project_title'], "javascript:;" %></h2>
+                    <p><%= @Get_Project_By_Project_id[0]['short_desp'] %>.</p>
+                </div>
+
+
+            </div>
+        </li>
+        <li>
+
+
+
+<!--
+<video width="100%" controls>
+<source src="http://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+<source src="http://www.w3schools.com/tags/movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+-->
+            
+            
+<!-- Particular Project Video -->
+<%= video_tag File.join(video_path, video_name), :class => 'vid_style', :autoplay => false, :controls => true, :alt => '', :id => 'blahs', :style => 'width:100%' %>                                
+<!-- Particular Project Video Ends -->
+
+            </figure>
+            <div class="evt-dt-wrap">
+                <div class="evt-det-des">
+                    <h2><%= link_to @Get_Project_By_Project_id[0]['project_title'], "javascript:;" %></h2>
+                    <p><%= @Get_Project_Story_data[0]['project_description'] %>. </p>
+                </div>
+
+
+            </div>
+        </li>
+        <li>
+            <div class="evt-dt-wrap no-img">
+                <div class="evt-det-des">
+                    <h2><%= link_to "FAQ", "javascript:;" %></h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus sit amet risus quis pulvinar. Duis venenatis sagittis orci, tincidunt sodales dui pulvinar at.</p>
+                </div>
+                <div class="action_btns">
+                    <%= link_to "Ask a Question","javascritp:;",:class => "btn btn-ask text-uppercase primary-btn" %>
+                    <%= link_to "Report This project to Dalendo","javascritp:;",:class => "btn btn-str primary-btn" %>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<%= render "layouts/sidebar_projects" %>
+</div>
+</div>
+
+</div>
+</div>
+
+<!--Hidden Lat Long Coming of Project Location-->
+<input type="hidden" name="project_lat" id="project_lat" value="<%= @Get_Project_By_Project_id[0]['project_location_latitude'] %>">
+<input type="hidden" name="project_long" id="project_long" value="<%= @Get_Project_By_Project_id[0]['project_location_longitude'] %>">
+
+<!--Hidden Lat Long Coming of Project Location-->
+
+
+
+<!-----------Showing Project Location on Map-------->
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript">// <![CDATA[
+var project_lat  = $('#project_lat').val();     
+var project_long = $('#project_long').val();   
+var markers = [{"title":"shilparamam","lat":project_lat,"lng":project_long,"description":"Mumbai formerly Bombay, is the capital city of the Indian state of Maharashtra."}];
+window.onload = function () {
+var mapOptions = {
+center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+zoom: 8,
+mapTypeId: google.maps.MapTypeId.ROADMAP    
+};
+var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+var infoWindow = new google.maps.InfoWindow();
+var lat_lng = new Array();
+//var latlngbounds = new google.maps.LatLngBounds();
+for (i = 0; i < markers.length; i++) {
+var data = markers[i]
+var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+lat_lng.push(myLatlng);
+var marker = new google.maps.Marker({
+position: myLatlng,
+map: map,
+title: data.title
+});
+latlngbounds.extend(marker.position);
+(function (marker, data) {
+google.maps.event.addListener(marker, "click", function (e) {
+infoWindow.setContent(data.description);
+infoWindow.open(map, marker);
+});
+})(marker, data);
+}
+//map.setCenter(latlngbounds.getCenter());
+//map.fitBounds(latlngbounds);
+
+}
+
+// ]]></script>
+
+
+<script>
+    /*For Showing Home Menus Active*/
+    jQuery('#submenuid li').eq(0).find('a').addClass('active');
+</script>
+
+<% end %>   <!-- End @Get_Projects_By_Cat_id --> 
+

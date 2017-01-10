@@ -1,0 +1,1352 @@
+<style>
+    
+.rewardsalert{
+        margin-left: 0px;
+        padding: 5px;
+    }    
+
+#title_empty { display: none; color: firebrick; }
+#rewardamount_empty { display: none; color: firebrick; }
+#rewardamount1_empty { display: none; color: firebrick; }
+#rewarddesc_empty { display: none; color: firebrick; }
+#month_empty { display: none; color: firebrick; }
+#year_empty { display: none; color: firebrick; }
+#shipping_empty { display: none; color: firebrick; }
+    
+#deleteReward { margin-left:1em; }
+#deleteReward:hover { color: #0087CA; cursor: pointer; }
+
+
+</style>
+
+
+
+<script>
+
+  /*  function validate_trigger(){ 
+        
+        jQuery("#addprojectsid").validate();
+        jQuery("#addprojectsid").each(function (item) {
+            
+      //  var counter = 1;   
+      //  for (var i = counter; i <= 10; i++) {
+           
+           jQuery(".testing1").rules("add", {
+               required: true,
+               minlength:3
+           });
+           jQuery(".testing2").rules("add", {
+               required: false,
+               minlength:3
+           });
+       // }
+       });   
+        
+        
+        var date = new Date();
+        date.setDate(date.getDate());
+        
+        $(".commobdatepicker").datepicker
+        ({
+            startDate: date
+        });
+        
+        
+        
+    } */
+    
+    
+    
+    
+    $(document).ready(function () {
+        
+        
+        
+        
+        /* validate_trigger();
+    
+        jQuery('body').on('click','#duplicateReward',function(){
+            
+            setTimeout(validate_trigger(), 1000);   
+           
+        }); */
+        
+        
+        
+        
+
+/*-------------------------------------------------------------------------------------------------*/
+        
+        
+        
+        
+        
+        
+    
+    $("input[name='rewardamount[]']").keypress(function(event) {
+            // Backspace, tab, enter, end, home, left, right
+            // We don't support the del key in Opera because del == . == 46.
+            var controlKeys = [8, 9, 13, 35, 36, 37, 39, 48];
+            // IE doesn't support indexOf
+            var isControlKey = controlKeys.join(",").match(new RegExp(event.which));
+            // Some browsers just don't raise events for control keys. Easy.
+            // e.g. Safari backspace.
+            if (!event.which || // Control keys in most browsers. e.g. Firefox tab is 0
+                (49 <= event.which && event.which <= 57) || // Always 1 through 9
+                (48 == event.which && $(this).attr("value")) || // No 0 first digit
+                isControlKey) { // Opera assigns values for control keys.
+
+                $("#rewardamount1_empty").css('display', 'none');
+
+                return;
+            } else {
+                $("#rewardamount_empty").css('display', 'none');
+                $("#rewardamount1_empty").css('display', 'block');
+                event.preventDefault();
+            }
+        });
+    
+    
+/*---------------------------------------------------------------------------------------------------------*/    
+    
+    
+    
+    
+
+	$('#rewardSubmit').on('click',function()
+    {
+		var titles           		= [];
+        var rewardAmounts           = [];
+        var reward_descriptions     = [];
+        var estimated_deliv_month   = [];
+        var reward_shipping_details = [];
+		
+		var check = true;
+
+        $("input[name='title[]']").each(function() 
+        {
+            if(!$(this).val())
+			{
+                $("#title_empty").css('display', 'block');
+                check = false;
+                return false;
+            }
+			else
+			{
+				$("#title_empty").css('display', 'none');
+                titles.push($(this).val());
+			}
+          
+        });
+		
+        
+        if (!check)
+        {
+            return false;
+        }
+        		
+
+        $("input[name='rewardamount[]']").each(function() 
+        {
+			if(!$(this).val())
+			{
+                $("#rewardamount_empty").css('display','block');
+                check = false;
+                return false;
+            }
+			else if (isNaN(this.value))
+			{
+				$("#rewardamount_empty").css('display','none');
+                $("#rewardamount1_empty").css('display','block');
+                
+                check = false;
+                return false;
+			}
+            else
+            {
+                $("#rewardamount1_empty").css('display','none');
+                rewardAmounts.push($(this).val());
+            }
+        }); 
+        
+        
+        if (!check)
+        {
+            return false;
+        }
+
+
+
+        $("textarea[name='reward_desc[]']").each(function() 
+        {
+            if(!$(this).val())
+			{
+                $("#rewarddesc_empty").css('display','block');
+                
+                check = false;
+                return false;
+            }
+			else
+			{
+				$("#rewarddesc_empty").css('display','none');
+                reward_descriptions.push($(this).val());
+			}
+          
+        });
+        
+        
+        if (!check)
+        {
+            return false;
+        }
+        
+        
+        $("input[name='estimated_deliv_month[]']").each(function() 
+        {
+            if(!$(this).val())
+			{
+                $("#month_empty").css('display','block');
+                
+                check = false;
+                return false;
+            }
+			else
+			{
+				$("#month_empty").css('display','none');
+                estimated_deliv_month.push($(this).val());
+            }
+          
+        }); 
+        
+        
+        
+        if (!check)
+        {
+            return false;
+        }
+            
+        
+
+        $("textarea[name='reward_shipping_details[]']").each(function() 
+        {
+            if(!$(this).val())
+			{
+                $("#shipping_empty").css('display','block');
+                
+                check = false;
+                return false;
+            }
+			else
+			{
+				$("#shipping_empty").css('display','none');
+                reward_shipping_details.push($(this).val());
+			}
+          
+        }); 
+        
+        
+        if (!check)
+        {
+            return false;
+        }
+        else
+        {
+		    $('#rewardsDiv').css('display','none');
+            $('#rewardSub').css('display','none');
+            $('#storyDiv').css('display','block');
+            $('#storySub').css('display','block');
+            $('#basicli').removeClass('last');
+            $('#rewardli').addClass('last');
+            
+//             $.ajax({
+//
+//               url: "/backend/add-project",
+//               type: "Post",
+//               data: { 
+//                        titles:titles, 
+//                        pledgeAmounts:rewardAmounts, 
+//                        reward_descriptions:reward_descriptions, reward_shipping_details:reward_shipping_details, estimated_deliv_month:estimated_deliv_month },
+//                        success: function(resp)
+//                        {
+//                            alert(resp);
+//
+//                            /* if (resp == 1)
+//                            {
+//                                window.location.href="/backend/project-management/add-story?pid="+projectid+""
+//                            } */
+//                        }
+//
+//               });
+        }
+
+	});
+    
+    
+    
+    
+//    
+//    
+//    
+//    /*--------------------- START SAVE STORY -------------------------*/
+//    
+//    $('#storySubmit123').on('click',function()
+//    {   
+//        var project_video = $("#project_video").val();
+//
+//        if(project_video === '')
+//        {
+//            $("#emptyicon").css('display','block').fadeOut(1000);
+//            return false;
+//        }
+//        else
+//        {
+//            $("#emptyicon").css('display','none');
+//        }
+//
+//        /*-- start validation for video extensions --*/
+//
+//        var file = $('#project_video')[0].files[0]
+//        if (file)
+//        {
+//            var videoName = file.name
+//            var imageSize = file.size
+//        }
+//
+//        img_array = videoName.split('.');
+//        name = img_array[0];
+//        exe  = img_array[1];
+//
+//        if (!(exe == 'mp4'))
+//        {
+//            $("#wrongicon").css('display','block');
+//            return false;
+//        }
+//        else
+//        {
+//            $("#wrongicon").css('display','none');
+//        }
+//
+//        /*-- end validation for image extensions --*/
+//
+//
+//        var project_desc = $("#project_desc").val();
+//        if(project_desc === '')
+//        {
+//            $("#project_desc").focus();
+//            $("#emptydescription").css('display','block');
+//            return false;
+//        }
+//
+//        var project_risk = $("#project_risk").val();
+//        if(project_risk === '')
+//        {
+//            $("#project_risk").focus();
+//            $("#emptyrisk").css('display','block');
+//            return false;
+//        }
+//        else
+//        {
+//            $('#basicDiv').css('display','none');
+//            $('#rewardsDiv').css('display','none');
+//            $('#storyDiv').css('display','none');
+//            $('#aboutyouDiv').css('display','block');
+//            $('#basicli').removeClass('last');
+//            $('#rewardli').removeClass('last');
+//            $('#storyli').addClass('last');
+//        }
+//
+//
+//    });
+//
+//
+//
+//
+///*--------------------- END SAVE STORY -------------------------*/
+//    
+    
+    
+        
+    
+});
+
+
+</script>
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">
+       		<div class="inner-padding-all">
+            	<div class="row">
+                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+                    	<div class="inside-gray-bx">
+                        	<div class="heading-two">
+                            	<h2>Let’s get started</h2>
+                            </div>
+							<div class="steps-status">
+								<ul>
+                                    
+								<li id="basicli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click1">1</i>Basics</a></li>
+                                    
+								<li id="rewardli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click2">2</i>Rewards</a></li>
+                                    
+								<li id="storyli" class="lastt"><a href="javascript:;"><i class="circle-helper" id="click3">3</i>Story</a></li>
+                                    
+								<li><a href="javascript:;"><i class="circle-helper" id="click4">4</i>About You</a></li>
+                                    
+								<li><a href="javascript:;"><i class="circle-helper">5</i>Account</a></li>
+								</ul>
+							</div>
+
+		<%= form_for :addprojects, :url => backend_add_project_path, :html => {:id => 'addprojectsid', :multipart => true} do |f| %>
+
+							<div class="steps-content-wrap">
+
+								<!-- Step 1-->
+								<div class="step-wrap-1" id="basicDiv">
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Project Type:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<div class="project-select-main">
+													<select class="selectpicker" id="project_user">
+
+														<option value="">Select Project</option>
+														<%
+															if @projecttype.present?
+																@projecttype.each_with_index  do |allprojectdataval, index|
+														%>
+																				<option value="<%= allprojectdataval %>"> <%= allprojectdataval.capitalize %></option>
+
+																<% end %> <!--Endloop -->
+														<% end %> <!--EndIf -->
+
+													</select>
+												</div>
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projectusererr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Project image:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+
+												<div class="change-image-sec common-imagewrap-sec border-grey">
+													<div class="web_site-logo-wrap">
+
+														<img id="blah" src="/assets/website_logo-a9356860cc605bca9adfa92af29d80c92ec6a64bfbc3de3a8f58e8b764544ddc.png" alt="" style="display:block;" />
+													</div>
+													<div class="choose-img-wrapper ">
+
+														<div class="upload-img-div">
+															<span><i class="fa fa-camera" aria-hidden="true"></i>Choose a Image to  upload</span>
+															<%= file_field_tag 'project_image', id: "projectimage", onchange: "ValidateSingleInput(this);" %>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+					<!--Error Message span -->
+          <span id="projectimgerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Project User:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<div class="project-select-main">
+													<select class="selectpicker" id="project_user">
+
+														<option value="">Select User</option>
+														<%
+														   if @getUsers.present?
+																  @getUsers.each_with_index  do |allusersdataval, index|
+                               if allusersdataval['id'] != session[:current_user_id]
+														%>
+		<option value="<%= allusersdataval['id'] %>"><%= allusersdataval['first_name'].capitalize %> <%= allusersdataval['last_name'].capitalize %></option>
+
+                            <% end %> <!--Endif condition -->
+                            <% end %> <!--Endloop -->
+                            <% end %> <!--EndIf -->
+
+													</select>
+												</div>
+											</div>
+										</div>
+					<!--Error Message span -->
+					<span id="projectusererr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Project title:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input class="form-control" type="text" placeholder="Enter Project Name" id="projecttitle">
+									</div>
+								</div>
+					<!--Error Message span -->
+					<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Project Language:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<div class="project-select-main">
+													<select class="selectpicker" id="projectlang">
+														<option value="">Select Project Language</option>
+														<%
+															if @languages.present?
+																@languages.each_with_index  do |languagesdataval, index|
+														%>
+														<option value="<%= languagesdataval.language_code %>"><%= languagesdataval.language_name %></option>
+                           <% end %> <!-- Endif -->
+                           <% end %> <!-- EndLoop -->
+													</select>
+												</div>
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projectlangerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Short blurb:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9"><textarea placeholder="Short blurb" id="blurb"
+																																		 class="form-control"></textarea></div>
+								</div>
+					<!--Error Message span -->
+					<span id="projectblurberr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								</div>
+
+
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Category:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+                                    <div class="project-select-main">
+                                      <select class="selectpicker" id="projectcategory">
+                                      <option value="">Select Project Category</option>
+
+																				<%
+																					if @getallcategories.present?
+																						@getallcategories.each_with_index  do |categoriesdataval, index|
+																				%>
+                     <option value="<%= categoriesdataval['id'] %>"><%= categoriesdataval['category_name'] %></option>
+
+																			<% end %>  <!--Endloop-->
+																			<% end %>  <!--Endif-->
+
+                                      </select>
+                                    </div>
+									</div>
+								</div>
+					<!--Error Message span -->
+					<span id="projectcategoryerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								</div>
+
+								 <div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Project location:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input class="form-control" type="text" placeholder="Enter Location" id="location">
+									</div>
+								</div>
+					<!--Error Message span -->
+					<span id="projectlocationerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								</div>
+
+								 <div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Project startdate:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+<div class="form-group datepicker-wrap">
+                <div class="input-group date" id="datetimepicker1">
+                    <input type="text" class="form-control" id="projectstart" placeholder="Starting Date" />
+                    <span class="input-group-addon">
+                      <i class="duration-selecter">
+                          <%= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                                        </i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+</div>
+					<!--Error Message span -->
+					<span id="projectstarterr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+                 </div>
+
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-3 col-md-3"><label>Project enddate:</label></div>
+                      <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="form-group datepicker-wrap">
+                          <div class="input-group date" id="datetimepicker2">
+                            <input type="text" class="form-control" id="projecend" placeholder="Ending Date" />
+                            <span class="input-group-addon">
+                      <i class="duration-selecter">
+                          <%= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                                        </i>
+                    </span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+					<!--Error Message span -->
+					<span id="projectenderr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+					<span id="projectgreatererr" class="alert alert-danger" style="display:none; margin-left:193px;">End date must be greater than start date.</span>
+					<span id="onemontherr" class="alert alert-danger" style="display:none; margin-left:193px;">Project must be of 30 days minimum
+						.</span>
+                  </div>
+
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Currency:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<div class="project-select-main">
+													<select class="selectpicker" id="projectcurrency">
+														<option value="">Select Currency</option>
+                            <%
+                              if @currency.present?
+                                @currency.each_with_index  do |currencydataval, index|
+                            %>
+                                    <option value="<%= currencydataval.currency_code %>"><%= currencydataval.currency_name %></option>
+
+                           <% end %> <!-- Endif -->
+                           <% end %> <!-- EndLoop -->
+
+													</select>
+												</div>
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projectcurrencyerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+								 <div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Minimum funding goal:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input class="form-control" id="minfundinggoal" type="text" placeholder="Minimum Goal Amount">
+									</div>
+								</div>
+									 <!--Error Message span -->
+									 <span id="projectminfundgoalerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								 </div>
+
+
+
+
+									 <div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Funding goal:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input class="form-control" id="fundinggoal" type="text" placeholder="Funding Goal Amount">
+									</div>
+								</div>
+
+
+					<!--Error Message span -->
+					<span id="projectfundgoalerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+									<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" value="Discard changes" name="Submit"
+												 id="discardbutton" />
+									<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="savebasicpro" />
+									</div>
+								</div>
+								</div>
+                                
+                            <!--step1 Ends-->
+                                
+                                
+          <!--  Start Step-2  -->
+                                
+                                
+                               
+                                
+                                
+                                
+                                
+
+
+          <div class="step-wrap-2 mainRewardDiv" id="rewardsDiv">
+              
+                                <label style="color: #1A375D;"><b>REWARD #1</b></label>
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Title:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input name="title[]" class="form-control testing1" type="text" placeholder="Enter Title">
+                                        
+                                        <span id="title_empty" class="rewardsalert alert-danger"> Title is required. </span>
+                                        
+									</div>
+								</div>
+								</div>
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Reward amount:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+										<input name="rewardamount[]" class="form-control" type="text" placeholder="$0">
+                                        
+                                        <span id="rewardamount_empty" class="rewardsalert alert-danger"> Reward amount is required. </span>
+                                        
+                                        <span id="rewardamount1_empty" class="rewardsalert alert-danger"> Please enter only numeric value. </span>
+                                        
+									</div>
+								</div>
+								</div>
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+									<div class="col-xs-12 col-sm-9 col-md-9">
+                                        <textarea name="reward_desc[]" class="form-control"></textarea>
+                                        
+                                        <span id="rewarddesc_empty" class="rewardsalert alert-danger"> Description is required. </span>
+                                        
+                                    </div>
+								</div>
+								</div>
+              
+              
+                                <div class="form-group">
+
+                                    <div class="row">
+                                      <div class="col-xs-12 col-sm-3 col-md-3"><label>Estimate Delivery:</label></div>
+                                      <div class="col-xs-12 col-sm-9 col-md-9">
+                                        <div class="form-group datepicker-wrap">
+                                          <div class="input-group date commobdatepicker">
+                                            <input type="text" name="estimated_deliv_month[]" class="form-control" placeholder="Delivery Date" />
+                                            <span class="input-group-addon">
+                                                <i class="duration-selecter">
+                                                    <%= image_tag ('cal_img.png'), :alt => 'Calender' %>
+                                                </i>
+                                            </span>
+                                              
+                                              
+                                          </div>
+                                            
+                                            <span id="month_empty" class="rewardsalert alert-danger"> Please Select a date. </span>
+                                            
+                                            
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                    <!--Error Message span -->
+
+                                    <span id="" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+
+                                </div>
+
+
+
+                                  <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3 col-md-3"><label>Shipping details:</label></div>
+                                        <div class="col-xs-12 col-sm-9 col-md-9">
+                                            <textarea name="reward_shipping_details[]" class="form-control"></textarea>
+                                            
+                                            <span id="shipping_empty" class="rewardsalert alert-danger"> Shipping Detail is required. </span>
+                                            
+
+                                        </div>
+                                        
+                                        </div>
+                                   </div>
+
+								
+                                <div class="abc"></div>
+
+								<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3 col-md-3"><label></label></div>
+									<div class="col-xs-12 col-sm-5 col-md-5">
+										<div class="rewards-system">
+                                            <a href="javascript:;" id="duplicateReward" class="add-rwd-btn">
+                                                <i class="fa fa-plus"></i>ADD A NEW REWARD
+                                            </a>
+                                        </div>
+									</div>
+                                    
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+										<div class="rewards-system">
+										<a href="javascript:;" class="remove-rwd-btn">
+                                            <i class="fa fa-plus"></i>REMOVE REWARD
+                                        </a>
+                                        </div>
+									</div>
+                                    
+								</div>
+								</div>
+              
+
+								
+								</div>
+                                
+                                
+                                <div class="row" id="rewardSub">
+									<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+									<input class="btn btn-trans-bg btn-radius btn-cancel" type="submit" value="Discard changes" name="Submit" />
+									<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="rewardSubmit" />
+									</div>
+								</div>
+
+
+                <!--  End Step-2  -->
+                                
+                                
+                                
+                                
+<!--  Start Step-3  -->
+                                
+    
+<div class="step-wrap-2" data-id="1" id="storyDiv">
+    <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-3"><label>Project image:</label></div>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+
+                        <div class="change-image-sec common-imagewrap-sec border-grey">
+                            <div class="web_site-logo-wrap">
+
+                                <img id="blah" src="/assets/website_logo-a9356860cc605bca9adfa92af29d80c92ec6a64bfbc3de3a8f58e8b764544ddc.png" alt="" style="display:block;" />
+                                
+                                <video style="display:none;" id="project_video_src" width="100" height="" controls="autoplay" ></video>
+                                
+                                
+                                
+                            </div>
+                            <div class="choose-img-wrapper ">
+
+                                <div class="upload-img-div">
+                                    <span><i class="fa fa-camera" aria-hidden="true"></i>Choose a Image to  upload</span>
+                                    
+                                    <%= file_field_tag 'project_video', id: 'project_video' %>
+                                                                        
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        <span class="rewardsalert alert-danger" id="emptyicon">please select a project video.</span>
+                        <span class="rewardsalert alert-danger" id="wrongicon">Only MP4 file format is acceptable.</span>
+                        
+                    </div>
+                </div>
+                        
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-3"><label>Project Description:</label></div>
+            <div class="col-xs-12 col-sm-9 col-md-9">
+            
+                <textarea name="project_desc" id="project_desc" class="form-control commontxt"></textarea>
+
+                <span class="rewardsalert alert-danger" id="emptydescription">please fill out this field.</span>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3"><label>Risks and challenges</label></div>
+        <div class="col-xs-12 col-sm-9 col-md-9">
+        
+            <textarea name="project_risk" id="project_risk" class="form-control commontxt"></textarea>
+
+            <span class="rewardsalert alert-danger" id="emptyrisk">please fill out this field.</span>
+        
+        </div>
+    </div>
+    </div>
+
+
+    <div class="form-group">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3"><label>Project FAQs</label></div>
+        <div class="col-xs-12 col-sm-9 col-md-9"><p> You'll be able to add FAQs on your project page once your project goes live. </p></div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+        <input class="btn btn-trans-bg btn-radius btn-cancel" type="submit" value="Discard changes" name="Submit" />
+
+        <input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="storySubmit123" />
+        </div>
+    </div>
+
+</div>                                
+                                
+                                
+                                
+<!--  End Step-3  -->
+
+                                
+              <!-- Step 4 Starts -->
+
+
+								<div class="step-wrap-1" id="aboutyouDiv" style="display:none;">
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Profile image:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+
+												<div class="change-image-sec common-imagewrap-sec border-grey">
+													<div class="web_site-logo-wrap">
+
+														<img id="blah" src="/assets/website_logo-a9356860cc605bca9adfa92af29d80c92ec6a64bfbc3de3a8f58e8b764544ddc.png" alt="" style="display:block;" />
+													</div>
+													<div class="choose-img-wrapper ">
+
+														<div class="upload-img-div">
+															<span><i class="fa fa-camera" aria-hidden="true"></i>Choose a Image to  upload</span>
+															<%= file_field_tag 'project_image', id: "projectimage", onchange: "ValidateSingleInput(this);" %>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projectimgerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Firstname:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+	<input class="form-control" type="text" placeholder="Enter Firstname" id="aboutyou_firstname" value="<% if session[:current_user_firstname].present? %> <%= session[:current_user_firstname].capitalize  %> <% end %>">
+											</div>
+										</div>
+										<!--Error Message span -->
+							<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Lastname:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<input class="form-control" type="text" placeholder="Enter Lastname" id="aboutyou_lastname" value="<% if session[:current_user_lastname].present? %> <%= session[:current_user_lastname].capitalize  %> <% end %>">
+											</div>
+										</div>
+										<!--Error Message span -->
+							<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Structure:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<input class="form-control" type="text" placeholder="Company name, association, club, ..."
+															 id="aboutyou_stucture">
+											</div>
+										</div>
+										<!--Error Message span -->
+							<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Address:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9"><textarea placeholder="Address" id="aboutyou_address"
+																																				 class="form-control"></textarea></div>
+										</div>
+										<!--Error Message span -->
+								<span id="projectblurberr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Country:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<input class="form-control" type="text" placeholder="Country" id="aboutyou_country">
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projectlocationerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Nationality:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<input class="form-control" type="text" placeholder="Nationality" id="aboutyou_nationality">
+											</div>
+										</div>
+										<!--Error Message span -->
+							<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-12 col-sm-3 col-md-3"><label>Phone number:</label></div>
+											<div class="col-xs-12 col-sm-9 col-md-9">
+												<input class="form-control" type="text" placeholder="Phone number" id="aboutyou_phoneno">
+											</div>
+										</div>
+										<!--Error Message span -->
+										<span id="projecttitleerr" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span>
+									</div>
+
+
+
+
+
+									<div class="row">
+										<div class="col-xs-12 col-sm-9 col-sm-offset-3 btn-sec">
+											<input class="btn btn-trans-bg btn-radius btn-cancel" type="button" value="Discard changes" name="Submit"
+														 id="discardbutton" />
+							<input class="btn btn-praimary-bg btn-radius btn-save" type="button" value="Next" name="Submit" id="saveaboutpro" />
+										</div>
+									</div>
+								</div>
+
+
+                <!-- Step 4 Ends -->
+
+                            </div>
+ 
+                        </div>
+
+         <% end %> <!--Form Ends-->
+                            
+                    </div>
+                </div>
+            </div>
+       </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"> </script>
+
+<script>
+ // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function () {
+
+        var date = new Date();
+        date.setDate(date.getDate());
+
+        $("#datetimepicker1").datepicker
+        ({
+            startDate: date
+        });
+
+        $("#datetimepicker2").datepicker
+        ({
+            startDate: date
+        });
+        
+        
+        
+        $(".commobdatepicker").datepicker
+        ({
+            startDate: date
+        });
+        
+        
+    });
+
+
+$('#datetimepicker1').on('changeDate', function(ev){
+    $(this).datepicker('hide');
+});
+
+            });
+
+</script>
+
+<script>
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').css('display','block');
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function() {
+        $("#projectimage").change(function () {
+            readURL(this);
+        });
+    });
+
+</script>
+
+
+
+
+
+
+<script>
+
+document.getElementById('project_video').onchange = function(e) {
+    
+    /*-- start validation for video extensions --*/
+
+        var file = $('#project_video')[0].files[0]
+        if (file)
+        {
+            var videoName = file.name
+            var videoSize = file.size
+        }
+
+        img_array = videoName.split('.');
+        name = img_array[0];
+        exe  = img_array[1];
+
+                
+        if (!(exe == 'mp4'))
+        {
+            $("#wrongicon").css('display','block');
+            return false;
+        }
+        else
+        {
+            $("#wrongicon").css('display','none');
+        }
+
+    /*-- end validation for image extensions --*/
+    
+    var reader = new FileReader();
+    
+    
+    reader.onload = function() {
+        
+        document.getElementById('project_video_src').src = e.target.result;
+        
+    };
+    
+    $('#project_video_src').show();
+    
+    reader.readAsDataURL(this.files[0]);
+    
+    
+};
+
+</script>
+
+
+
+<!-- START SCRIPT FOR AUTO PLACE-SEARCH -->
+
+<script>
+
+    function init()
+    {
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', init);
+</script>
+
+<!-- END SCRIPT FOR AUTO PLACE-SEARCH -->
+
+
+<script>
+
+    $.fn.ForceNumericOnly =
+        function()
+        {
+            return this.each(function()
+            {
+                $(this).keydown(function(e)
+                {
+                    var key = e.charCode || e.keyCode || 0;
+                    // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                    // home, end, period, and numpad decimal
+                    return (
+                    key == 8 ||
+                    key == 9 ||
+                    key == 13 ||
+                    key == 46 ||
+                    key == 110 ||
+                    key == 190 ||
+                    (key >= 35 && key <= 40) ||
+                    (key >= 48 && key <= 57) ||
+                    (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+
+    $("#minfundinggoal").ForceNumericOnly();
+    $("#fundinggoal").ForceNumericOnly();
+
+</script>
+
+
+<script>
+
+
+
+$(document).ready(function() {
+    
+    
+    
+    /*-- function for Year -- */
+    
+//    $(function()
+//    {
+//          var start_year = new Date().getFullYear();
+//
+//          for (var i = start_year; i > start_year - 10; i--) {
+//            $('#year').append('<option value="' + i + '">' + i + '</option>');
+//          }
+//    });
+    
+    
+      
+    /*-- function for Months -- */
+     
+//    $(function()
+//    {
+//    
+//    
+//        var d = new Date();
+//        var monthArray = new Array();
+//
+//        monthArray[0] = "January";
+//        monthArray[1] = "February";
+//        monthArray[2] = "March";
+//        monthArray[3] = "April";
+//        monthArray[4] = "May";
+//        monthArray[5] = "June";
+//        monthArray[6] = "July";
+//        monthArray[7] = "August";
+//        monthArray[8] = "September";
+//        monthArray[9] = "October";
+//        monthArray[10] = "November";
+//        monthArray[11] = "December";
+//
+//        for(m = 0; m <= 11; m++) {
+//            var optn = document.createElement("OPTION");
+//            optn.text = monthArray[m];
+//            // server side month start from one
+//            optn.value = (m+1);
+//
+//            // if june selected
+//            //if ( m == 5) {
+//                //optn.selected = true;
+//            //}
+//
+//            document.getElementById('month').options.add(optn);
+//        }
+//        
+//    });
+    
+    
+        
+    /*-- Add/Remove New Reward --*/
+    
+        
+   var counter = 1;
+    
+    $("#duplicateReward").click(function () 
+    {
+        if(counter<=1)
+        {
+            var counterr = counter+1;
+            
+            $(".abc").append('<br>');
+            
+            $(".abc").append('<label style="color: #1A375D;"><b>REWARD #'+counterr+'</b></label> <a href="javascript:;"><label style="float: right; cursor: pointer; color: #1A375D;"><b>REMOVE REWARD #'+counterr+'</b></label></a> <div class="form-group"></div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Title:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <input name="title[]" class="form-control testing'+counterr+'" type="text" placeholder="Enter Title"> <span id="title_empty" class="rewardsalert alert-danger"> Title is required. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Reward amount:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <input name="rewardamount[]" class="form-control" type="text" placeholder="$0"> <span id="rewardamount_empty" class="rewardsalert alert-danger"> Reward amount is required. </span> <span id="rewardamount1_empty" class="rewardsalert alert-danger"> Please enter only numeric value. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <textarea name="reward_desc[]" class="form-control"></textarea> <span id="rewarddesc_empty" class="rewardsalert alert-danger"> Description is required. </span> </div> </div> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Estimate Delivery:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <div class="form-group datepicker-wrap"> <div class="input-group date commobdatepicker"> <input type="text" name="estimated_deliv_month[]" class="form-control" placeholder="Delivery Date" /> <span class="input-group-addon"> <i class="duration-selecter"> <img src="/assets/cal_img-3506669552c0b6f43501f6b57783b4424e4d0ea78c2c2542fb480004c68f2c13.png" alt="Calender"> </i> </span> </div> <span id="month_empty" class="rewardsalert alert-danger"> Please Select a date. </span> </div> </div> </div> <span id="" class="alert alert-danger" style="display:none; margin-left:193px;">Field is required.</span> </div> <div class="form-group"> <div class="row"> <div class="col-xs-12 col-sm-3 col-md-3"><label>Shipping details:</label></div> <div class="col-xs-12 col-sm-9 col-md-9"> <textarea name="reward_shipping_details[]" class="form-control"></textarea> <span id="shipping_empty" class="rewardsalert alert-danger"> Shipping Detail is required. </span> </div> </div> </div>'); 
+            
+            counter++;
+        }
+        
+            
+    });
+	
+
+	
+    });
+    
+</script>

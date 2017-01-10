@@ -1,0 +1,194 @@
+<!-- Start If User Added Successfuly -->
+
+    <% if flash[:success] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "User has been saved.", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+<!-- End If User Added Successfuly -->
+
+
+
+<!-- Start If User Updated Successfuly -->
+
+    <% if flash[:updated] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "User has been updated.", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+<!-- End If User Updated Successfuly -->
+
+
+<!-- Start If User Status Changed Successfuly -->
+
+    <% if flash[:status_inactive] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "User status has been changed to Inactive", "success");
+        });
+
+
+        </script>
+
+    <% end %>
+
+
+
+    <% if flash[:status_active] %>
+
+        <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            swal("Success!", "User status has been changed to Active", "success");
+        });
+
+
+        </script>
+
+    <% end %> 
+
+<!-- End If User Status Changed Successfuly -->
+
+
+
+
+<div class="right-content-area">
+       <div class="inner-pages-main">  
+            	<div class="heading-one"><h3>User Management</h3>
+                
+                <div class="right-add-btn-outer">
+                    	<a href="/backend/add-user">Add User</a>
+                    </div>
+                </div>
+                
+            <% if @getUsers.present? %> <!-- Start if @getUsers.present? -->
+           
+       		<div class="table-responsive project-table-outer globel-search-hide">
+            	
+               <table id="example" class="display table" cellspacing="0" width="100%">
+              
+                	<thead>
+                	<tr>
+                    	<th>S.No.</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>User Name</th>
+                        <th>Email Address</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                <% @getUsers.each_with_index  do |userdata, index| %> <!-- Start @getUsers Main Foreach -->
+                        
+                        <% userImage = userdata['user_image'].to_s %>
+                        
+                         <!-- Code for Image Checking  -->
+                        
+                        <% if userImage.present? %>    
+                        <% if File.exist?(Rails.root.join('app/assets/images', 'userImages', userImage )) %>
+                            <% user_pic = userImage  %>
+                        <% else %>
+                            <% user_pic = 'default' + '.jpg'  %>
+                        <% end %>
+                        <% else %>
+                        <% user_pic = 'default' + '.jpg'  %>
+                        <% end %>
+                        
+                         <!-- Code for Image Checking  -->
+                        
+                    
+                    <tr id="usersAllshowingdiv_<%= userdata['id'] %>">
+                        
+                    	<td><%= index+1 %></td>
+                        <td><figure><%= image_tag File.join('userImages', user_pic), :alt => '' %></figure></td>
+                        <td><%= userdata['first_name'] %> <%= userdata['last_name'] %></td>
+                        <td><%= userdata['user_name'] %></td>
+                        <td><%= userdata['email'] %></td>
+                        
+                        
+                        
+                        
+                        <% if userdata['user_status'] == 'active' %>    
+                                    
+                             <td><span class="btn-active">
+                                 <!--<a href="/backend/changeUserstatus?uid=<%#= userdata['id'] %>&&status=<%#= userdata['user_status'] %>" > Active </a> </span>-->
+                                 
+                                 <a href="javascript:;" > Active </a> </span>
+                             </td>
+
+                             <% else %>
+
+                        <td><span class="btn-active btn-inactive">
+                            <!--<a href="/backend/changeUserstatus?uid=<%#= userdata['id'] %>&&status=<%#= userdata['user_status'] %>"> Inactive </a></span>-->
+                            
+                            <a href="javascript:;"> Inactive </a></span>
+                             </td> 
+
+                <% end %>
+
+
+                <td>
+                    <span class="tble-action-outer">
+
+                    <a href="/backend/view-user?uid=<%= userdata['id'] %>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                    <a href="/backend/edit-user?uid=<%= userdata['id'] %>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+<a href="javascript:;" onclick="changeUserstatus('<%= userdata['id'] %>','<%= userdata['user_status'] %>');"><i data-userid="<%= userdata['id'] %>" data-profileimage="<%= userdata['user_image'] %>" class="fa fa-random trashuserss" aria-hidden="true"></i></a>
+
+                    </span>
+                </td>
+            </tr>
+                        
+                <% end %> <!-- End @getUsers Main Foreach -->
+                        
+                            
+                                        
+                    </tbody>
+                </table>
+                
+                
+            </div>
+           
+           
+           <% else %>  
+                        
+            <div class="inner-pages-main">  
+            	
+                <div class="comming_soon"><h3>Oooooops...! There is no data in User Table.</h3></div>    
+       		
+            </div>            
+                        
+            <% end %> <!-- End if @getUsers.present? -->
+           
+           
+       </div>
+        
+       
+    </div>
+

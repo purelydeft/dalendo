@@ -1,0 +1,169 @@
+<div class="right-content-area">
+<div class="inner-pages-main">
+<div class="inner-padding-all">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2">
+
+            <!-- ADD-Category-Form-Starts -->
+  <%= form_for :addcategory, :url => backend_add_category_path, :html => {:id => 'addcategoryid', :multipart => true} do |f| %>
+        <div class="inside-gray-bx">
+            <div class="heading-two">
+                <h2>ADD Category</h2>
+            </div>              
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Name:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <%= f.text_field :categoryname, id: 'categoryname', placeholder: 'Category Name', class: 'form-control', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false" %></div>
+            </div>
+           <!-- Empty Error Message   -->
+            <span id="categoryname1" class="alert alert-danger custom" style="display:none;">Field is required.</span> <span id="categoryname2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>    
+            </div>
+            
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Description:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_area(:category_decription, class: 'form-control', placeholder: 'Category Description', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)', :ondrop => "return false", :onpaste => "return false") %></div>
+            </div>
+             <!-- Empty Error Message   -->
+            <span id="addcategory_category_decription1" class="alert alert-danger custom" style="display:none;">Field is required.</span>
+            <span id="addcategory_category_decription2" class="alert alert-danger custom" style="display:none">Special Characters not allowed.</span>  
+            </div>
+			
+			
+            <div class="form-group">
+                <div class="row" id="icon-image">
+                    <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload:</label></div>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                      <ul class="custom_radio_button">
+                      <li>
+                      <div>
+                      <input type="radio" id="radio01" name="radio" value="icon_request" checked="checked" />
+                      <label for="radio01"><span></span>An icon</label>
+                      </div>
+                      </li>
+
+                      <li>
+                      <div>
+                      <input type="radio" id="radio02" name="radio" value="image_request" />
+                      <label for="radio02"><span></span>An image</label>
+                      </div>
+                      </li>
+                      </ul>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            
+            
+            <div class="form-group">
+            <div class="row" id="icon-images" style="display: block;">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Icon name:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9"><%= f.text_field :iconname, id: 'iconname', placeholder: 'Icon Name', class: 'form-control', :onkeyup => 'removevalidations(this)', :onblur => 'removevalidations(this)' %></div>
+            </div>
+             <span id="iconname1" class="alert alert-danger custom" style="display:none;">Field is required.</span>               
+            </div>
+            
+            
+             <div class="form-group">
+            <div class="row" id="cat-image" style="display: none;">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Upload image:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="upload-img-div">
+                        <span><i><%= image_tag ('upload-img.png'), :alt => "" %></i>Upload image</span>
+<!--<input class="" id="categoryimage" type="file" name="category_image" onchange="ValidateSingleInput(this);" />-->
+                    <%= file_field_tag 'category_image', id: "categoryimage", onchange: "ValidateSingleInput(this);" %>
+                    </div>
+                    <div class="upload-img-show">
+                     <img id="blah" src="#" alt="" style="display:none;" />
+                    </div>
+    
+
+                </div>
+            </div>
+              <span id="imagenameerrmsz" class="alert alert-danger custom" style="display:none;">Field is required.</span> 
+            </div>
+
+
+
+             <%= f.hidden_field :category_status, :value => 'active', :class => 'categorystatus'%>
+             <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3"><label>Status:</label></div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="custom-on-off">
+                    <ul class="active_bg">
+                    <li class="active"><a href="javascript:void(0)">Active</a></li>
+                    <li class="inactive"><a href="javascript:void(0)">Inactive</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            </div>                    
+
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3">
+           <!--<input class="login-btn btn-margin-top" type="submit" value="Submit" name="Submit" />-->
+                    <%= f.submit :Submit, :class => 'login-btn btn-margin-top', :id => 'categorysavebutton', :type => 'button' %> </div>
+            </div>
+
+        </div>                    
+        <% end %> <!-- ADD-Category-Form-Ends -->
+    </div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+    function readURL(input) {
+
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+    $('#blah').css('display','block');
+    $('#blah').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+    }
+    }
+
+    $("#categoryimage").change(function(){
+        $('#imagenameerrmsz').css('display','none');
+    readURL(this);
+    });
+    
+    
+//$(document).ready(function(){
+//  $("#categorysavebutton").dblclick(function(e){
+//  $(this).attr('disabled');
+//    e.preventDefault();
+//  });
+//});
+
+</script>
+
+<script>
+
+document.onkeypress = function (e) {
+    if (e.keyCode == 13) {
+       $('#categorysavebutton').click();
+    }
+}
+
+</script>
+    

@@ -1,0 +1,2 @@
+class ProjectNews < ApplicationRecord
+end
